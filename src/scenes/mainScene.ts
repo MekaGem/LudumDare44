@@ -84,6 +84,7 @@ export class MainScene extends Phaser.Scene {
       x: 30,
       y: 30,
     }, this.playerState);
+    this.playerHealthBar.setScrollFactor(0);
 
     this.ground = this.physics.add.staticSprite(200, 400, "ground");
 
