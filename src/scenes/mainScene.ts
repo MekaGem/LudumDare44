@@ -5,7 +5,12 @@ export class MainScene extends Phaser.Scene {
   private playerState: PlayerState;
   private playerUnit: Phaser.Physics.Arcade.Sprite;
   private ground: Phaser.Physics.Arcade.Sprite;
-	private cursors: CursorKeys;
+  private cursors: CursorKeys;
+  private canvas: HTMLCanvasElement;
+
+  private LEVEL_WIDTH: number = 1200;
+  private LEVEL_HEIGHT: number = 1200;
+  private wallsGroup: Phaser.Physics.Arcade.StaticGroup;
 
   constructor() {
     super({
@@ -20,19 +25,63 @@ export class MainScene extends Phaser.Scene {
   preload(): void {
     this.load.image("player", "./assets/circle.png");
     this.load.image("ground", "./assets/ground.png");
-    // this.load.atlas("ground", "./assets/ground.png", "./assets/ground.json");
+    this.load.image("1x1white", "./assets/1x1white.png");
+
+    this.canvas = this.sys.game.canvas;
+  }
+
+  private getWidth(): number {
+    return this.canvas.width;
+  }
+
+  private getHeight(): number {
+    return this.canvas.height;
   }
 
   create(): void {
+    {
+      this.wallsGroup = this.physics.add.staticGroup();
+
+      let border = 50;
+
+      let upWall = this.physics.add.staticSprite(-border, -border, "1x1white");
+      upWall.setScale(this.LEVEL_WIDTH + border * 2, border);
+      upWall.setSize(this.LEVEL_WIDTH + border * 2, border);
+      upWall.setOrigin(0, 0);
+      upWall.setTint(0xff0000);
+
+      let downWall = this.physics.add.staticSprite(-border, this.LEVEL_HEIGHT, "1x1white");
+      downWall.setScale(this.LEVEL_WIDTH + border * 2, border);
+      downWall.setSize(this.LEVEL_WIDTH + border * 2, border);
+      downWall.setOrigin(0, 0);
+      downWall.setTint(0xff0000);
+
+      let leftWall = this.physics.add.staticSprite(-border, -border, "1x1white");
+      leftWall.setScale(border, this.LEVEL_HEIGHT + border * 2);
+      leftWall.setSize(border, this.LEVEL_HEIGHT + border * 2);
+      leftWall.setOrigin(0, 0);
+      leftWall.setTint(0xff0000);
+
+      let rightWall = this.physics.add.staticSprite(this.LEVEL_WIDTH, -border, "1x1white");
+      rightWall.setScale(border, this.LEVEL_HEIGHT + border * 2);
+      rightWall.setSize(border, this.LEVEL_HEIGHT + border * 2);
+      rightWall.setOrigin(0, 0);
+      rightWall.setTint(0xff0000);
+
+      this.wallsGroup.add(upWall);
+      this.wallsGroup.add(downWall);
+      this.wallsGroup.add(leftWall);
+      this.wallsGroup.add(rightWall);
+    }
+
     this.playerState = new PlayerState(PLAYER_INFO.STARTING_BLOOD);
 
-    this.ground = this.physics.add.sprite(0, 400, "ground");
-    this.ground.setCollideWorldBounds(true);
+    this.ground = this.physics.add.staticSprite(200, 400, "ground");
 
-    this.playerUnit = this.physics.add.sprite(50, 50, "player");
-    this.playerUnit.setCollideWorldBounds(true);
+    this.playerUnit = this.physics.add.sprite(200, 50, "player");
 
-    this.physics.add.collider(this.ground, this.playerUnit);
+    this.physics.add.collider(this.playerUnit, this.wallsGroup);
+    this.physics.add.collider(this.playerUnit, this.ground);
   }
 
   update(time): void {
@@ -51,5 +100,7 @@ export class MainScene extends Phaser.Scene {
     } else if (this.cursors.down.isDown) {
       // this.playerUnit.y += 10;
     }
+
+    this.cameras.main.startFollow(this.playerUnit);
   }
 }
