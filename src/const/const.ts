@@ -12,6 +12,10 @@ export let PLAYER_INFO = {
   STARTING_BLOOD: 10,
 }
 
+export let PLAYER_GRAPHICS = {
+  HEIGHT: 50,
+}
+
 export let PLAYER_HUD = {
   BLOOD_TEXT_STYLE: {
     fontSize: CONST.FONT_SIZE,

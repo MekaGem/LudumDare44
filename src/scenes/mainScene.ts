@@ -67,11 +67,6 @@ export class MainScene extends Phaser.Scene {
     this.worldLayer.setCollisionByProperty({ collides: true });
 
     const debugGraphics = this.add.graphics().setAlpha(0.75);
-    this.worldLayer.renderDebug(debugGraphics, {
-      tileColor: null, // Color of non-colliding tiles
-      collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
-      faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
-    });
 
     this.playerState = new PlayerState(PLAYER_INFO.STARTING_BLOOD);
     this.playerHealthBar = new HealthBar(this, {
@@ -111,7 +106,9 @@ export class MainScene extends Phaser.Scene {
       }
     }
 
-    this.playerUnit.highlight(this.playerUnit.body.onFloor());
+    if (false) {
+      this.playerUnit.highlight(this.playerUnit.body.onFloor());
+    }
     this.cameras.main.startFollow(this.playerUnit);
   }
 

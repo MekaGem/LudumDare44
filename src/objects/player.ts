@@ -1,4 +1,5 @@
 import { PlayerState } from "../logic/playerState";
+import { PLAYER_GRAPHICS } from "../const/const";
 
 // Stores graphical and physical representation of Player.
 export class Player extends Phaser.GameObjects.Container {
@@ -15,7 +16,15 @@ export class Player extends Phaser.GameObjects.Container {
     this.playerState = playerState;
 
     this.playerUnit = scene.add.sprite(0, 0, "player");
-    this.setSize(140, 210);
+    let scale = PLAYER_GRAPHICS.HEIGHT / this.playerUnit.height;
+
+    //console.log(scale);
+    //console.log(this.playerUnit.width);
+
+    //this.playerUnit.setOrigin(this.playerUnit.width * scale / 2, 0);
+    this.playerUnit.setOrigin(0, 0);
+    this.setScale(scale);
+    this.setSize(this.playerUnit.width * scale, this.playerUnit.height * scale);
 
     this.add(this.playerUnit);
 
