@@ -100,11 +100,11 @@ export class MainScene extends Phaser.Scene {
     this.playerUnit.body.setVelocityX(0);
     if (this.cursors.right.isDown) {
       this.playerUnit.body.setVelocityX(PLAYER_PHYSICS.wSpeed);
-      this.playerUnit.setDirection(Direction.Right);
+      this.playerUnit.direction = Direction.Right;
     }
     if (this.cursors.left.isDown) {
       this.playerUnit.body.setVelocityX(-PLAYER_PHYSICS.wSpeed);
-      this.playerUnit.setDirection(Direction.Left);
+      this.playerUnit.direction = Direction.Left;
     }
     if (this.cursors.up.isDown) {
       if (this.playerUnit.body.onFloor()) {
@@ -123,7 +123,7 @@ export class MainScene extends Phaser.Scene {
   onButtonDown(event): void {
     if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.Z) {
       let playerBody: Phaser.Physics.Arcade.Body = this.playerUnit.body;
-      let bullet = new Bullet(this, playerBody.center.x, playerBody.center.y, BulletType.Blood, this.playerUnit.getDirection());
+      let bullet = new Bullet(this, playerBody.center.x, playerBody.center.y, BulletType.Blood, this.playerUnit.direction);
 
       this.physics.add.collider(bullet, this.worldLayer, (b: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) => {
         bullet.destroy();

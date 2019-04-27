@@ -6,7 +6,7 @@ import { Direction } from "../logic/direction";
 export class Player extends Phaser.GameObjects.Container {
   private playerState: PlayerState;
   private playerUnit: Phaser.GameObjects.Sprite;
-  private direction: Direction;
+  private _direction: Direction;
 
   // Knows how to draw itself.
   // Needs to have a physical body to collide with enemies.
@@ -41,11 +41,11 @@ export class Player extends Phaser.GameObjects.Container {
     }
   }
 
-  setDirection(direction: Direction) {
-    this.direction = direction;
+  get direction(): Direction {
+    return this._direction;
   }
 
-  getDirection(): Direction {
-    return this.direction;
+  set direction(direction: Direction) {
+    this._direction = direction;
   }
 }
