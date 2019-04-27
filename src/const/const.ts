@@ -7,8 +7,8 @@
 // ======= General =======
 //
 export let CONST = {
-  FONT_SIZE: "32px",
-  BACKGROUND_COLOR: "#ccccff",
+  fontSize: "32px",
+  backgroundColor: "#ccccff",
   gravity: 1500,
 }
 
@@ -25,7 +25,7 @@ export let BULLET = {
 // ======= Player =======
 //
 export let PLAYER_INFO = {
-  STARTING_BLOOD: 10,
+  startingBlood: 10,
 }
 
 export let PLAYER_PHYSICS = {
@@ -38,8 +38,8 @@ export let PLAYER_GRAPHICS = {
 }
 
 export let PLAYER_HUD = {
-  BLOOD_TEXT_STYLE: {
-    fontSize: CONST.FONT_SIZE,
+  bloodTextStyle: {
+    fontSize: CONST.fontSize,
     color: "#000000",  // Black.
   }
 }

@@ -57,7 +57,7 @@ export class MainScene extends Phaser.Scene {
 
   create(): void {
     // Add more colors to the dull black world.
-    this.cameras.main.setBackgroundColor(CONST.BACKGROUND_COLOR);
+    this.cameras.main.setBackgroundColor(CONST.backgroundColor);
 
     this.tilemap = this.make.tilemap({ key: "level1" });
     this.tileset = this.tilemap.addTilesetImage("mario", "tiles");
@@ -65,7 +65,7 @@ export class MainScene extends Phaser.Scene {
     this.worldLayer = this.tilemap.createStaticLayer("World", this.tileset, 0, 0);
     this.worldLayer.setCollisionByProperty({ collides: true });
 
-    this.playerState = new PlayerState(PLAYER_INFO.STARTING_BLOOD);
+    this.playerState = new PlayerState(PLAYER_INFO.startingBlood);
     this.playerHealthBar = new HealthBar(this, {
       x: 30,
       y: 30,

@@ -16,7 +16,7 @@ export class HealthBar extends Phaser.GameObjects.Container {
     this.health_text = scene.make.text({
       x: 0,
       y: 0,
-      style: PLAYER_HUD.BLOOD_TEXT_STYLE,
+      style: PLAYER_HUD.bloodTextStyle,
       add: false,
     });
     this.add(this.health_text);
