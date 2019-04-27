@@ -3,6 +3,7 @@ import { PLAYER_INFO } from "../const/const";
 import { HealthBar } from "../hud/playerInfo";
 import { Player } from "../objects/player";
 import { Bullet } from "../objects/bullet";
+import { Gunner } from "../objects/gunner";
 
 export class MainScene extends Phaser.Scene {
   // Logic.
@@ -80,11 +81,10 @@ export class MainScene extends Phaser.Scene {
     const spawnPoint: any = this.tilemap.findObject("Objects", obj => obj.name === "PlayerSpawn");
     this.playerUnit = new Player(this, {x: spawnPoint.x, y: spawnPoint.y}, this.playerState);
 
-    this.physics.add.collider(this.playerUnit, this.wallsGroup, test);
     this.physics.add.collider(this.playerUnit, this.worldLayer);
 
-    let gunner = this.add.sprite(30, 30, "gunner", "gunner-0.png");
-    gunner.setScrollFactor(0);
+    let gunner = new Gunner(this, 300, 40);
+    this.physics.add.collider(gunner, this.worldLayer);
 
     function test(player: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) {
       let playerBody: Phaser.Physics.Arcade.Body = player.body;
