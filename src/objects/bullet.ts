@@ -9,7 +9,7 @@ export class Bullet extends Phaser.GameObjects.Container {
   constructor(scene: Phaser.Scene, params: any) {
     super(scene, params.x, params.y);
 
-    let drop = scene.add.sprite(0, 0, "blood_drop");
+    let drop = scene.add.sprite(0, 0, BULLET.bloodSprite);
     // TODO: Scale should depend on bullet size.
     drop.setScale(1.0 / 8);
     this.setSize(BULLET.size, BULLET.size);

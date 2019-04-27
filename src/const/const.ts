@@ -18,6 +18,7 @@ export let CONST = {
 export let BULLET = {
   speed: 600,
   size: 16,
+  bloodSprite: "blood_drop",
 }
 
 //
