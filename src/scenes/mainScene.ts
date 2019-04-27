@@ -1,5 +1,5 @@
 export class MainScene extends Phaser.Scene {
-  private playerUnit: Phaser.GameObjects.Graphics;
+  private playerUnit: Phaser.Physics.Arcade.Sprite;
 	private cursors: CursorKeys;
 
   constructor() {
@@ -13,13 +13,12 @@ export class MainScene extends Phaser.Scene {
   }
 
   preload(): void {
-    this.load.image("logo", "./assets/phaser.png");
+    this.load.image("player", "./assets/circle.png");
   }
 
   create(): void {
-    this.playerUnit = this.add.graphics();
-    this.playerUnit.fillStyle(0xFFFFFF, 1.0);
-    this.playerUnit.fillCircle(350, 350, 30);
+    this.playerUnit = this.physics.add.sprite(50, 50, "player");
+    this.playerUnit.setCollideWorldBounds(true);
   }
 
   update(time): void {
