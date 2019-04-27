@@ -19,13 +19,13 @@ export class Player extends Phaser.GameObjects.Container {
     this.playerUnit = scene.add.sprite(0, 0, "player");
     let scale = PLAYER_GRAPHICS.height / this.playerUnit.height;
 
-    //console.log(scale);
-    //console.log(this.playerUnit.width);
+    //var box = new Phaser.Structs.Size(
+      //PLAYER_GRAPHICS.width, PLAYER_GRAPHICS.height, Phaser.Structs.Size.FIT);
 
-    //this.playerUnit.setOrigin(this.playerUnit.width * scale / 2, 0);
-    this.playerUnit.setOrigin(0, 0);
-    this.setScale(scale);
-    this.setSize(this.playerUnit.width * scale, this.playerUnit.height * scale);
+    let width = this.playerUnit.width * scale;
+    let height = this.playerUnit.height * scale;
+    this.playerUnit.setDisplaySize(width, height);
+    this.setSize(width, height);
 
     this.add(this.playerUnit);
 

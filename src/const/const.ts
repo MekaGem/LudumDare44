@@ -43,6 +43,7 @@ export let PLAYER_PHYSICS = {
 }
 
 export let PLAYER_GRAPHICS = {
+  width: 90,
   height: 50,
 }
 
