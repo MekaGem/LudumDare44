@@ -43,3 +43,7 @@ export let PLAYER_HUD = {
     color: "#000000",  // Black.
   }
 }
+
+export let GUNNER_INFO = {
+  MOVING_SPEED: 100,
+}
