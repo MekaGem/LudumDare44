@@ -21,6 +21,8 @@ export class Gunner extends Phaser.GameObjects.Container {
     this.movingDirection = direction;
   }
 
+  // TODO: Consider instead manually call update method for all gunners in mainScene.update.
+  // https://github.com/photonstorm/phaser/pull/3379#issuecomment-373718957
   preUpdate() {
     this.body.setVelocityX(getDX(this.movingDirection) * GUNNER_INFO.MOVING_SPEED);
   }
