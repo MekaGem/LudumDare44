@@ -4,6 +4,7 @@ import { HealthBar } from "../hud/playerInfo";
 import { Player } from "../objects/player";
 import { Bullet, BulletType } from "../objects/bullet";
 import { Gunner } from "../objects/gunner";
+import { Direction } from "../logic/direction";
 
 export class MainScene extends Phaser.Scene {
   // Logic.
@@ -96,11 +97,11 @@ export class MainScene extends Phaser.Scene {
     this.playerUnit.body.setVelocityX(0);
     if (this.cursors.right.isDown) {
       this.playerUnit.body.setVelocityX(PLAYER_PHYSICS.wSpeed);
-      this.playerUnit.setDirection(1);
+      this.playerUnit.setDirection(Direction.Right);
     }
     if (this.cursors.left.isDown) {
       this.playerUnit.body.setVelocityX(-PLAYER_PHYSICS.wSpeed);
-      this.playerUnit.setDirection(-1);
+      this.playerUnit.setDirection(Direction.Left);
     }
     if (this.cursors.up.isDown) {
       if (this.playerUnit.body.onFloor()) {
