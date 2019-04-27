@@ -1,6 +1,7 @@
 import { PlayerState } from "../logic/playerState";
 import { PLAYER_INFO } from "../const/const";
 import { HealthBar } from "../hud/playerInfo";
+import { Player } from "../objects/player";
 
 export class MainScene extends Phaser.Scene {
   // Logic.
@@ -8,7 +9,7 @@ export class MainScene extends Phaser.Scene {
 
   // Graphics and physics.
   private playerHealthBar: HealthBar;
-  private playerUnit: Phaser.Physics.Arcade.Sprite;
+  private playerUnit: Player;
   private ground: Phaser.Physics.Arcade.Sprite;
   private cursors: CursorKeys;
   private canvas: HTMLCanvasElement;
@@ -92,8 +93,7 @@ export class MainScene extends Phaser.Scene {
     this.ground = this.physics.add.staticSprite(200, 400, "ground");
     this.wallsGroup.add(this.ground);
 
-    this.playerUnit = this.physics.add.sprite(200, 120, "player");
-    this.playerUnit.setScale(0.8);
+    this.playerUnit = new Player(this, {x: 90, y: 30}, this.playerState);
 
     this.physics.add.collider(this.playerUnit, this.wallsGroup, test);
 
@@ -104,12 +104,12 @@ export class MainScene extends Phaser.Scene {
 
   update(time): void {
     const horizontalSpeed = 200;
-    this.playerUnit.setVelocityX(0);
+    this.playerUnit.body.setVelocityX(0);
     if (this.cursors.right.isDown) {
-      this.playerUnit.setVelocityX(horizontalSpeed);
+      this.playerUnit.body.setVelocityX(horizontalSpeed);
     }
     if (this.cursors.left.isDown) {
-      this.playerUnit.setVelocityX(-horizontalSpeed);
+      this.playerUnit.body.setVelocityX(-horizontalSpeed);
     }
     if (this.cursors.up.isDown) {
       if (this.playerUnit.body.onFloor()) {
