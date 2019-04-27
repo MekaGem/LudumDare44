@@ -1,8 +1,13 @@
 import { PlayerState } from "../logic/playerState";
 import { PLAYER_INFO } from "../const/const";
+import { HealthBar } from "../hud/playerInfo";
 
 export class MainScene extends Phaser.Scene {
+  // Logic.
   private playerState: PlayerState;
+
+  // Graphics and physics.
+  private playerHealthBar: HealthBar;
   private playerUnit: Phaser.Physics.Arcade.Sprite;
   private ground: Phaser.Physics.Arcade.Sprite;
   private cursors: CursorKeys;
@@ -75,6 +80,10 @@ export class MainScene extends Phaser.Scene {
     }
 
     this.playerState = new PlayerState(PLAYER_INFO.STARTING_BLOOD);
+    this.playerHealthBar = new HealthBar(this, {
+      x: 50,
+      y: 50,
+    }, this.playerState);
 
     this.ground = this.physics.add.staticSprite(200, 400, "ground");
 
