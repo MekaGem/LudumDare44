@@ -43,7 +43,8 @@ export class MainScene extends Phaser.Scene {
     this.load.image("tiles", "./assets/mario.png");
     this.load.tilemapTiledJSON("level1", "./assets/maps/level1.json");
 
-    // this.load.atlas("gunner", "./assets/gunner.png", "./assets/gunner.json");
+    //this.load.atlas("gunner", "./assets/gunner.png", "./assets/gunner.json");
+   this.load.multiatlas('gunner', './assets/gunner.json', './assets/gunner/');
 
     this.canvas = this.sys.game.canvas;
   }
