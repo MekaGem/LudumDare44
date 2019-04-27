@@ -41,7 +41,7 @@ export class MainScene extends Phaser.Scene {
     this.load.image("blood_drop", "./assets/blood_drop.png");
 
     this.load.image("tiles", "./assets/mario.png");
-    this.load.tilemapTiledJSON("map", "./assets/maps/levels_exported.json");
+    this.load.tilemapTiledJSON("level1", "./assets/maps/level1.json");
 
     this.canvas = this.sys.game.canvas;
   }
@@ -58,7 +58,7 @@ export class MainScene extends Phaser.Scene {
     // Add more colors to the dull black world.
     this.cameras.main.setBackgroundColor("#ccccff");
 
-    this.tilemap = this.make.tilemap({ key: "map" });
+    this.tilemap = this.make.tilemap({ key: "level1" });
     this.tileset = this.tilemap.addTilesetImage("mario", "tiles");
 
     this.worldLayer = this.tilemap.createStaticLayer("World", this.tileset, 0, 0);
