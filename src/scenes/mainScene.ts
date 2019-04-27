@@ -22,14 +22,18 @@ export class MainScene extends Phaser.Scene {
   }
 
   update(time): void {
+    const horizontalSpeed = 200;
+    this.playerUnit.setVelocityX(0);
     if (this.cursors.right.isDown) {
-      this.playerUnit.x += 10;
-    } else if (this.cursors.left.isDown) {
-      this.playerUnit.x -= 10;
-    } else if (this.cursors.up.isDown) {
-      this.playerUnit.y -= 10;
+      this.playerUnit.setVelocityX(horizontalSpeed);
+    }
+    if (this.cursors.left.isDown) {
+      this.playerUnit.setVelocityX(-horizontalSpeed);
+    }
+    if (this.cursors.up.isDown) {
+      this.playerUnit.setVelocityY(-2 * horizontalSpeed);
     } else if (this.cursors.down.isDown) {
-      this.playerUnit.y += 10;
+      // this.playerUnit.y += 10;
     }
   }
 }
