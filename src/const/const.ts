@@ -5,6 +5,7 @@
 
 export let CONST = {
   FONT_SIZE: "32px",
+  BACKGROUND_COLOR: "#ccccff",
 }
 
 // Player characteristics

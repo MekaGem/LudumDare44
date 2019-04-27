@@ -1,5 +1,5 @@
 import { PlayerState } from "../logic/playerState";
-import { PLAYER_INFO } from "../const/const";
+import { PLAYER_INFO, CONST } from "../const/const";
 import { HealthBar } from "../hud/playerInfo";
 import { Player } from "../objects/player";
 import { Bullet } from "../objects/bullet";
@@ -15,11 +15,7 @@ export class MainScene extends Phaser.Scene {
   private ground: Phaser.Physics.Arcade.Sprite;
   private cursors: CursorKeys;
   private canvas: HTMLCanvasElement;
-
-  private LEVEL_WIDTH: number = 1200;
-  private LEVEL_HEIGHT: number = 1200;
   private wallsGroup: Phaser.Physics.Arcade.StaticGroup;
-
   private tilemap: Phaser.Tilemaps.Tilemap;
   private tileset: Phaser.Tilemaps.Tileset;
   private worldLayer: Phaser.Tilemaps.StaticTilemapLayer;
@@ -61,7 +57,7 @@ export class MainScene extends Phaser.Scene {
 
   create(): void {
     // Add more colors to the dull black world.
-    this.cameras.main.setBackgroundColor("#ccccff");
+    this.cameras.main.setBackgroundColor(CONST.BACKGROUND_COLOR);
 
     this.tilemap = this.make.tilemap({ key: "level1" });
     this.tileset = this.tilemap.addTilesetImage("mario", "tiles");
