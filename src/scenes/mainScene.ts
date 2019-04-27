@@ -1,5 +1,5 @@
 import { PlayerState } from "../logic/playerState";
-import { PLAYER_INFO, CONST, PLAYER_PHYSICS } from "../const/const";
+import { PLAYER_INFO, CONST, PLAYER_PHYSICS, BULLET } from "../const/const";
 import { HealthBar } from "../hud/playerInfo";
 import { Player } from "../objects/player";
 import { Bullet } from "../objects/bullet";
@@ -115,7 +115,7 @@ export class MainScene extends Phaser.Scene {
       let playerBody: Phaser.Physics.Arcade.Body = this.playerUnit.body;
       let bullet = new Bullet(this, {x: playerBody.center.x, y: playerBody.center.y});
 
-      bullet.body.setVelocityX(this.playerUnit.getDirection() * 600);
+      bullet.body.setVelocityX(this.playerUnit.getDirection() * BULLET.speed);
 
       this.physics.add.collider(bullet, this.worldLayer, (b: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) => {
         bullet.destroy();

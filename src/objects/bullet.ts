@@ -1,3 +1,5 @@
+import { BULLET } from "../const/const";
+
 // Stores graphical and physical representation of Bullet.
 export class Bullet extends Phaser.GameObjects.Container {
 
@@ -8,8 +10,9 @@ export class Bullet extends Phaser.GameObjects.Container {
     super(scene, params.x, params.y);
 
     let drop = scene.add.sprite(0, 0, "blood_drop");
+    // TODO: Scale should depend on bullet size.
     drop.setScale(1.0 / 8);
-    this.setSize(16, 16);
+    this.setSize(BULLET.size, BULLET.size);
     this.add(drop);
 
     scene.physics.world.enable(this);

@@ -3,13 +3,26 @@
 // - Object dimensions
 // - Player default characteristics
 
+//
+// ======= General =======
+//
 export let CONST = {
   FONT_SIZE: "32px",
   BACKGROUND_COLOR: "#ccccff",
   gravity: 1500,
 }
 
-// Player characteristics
+//
+// ======= Bullets =======
+//
+export let BULLET = {
+  speed: 600,
+  size: 16,
+}
+
+//
+// ======= Player =======
+//
 export let PLAYER_INFO = {
   STARTING_BLOOD: 10,
 }
