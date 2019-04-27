@@ -81,8 +81,8 @@ export class MainScene extends Phaser.Scene {
 
     this.playerState = new PlayerState(PLAYER_INFO.STARTING_BLOOD);
     this.playerHealthBar = new HealthBar(this, {
-      x: 50,
-      y: 50,
+      x: 30,
+      y: 30,
     }, this.playerState);
 
     this.ground = this.physics.add.staticSprite(200, 400, "ground");
