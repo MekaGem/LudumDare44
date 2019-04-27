@@ -31,7 +31,9 @@ export class MainScene extends Phaser.Scene {
       this.playerUnit.setVelocityX(-horizontalSpeed);
     }
     if (this.cursors.up.isDown) {
-      this.playerUnit.setVelocityY(-2 * horizontalSpeed);
+      if (this.playerUnit.body.velocity.y == 0) {
+        this.playerUnit.setVelocityY(-2 * horizontalSpeed);
+      }
     } else if (this.cursors.down.isDown) {
       // this.playerUnit.y += 10;
     }
