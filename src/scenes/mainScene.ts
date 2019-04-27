@@ -28,7 +28,7 @@ export class MainScene extends Phaser.Scene {
   }
 
   preload(): void {
-    this.load.image("player", "./assets/circle.png");
+    this.load.image("player", "./assets/vampire.png");
     this.load.image("ground", "./assets/ground.png");
     this.load.image("1x1white", "./assets/1x1white.png");
 
@@ -44,6 +44,9 @@ export class MainScene extends Phaser.Scene {
   }
 
   create(): void {
+    // Add more colors to the dull black world.
+    this.cameras.main.setBackgroundColor('#ccccff');
+
     {
       this.wallsGroup = this.physics.add.staticGroup();
 
@@ -89,6 +92,7 @@ export class MainScene extends Phaser.Scene {
     this.ground = this.physics.add.staticSprite(200, 400, "ground");
 
     this.playerUnit = this.physics.add.sprite(200, 50, "player");
+    this.playerUnit.setScale(0.8);
 
     this.physics.add.collider(this.playerUnit, this.wallsGroup);
     this.physics.add.collider(this.playerUnit, this.ground);
