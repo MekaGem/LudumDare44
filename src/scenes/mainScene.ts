@@ -1,5 +1,6 @@
 export class MainScene extends Phaser.Scene {
   private playerUnit: Phaser.Physics.Arcade.Sprite;
+  private ground: Phaser.Physics.Arcade.Sprite;
 	private cursors: CursorKeys;
 
   constructor() {
@@ -14,11 +15,18 @@ export class MainScene extends Phaser.Scene {
 
   preload(): void {
     this.load.image("player", "./assets/circle.png");
+    this.load.image("ground", "./assets/ground.png");
+    // this.load.atlas("ground", "./assets/ground.png", "./assets/ground.json");
   }
 
   create(): void {
+    this.ground = this.physics.add.sprite(0, 400, "ground");
+    this.ground.setCollideWorldBounds(true);
+
     this.playerUnit = this.physics.add.sprite(50, 50, "player");
     this.playerUnit.setCollideWorldBounds(true);
+
+    this.physics.add.collider(this.ground, this.playerUnit);
   }
 
   update(time): void {
