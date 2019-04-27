@@ -19,6 +19,10 @@ export class MainScene extends Phaser.Scene {
   private LEVEL_HEIGHT: number = 1200;
   private wallsGroup: Phaser.Physics.Arcade.StaticGroup;
 
+  private tilemap: Phaser.Tilemaps.Tilemap;
+  private tileset: Phaser.Tilemaps.Tileset;
+  private worldLayer: Phaser.Tilemaps.StaticTilemapLayer;
+
   constructor() {
     super({
       key: "MainScene"
@@ -36,6 +40,9 @@ export class MainScene extends Phaser.Scene {
     this.load.image("1x1white", "./assets/1x1white.png");
     this.load.image("blood_drop", "./assets/blood_drop.png");
 
+    this.load.image("tiles", "./assets/mario.png");
+    this.load.tilemapTiledJSON("map", "./assets/maps/levels_exported.json");
+
     this.canvas = this.sys.game.canvas;
   }
 
@@ -49,18 +56,32 @@ export class MainScene extends Phaser.Scene {
 
   create(): void {
     // Add more colors to the dull black world.
-    this.cameras.main.setBackgroundColor('#ccccff');
+    this.cameras.main.setBackgroundColor("#ccccff");
+
+    this.tilemap = this.make.tilemap({ key: "map" });
+    this.tileset = this.tilemap.addTilesetImage("mario", "tiles");
+
+    this.worldLayer = this.tilemap.createStaticLayer("World", this.tileset, 0, 0);
+    this.worldLayer.setCollisionByProperty({ collides: true });
+    //this.worldLayer.setCollisionBetween(1, 220);
+
+    const debugGraphics = this.add.graphics().setAlpha(0.75);
+    this.worldLayer.renderDebug(debugGraphics, {
+      tileColor: null, // Color of non-colliding tiles
+      collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
+      faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
+    });
 
     {
       this.wallsGroup = this.physics.add.staticGroup();
 
       let border = 50;
 
-      let upWall = this.physics.add.staticSprite(-border, -border, "1x1white");
-      upWall.setScale(this.LEVEL_WIDTH + border * 2, border);
-      upWall.setSize(this.LEVEL_WIDTH + border * 2, border);
-      upWall.setOrigin(0, 0);
-      upWall.setTint(0xff0000);
+      //let upWall = this.physics.add.staticSprite(-border, -border, "1x1white");
+      //upWall.setScale(this.LEVEL_WIDTH + border * 2, border);
+      //upWall.setSize(this.LEVEL_WIDTH + border * 2, border);
+      //upWall.setOrigin(0, 0);
+      //upWall.setTint(0xff0000);
 
       let downWall = this.physics.add.staticSprite(-border, this.LEVEL_HEIGHT, "1x1white");
       downWall.setScale(this.LEVEL_WIDTH + border * 2, border);
@@ -68,22 +89,22 @@ export class MainScene extends Phaser.Scene {
       downWall.setOrigin(0, 0);
       downWall.setTint(0xff0000);
 
-      let leftWall = this.physics.add.staticSprite(-border, -border, "1x1white");
-      leftWall.setScale(border, this.LEVEL_HEIGHT + border * 2);
-      leftWall.setSize(border, this.LEVEL_HEIGHT + border * 2);
-      leftWall.setOrigin(0, 0);
-      leftWall.setTint(0xff0000);
+      //let leftWall = this.physics.add.staticSprite(-border, -border, "1x1white");
+      //leftWall.setScale(border, this.LEVEL_HEIGHT + border * 2);
+      //leftWall.setSize(border, this.LEVEL_HEIGHT + border * 2);
+      //leftWall.setOrigin(0, 0);
+      //leftWall.setTint(0xff0000);
 
-      let rightWall = this.physics.add.staticSprite(this.LEVEL_WIDTH, -border, "1x1white");
-      rightWall.setScale(border, this.LEVEL_HEIGHT + border * 2);
-      rightWall.setSize(border, this.LEVEL_HEIGHT + border * 2);
-      rightWall.setOrigin(0, 0);
-      rightWall.setTint(0xff0000);
+      //let rightWall = this.physics.add.staticSprite(this.LEVEL_WIDTH, -border, "1x1white");
+      //rightWall.setScale(border, this.LEVEL_HEIGHT + border * 2);
+      //rightWall.setSize(border, this.LEVEL_HEIGHT + border * 2);
+      //rightWall.setOrigin(0, 0);
+      //rightWall.setTint(0xff0000);
 
-      this.wallsGroup.add(upWall);
+      //this.wallsGroup.add(upWall);
       this.wallsGroup.add(downWall);
-      this.wallsGroup.add(leftWall);
-      this.wallsGroup.add(rightWall);
+      //this.wallsGroup.add(leftWall);
+      //this.wallsGroup.add(rightWall);
     }
 
     this.playerState = new PlayerState(PLAYER_INFO.STARTING_BLOOD);
@@ -93,12 +114,13 @@ export class MainScene extends Phaser.Scene {
     }, this.playerState);
     this.playerHealthBar.setScrollFactor(0);
 
-    this.ground = this.physics.add.staticSprite(200, 400, "ground");
-    this.wallsGroup.add(this.ground);
+    //this.ground = this.physics.add.staticSprite(200, 400, "ground");
+    //this.wallsGroup.add(this.ground);
 
     this.playerUnit = new Player(this, {x: 90, y: 30}, this.playerState);
 
     this.physics.add.collider(this.playerUnit, this.wallsGroup, test);
+    this.physics.add.collider(this.playerUnit, this.worldLayer);
 
     function test(player: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) {
       let playerBody: Phaser.Physics.Arcade.Body = player.body;
