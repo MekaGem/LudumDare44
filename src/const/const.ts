@@ -34,7 +34,7 @@ export let PLAYER_PHYSICS = {
 }
 
 export let PLAYER_GRAPHICS = {
-  HEIGHT: 50,
+  height: 50,
 }
 
 export let PLAYER_HUD = {
