@@ -63,7 +63,6 @@ export class MainScene extends Phaser.Scene {
 
     this.worldLayer = this.tilemap.createStaticLayer("World", this.tileset, 0, 0);
     this.worldLayer.setCollisionByProperty({ collides: true });
-    //this.worldLayer.setCollisionBetween(1, 220);
 
     const debugGraphics = this.add.graphics().setAlpha(0.75);
     this.worldLayer.renderDebug(debugGraphics, {
@@ -72,50 +71,12 @@ export class MainScene extends Phaser.Scene {
       faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
     });
 
-    {
-      this.wallsGroup = this.physics.add.staticGroup();
-
-      let border = 50;
-
-      //let upWall = this.physics.add.staticSprite(-border, -border, "1x1white");
-      //upWall.setScale(this.LEVEL_WIDTH + border * 2, border);
-      //upWall.setSize(this.LEVEL_WIDTH + border * 2, border);
-      //upWall.setOrigin(0, 0);
-      //upWall.setTint(0xff0000);
-
-      let downWall = this.physics.add.staticSprite(-border, this.LEVEL_HEIGHT, "1x1white");
-      downWall.setScale(this.LEVEL_WIDTH + border * 2, border);
-      downWall.setSize(this.LEVEL_WIDTH + border * 2, border);
-      downWall.setOrigin(0, 0);
-      downWall.setTint(0xff0000);
-
-      //let leftWall = this.physics.add.staticSprite(-border, -border, "1x1white");
-      //leftWall.setScale(border, this.LEVEL_HEIGHT + border * 2);
-      //leftWall.setSize(border, this.LEVEL_HEIGHT + border * 2);
-      //leftWall.setOrigin(0, 0);
-      //leftWall.setTint(0xff0000);
-
-      //let rightWall = this.physics.add.staticSprite(this.LEVEL_WIDTH, -border, "1x1white");
-      //rightWall.setScale(border, this.LEVEL_HEIGHT + border * 2);
-      //rightWall.setSize(border, this.LEVEL_HEIGHT + border * 2);
-      //rightWall.setOrigin(0, 0);
-      //rightWall.setTint(0xff0000);
-
-      //this.wallsGroup.add(upWall);
-      this.wallsGroup.add(downWall);
-      //this.wallsGroup.add(leftWall);
-      //this.wallsGroup.add(rightWall);
-    }
-
     this.playerState = new PlayerState(PLAYER_INFO.STARTING_BLOOD);
     this.playerHealthBar = new HealthBar(this, {
       x: 30,
       y: 30,
     }, this.playerState);
     this.playerHealthBar.setScrollFactor(0);
-
-    //this.ground = this.physics.add.staticSprite(200, 400, "ground");
-    //this.wallsGroup.add(this.ground);
 
     this.playerUnit = new Player(this, {x: 90, y: 30}, this.playerState);
 
