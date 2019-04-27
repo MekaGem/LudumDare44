@@ -2,7 +2,7 @@ import { PlayerState } from "../logic/playerState";
 import { PLAYER_INFO, CONST, PLAYER_PHYSICS, BULLET } from "../const/const";
 import { HealthBar } from "../hud/playerInfo";
 import { Player } from "../objects/player";
-import { Bullet } from "../objects/bullet";
+import { Bullet, BulletType } from "../objects/bullet";
 import { Gunner } from "../objects/gunner";
 
 export class MainScene extends Phaser.Scene {
@@ -37,7 +37,7 @@ export class MainScene extends Phaser.Scene {
     this.load.image("player", "vampire.png");
     this.load.image("ground", "ground.png");
     this.load.image("1x1white", "1x1white.png");
-    this.load.image(BULLET.bloodSprite, "blood_drop.png");
+    this.load.image(BULLET.BLOOD.spritePack, BULLET.BLOOD.spriteName);
 
     this.load.image("tiles", "mario.png");
     this.load.tilemapTiledJSON("level1", "maps/level1.json");
@@ -119,9 +119,7 @@ export class MainScene extends Phaser.Scene {
   onButtonDown(event): void {
     if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.Z) {
       let playerBody: Phaser.Physics.Arcade.Body = this.playerUnit.body;
-      let bullet = new Bullet(this, {x: playerBody.center.x, y: playerBody.center.y});
-
-      bullet.body.setVelocityX(this.playerUnit.getDirection() * BULLET.speed);
+      let bullet = new Bullet(this, playerBody.center.x, playerBody.center.y, BulletType.Blood, this.playerUnit.getDirection());
 
       this.physics.add.collider(bullet, this.worldLayer, (b: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) => {
         bullet.destroy();

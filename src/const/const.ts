@@ -16,9 +16,18 @@ export let CONST = {
 // ======= Bullets =======
 //
 export let BULLET = {
-  speed: 600,
-  size: 16,
-  bloodSprite: "blood_drop",
+  BLOOD: {
+    speed: 600,
+    size: 16,
+    spritePack: "blood_drop",
+    spriteName: "blood_drop.png",
+  },
+  GUN: {
+    speed: 1000,
+    size: 16,
+    spritePack: "gunner",
+    spriteName: "gunner-5.png",
+  },
 }
 
 //

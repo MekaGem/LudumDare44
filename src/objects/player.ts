@@ -1,11 +1,12 @@
 import { PlayerState } from "../logic/playerState";
 import { PLAYER_GRAPHICS } from "../const/const";
+import { Direction } from "../logic/direction";
 
 // Stores graphical and physical representation of Player.
 export class Player extends Phaser.GameObjects.Container {
   private playerState: PlayerState;
   private playerUnit: Phaser.GameObjects.Sprite;
-  private direction: number = 1;
+  private direction: Direction;
 
   // Knows how to draw itself.
   // Needs to have a physical body to collide with enemies.
@@ -40,11 +41,11 @@ export class Player extends Phaser.GameObjects.Container {
     }
   }
 
-  setDirection(direction: number) {
+  setDirection(direction: Direction) {
     this.direction = direction;
   }
 
-  getDirection(): number {
+  getDirection(): Direction {
     return this.direction;
   }
 }
