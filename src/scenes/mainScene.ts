@@ -69,8 +69,6 @@ export class MainScene extends Phaser.Scene {
     this.worldLayer = this.tilemap.createStaticLayer("World", this.tileset, 0, 0);
     this.worldLayer.setCollisionByProperty({ collides: true });
 
-    const debugGraphics = this.add.graphics().setAlpha(0.75);
-
     this.playerState = new PlayerState(PLAYER_INFO.STARTING_BLOOD);
     this.playerHealthBar = new HealthBar(this, {
       x: 30,
