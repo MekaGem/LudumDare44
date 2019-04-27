@@ -35,16 +35,17 @@ export class MainScene extends Phaser.Scene {
   }
 
   preload(): void {
-    this.load.image("player", "./assets/vampire.png");
-    this.load.image("ground", "./assets/ground.png");
-    this.load.image("1x1white", "./assets/1x1white.png");
-    this.load.image("blood_drop", "./assets/blood_drop.png");
+    this.load.setPath('./assets/');
+    this.load.image("player", "vampire.png");
+    this.load.image("ground", "ground.png");
+    this.load.image("1x1white", "1x1white.png");
+    this.load.image("blood_drop", "blood_drop.png");
 
-    this.load.image("tiles", "./assets/mario.png");
-    this.load.tilemapTiledJSON("level1", "./assets/maps/level1.json");
+    this.load.image("tiles", "mario.png");
+    this.load.tilemapTiledJSON("level1", "maps/level1.json");
 
     //this.load.atlas("gunner", "./assets/gunner.png", "./assets/gunner.json");
-   this.load.multiatlas('gunner', './assets/gunner.json', './assets/gunner/');
+    this.load.multiatlas("gunner", "gunner.json");
 
     this.canvas = this.sys.game.canvas;
   }
@@ -82,7 +83,7 @@ export class MainScene extends Phaser.Scene {
     this.physics.add.collider(this.playerUnit, this.wallsGroup, test);
     this.physics.add.collider(this.playerUnit, this.worldLayer);
 
-    let gunner = this.add.sprite(0, 0, "gunner", 0);
+    let gunner = this.add.sprite(30, 30, "gunner", "gunner-0.png");
     gunner.setScrollFactor(0);
 
     function test(player: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) {

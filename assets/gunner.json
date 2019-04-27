@@ -1,7 +1,7 @@
 {
 	"textures": [
 		{
-			"image": "gunner_split.png",
+			"image": "gunner.png",
 			"format": "RGBA8888",
 			"size": {
 				"w": 324,
@@ -1212,6 +1212,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:4e18edeace960dfbccdfc318c7d35736:5728c60de6d3e554d6ce03c515fe209f:e24e2760341cc404b5242382d16e5a18$"
+		"smartupdate": "$TexturePacker:SmartUpdate:5ea0bced53bdb703b2f5e57a30b9601d:5728c60de6d3e554d6ce03c515fe209f:82683db7077e56755788f90d1b13832d$"
 	}
 }
