@@ -90,12 +90,16 @@ export class MainScene extends Phaser.Scene {
     this.playerHealthBar.setScrollFactor(0);
 
     this.ground = this.physics.add.staticSprite(200, 400, "ground");
+    this.wallsGroup.add(this.ground);
 
-    this.playerUnit = this.physics.add.sprite(200, 50, "player");
+    this.playerUnit = this.physics.add.sprite(200, 120, "player");
     this.playerUnit.setScale(0.8);
 
-    this.physics.add.collider(this.playerUnit, this.wallsGroup);
-    this.physics.add.collider(this.playerUnit, this.ground);
+    this.physics.add.collider(this.playerUnit, this.wallsGroup, test);
+
+    function test(player: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) {
+      let playerBody: Phaser.Physics.Arcade.Body = player.body;
+    }
   }
 
   update(time): void {
@@ -108,13 +112,16 @@ export class MainScene extends Phaser.Scene {
       this.playerUnit.setVelocityX(-horizontalSpeed);
     }
     if (this.cursors.up.isDown) {
-      if (this.playerUnit.body.velocity.y == 0) {
+      if (this.playerUnit.body.onFloor()) {
         this.playerUnit.setVelocityY(-2 * horizontalSpeed);
       }
-    } else if (this.cursors.down.isDown) {
-      // this.playerUnit.y += 10;
     }
 
+    if (this.playerUnit.body.onFloor()) {
+      this.playerUnit.setTint(0xff0000);
+    } else {
+      this.playerUnit.setTint(0x00ff00);
+    }
     this.cameras.main.startFollow(this.playerUnit);
   }
 }
