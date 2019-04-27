@@ -78,7 +78,8 @@ export class MainScene extends Phaser.Scene {
     }, this.playerState);
     this.playerHealthBar.setScrollFactor(0);
 
-    this.playerUnit = new Player(this, {x: 90, y: 30}, this.playerState);
+    const spawnPoint: any = this.tilemap.findObject("Objects", obj => obj.name === "PlayerSpawn");
+    this.playerUnit = new Player(this, {x: spawnPoint.x, y: spawnPoint.y}, this.playerState);
 
     this.physics.add.collider(this.playerUnit, this.wallsGroup, test);
     this.physics.add.collider(this.playerUnit, this.worldLayer);
