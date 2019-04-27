@@ -8,8 +8,8 @@ export class Bullet extends Phaser.GameObjects.Container {
     super(scene, params.x, params.y);
 
     let drop = scene.add.sprite(0, 0, "blood_drop");
-    drop.setScale(0.5);
-    this.setSize(64, 64);
+    drop.setScale(1.0 / 8);
+    this.setSize(16, 16);
     this.add(drop);
 
     scene.physics.world.enable(this);

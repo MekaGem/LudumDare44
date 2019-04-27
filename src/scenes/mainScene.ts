@@ -118,7 +118,7 @@ export class MainScene extends Phaser.Scene {
 
       bullet.body.setVelocityX(this.playerUnit.getDirection() * 600);
 
-      this.physics.add.overlap(bullet, this.wallsGroup, (b: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) => {
+      this.physics.add.collider(bullet, this.worldLayer, (b: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) => {
         bullet.destroy();
       });
     }
