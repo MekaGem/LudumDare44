@@ -17,6 +17,7 @@ export class MainScene extends Phaser.Scene {
   private cursors: CursorKeys;
   private canvas: HTMLCanvasElement;
   private wallsGroup: Phaser.Physics.Arcade.StaticGroup;
+  private enemiesGroup: Phaser.Physics.Arcade.Group;
   private tilemap: Phaser.Tilemaps.Tilemap;
   private tileset: Phaser.Tilemaps.Tileset;
   private worldLayer: Phaser.Tilemaps.StaticTilemapLayer;
@@ -80,11 +81,13 @@ export class MainScene extends Phaser.Scene {
     this.physics.add.collider(this.playerUnit, this.worldLayer);
 
     this.updateList = new Phaser.GameObjects.UpdateList(this);
+    this.enemiesGroup = this.physics.add.group();
 
     const gunnerSpawns: any = this.tilemap.filterObjects("Objects", obj => obj.name === "GunnerSpawn");
     for (var spawn of gunnerSpawns) {
       let gunner = new Gunner(this, spawn.x, spawn.y);
       this.updateList.add(gunner);
+      this.enemiesGroup.add(gunner);
       this.physics.add.collider(gunner, this.worldLayer);
     }
 
@@ -124,6 +127,11 @@ export class MainScene extends Phaser.Scene {
 
       this.physics.add.collider(bullet, this.worldLayer, (b: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) => {
         bullet.destroy();
+      });
+
+      this.physics.add.collider(bullet, this.enemiesGroup, (b: Phaser.GameObjects.GameObject, enemy: Phaser.GameObjects.GameObject) => {
+        bullet.destroy();
+        enemy.destroy();
       });
     }
   }
