@@ -113,15 +113,11 @@ export class MainScene extends Phaser.Scene {
     }
     if (this.cursors.up.isDown) {
       if (this.playerUnit.body.onFloor()) {
-        this.playerUnit.setVelocityY(-2 * horizontalSpeed);
+        this.playerUnit.body.setVelocityY(-2 * horizontalSpeed);
       }
     }
 
-    if (this.playerUnit.body.onFloor()) {
-      this.playerUnit.setTint(0xff0000);
-    } else {
-      this.playerUnit.setTint(0x00ff00);
-    }
+    this.playerUnit.highlight(this.playerUnit.body.onFloor());
     this.cameras.main.startFollow(this.playerUnit);
   }
 }

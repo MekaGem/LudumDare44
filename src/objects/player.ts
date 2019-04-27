@@ -21,4 +21,12 @@ export class Player extends Phaser.GameObjects.Container {
     scene.physics.world.enable(this);
     scene.add.existing(this);
   }
+
+  highlight(active) {
+    if (active) {
+      this.playerUnit.setTint(0xff0000);
+    } else {
+      this.playerUnit.setTint(0x00ff00);
+    }
+  }
 }
