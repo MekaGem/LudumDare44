@@ -3,6 +3,7 @@
 import "phaser";
 import { MainScene } from "./scenes/mainScene";
 import { TitleScene } from "./scenes/titleScene";
+import { CONST } from "./const/const";
 
 // main game configuration
 const config: GameConfig = {
@@ -14,7 +15,7 @@ const config: GameConfig = {
   physics: {
     default: "arcade",
     arcade: {
-      gravity: { y: 500 },
+      gravity: { y: CONST.gravity },
       debug: true,
     }
   }

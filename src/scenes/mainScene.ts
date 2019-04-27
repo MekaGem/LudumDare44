@@ -1,5 +1,5 @@
 import { PlayerState } from "../logic/playerState";
-import { PLAYER_INFO, CONST } from "../const/const";
+import { PLAYER_INFO, CONST, PLAYER_PHYSICS } from "../const/const";
 import { HealthBar } from "../hud/playerInfo";
 import { Player } from "../objects/player";
 import { Bullet } from "../objects/bullet";
@@ -89,19 +89,18 @@ export class MainScene extends Phaser.Scene {
   }
 
   update(time: number): void {
-    const horizontalSpeed = 200;
     this.playerUnit.body.setVelocityX(0);
     if (this.cursors.right.isDown) {
-      this.playerUnit.body.setVelocityX(horizontalSpeed);
+      this.playerUnit.body.setVelocityX(PLAYER_PHYSICS.wSpeed);
       this.playerUnit.setDirection(1);
     }
     if (this.cursors.left.isDown) {
-      this.playerUnit.body.setVelocityX(-horizontalSpeed);
+      this.playerUnit.body.setVelocityX(-PLAYER_PHYSICS.wSpeed);
       this.playerUnit.setDirection(-1);
     }
     if (this.cursors.up.isDown) {
       if (this.playerUnit.body.onFloor()) {
-        this.playerUnit.body.setVelocityY(-2 * horizontalSpeed);
+        this.playerUnit.body.setVelocityY(-PLAYER_PHYSICS.hSpeed);
       }
     }
 
