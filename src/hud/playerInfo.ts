@@ -1,3 +1,4 @@
+import { PLAYER_HUD } from "../const/const";
 import { PlayerState } from "../logic/playerState";
 
 // Components for showing current player information.
@@ -15,10 +16,7 @@ export class HealthBar extends Phaser.GameObjects.Container {
     this.health_text = scene.make.text({
       x: 0,
       y: 0,
-      style: {
-        fontSize: 30,
-        color: '#ffffff',
-      },
+      style: PLAYER_HUD.BLOOD_TEXT_STYLE,
       add: false,
     });
     this.add(this.health_text);
