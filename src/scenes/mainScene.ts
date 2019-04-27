@@ -2,6 +2,7 @@ import { PlayerState } from "../logic/playerState";
 import { PLAYER_INFO } from "../const/const";
 import { HealthBar } from "../hud/playerInfo";
 import { Player } from "../objects/player";
+import { Bullet } from "../objects/bullet";
 
 export class MainScene extends Phaser.Scene {
   // Logic.
@@ -26,12 +27,14 @@ export class MainScene extends Phaser.Scene {
 
   init(): void {
     this.cursors = this.input.keyboard.createCursorKeys();
+    this.input.keyboard.on("keydown", this.onButtonDown, this);
   }
 
   preload(): void {
     this.load.image("player", "./assets/vampire.png");
     this.load.image("ground", "./assets/ground.png");
     this.load.image("1x1white", "./assets/1x1white.png");
+    this.load.image("blood_drop", "./assets/blood_drop.png");
 
     this.canvas = this.sys.game.canvas;
   }
@@ -102,14 +105,16 @@ export class MainScene extends Phaser.Scene {
     }
   }
 
-  update(time): void {
+  update(time: number): void {
     const horizontalSpeed = 200;
     this.playerUnit.body.setVelocityX(0);
     if (this.cursors.right.isDown) {
       this.playerUnit.body.setVelocityX(horizontalSpeed);
+      this.playerUnit.setDirection(1);
     }
     if (this.cursors.left.isDown) {
       this.playerUnit.body.setVelocityX(-horizontalSpeed);
+      this.playerUnit.setDirection(-1);
     }
     if (this.cursors.up.isDown) {
       if (this.playerUnit.body.onFloor()) {
@@ -119,5 +124,18 @@ export class MainScene extends Phaser.Scene {
 
     this.playerUnit.highlight(this.playerUnit.body.onFloor());
     this.cameras.main.startFollow(this.playerUnit);
+  }
+
+  onButtonDown(event): void {
+    if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.Z) {
+      let playerBody: Phaser.Physics.Arcade.Body = this.playerUnit.body;
+      let bullet = new Bullet(this, {x: playerBody.center.x, y: playerBody.center.y});
+
+      bullet.body.setVelocityX(this.playerUnit.getDirection() * 600);
+
+      this.physics.add.overlap(bullet, this.wallsGroup, (b: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) => {
+        bullet.destroy();
+      });
+    }
   }
 }

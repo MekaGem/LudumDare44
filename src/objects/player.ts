@@ -3,12 +3,13 @@ import { PlayerState } from "../logic/playerState";
 // Stores graphical and physical representation of Player.
 export class Player extends Phaser.GameObjects.Container {
   private playerState: PlayerState;
-  private playerUnit: Phaser.Physics.Arcade.Sprite;
+  private playerUnit: Phaser.GameObjects.Sprite;
+  private direction: number = 1;
 
   // Knows how to draw itself.
   // Needs to have a physical body to collide with enemies.
 
-  constructor(scene, params, playerState: PlayerState) {
+  constructor(scene: Phaser.Scene, params: any, playerState: PlayerState) {
     super(scene, params.x, params.y);
 
     this.playerState = playerState;
@@ -28,5 +29,13 @@ export class Player extends Phaser.GameObjects.Container {
     } else {
       this.playerUnit.setTint(0x00ff00);
     }
+  }
+
+  setDirection(direction: number) {
+    this.direction = direction;
+  }
+
+  getDirection(): number {
+    return this.direction;
   }
 }
