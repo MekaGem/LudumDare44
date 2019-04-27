@@ -43,6 +43,8 @@ export class MainScene extends Phaser.Scene {
     this.load.image("tiles", "./assets/mario.png");
     this.load.tilemapTiledJSON("level1", "./assets/maps/level1.json");
 
+    // this.load.atlas("gunner", "./assets/gunner.png", "./assets/gunner.json");
+
     this.canvas = this.sys.game.canvas;
   }
 
@@ -83,6 +85,9 @@ export class MainScene extends Phaser.Scene {
 
     this.physics.add.collider(this.playerUnit, this.wallsGroup, test);
     this.physics.add.collider(this.playerUnit, this.worldLayer);
+
+    let gunner = this.add.sprite(0, 0, "gunner", 0);
+    gunner.setScrollFactor(0);
 
     function test(player: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) {
       let playerBody: Phaser.Physics.Arcade.Body = player.body;

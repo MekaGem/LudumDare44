@@ -1,0 +1,13 @@
+{
+    "images": [
+        "assets/gunner.png"
+    ],
+    "frames": [
+        [0, 0, 30, 30, 0, 0, 0],
+        [0, 0, 30, 30, 0, 0, 0]
+    ],
+    "animations": {
+        "stand": 0,
+        "fire": 1
+    }
+}
