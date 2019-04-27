@@ -7,7 +7,7 @@ export class PlayerState {
 
   // - Current blood level
   private _blood: number;
-  blood(): number {
+  get blood(): number {
     return this._blood;
   }
 
