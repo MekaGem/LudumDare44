@@ -78,13 +78,16 @@ export class MainScene extends Phaser.Scene {
     }, this.playerState);
     this.playerHealthBar.setScrollFactor(0);
 
-    const spawnPoint: any = this.tilemap.findObject("Objects", obj => obj.name === "PlayerSpawn");
-    this.playerUnit = new Player(this, {x: spawnPoint.x, y: spawnPoint.y}, this.playerState);
+    const playerSpawn: any = this.tilemap.findObject("Objects", obj => obj.name === "PlayerSpawn");
+    this.playerUnit = new Player(this, {x: playerSpawn.x, y: playerSpawn.y}, this.playerState);
 
     this.physics.add.collider(this.playerUnit, this.worldLayer);
 
-    let gunner = new Gunner(this, 300, 40);
-    this.physics.add.collider(gunner, this.worldLayer);
+    const gunnerSpawns: any = this.tilemap.filterObjects("Objects", obj => obj.name === "GunnerSpawn");
+    for (var spawn of gunnerSpawns) {
+      let gunner = new Gunner(this, spawn.x, spawn.y);
+      this.physics.add.collider(gunner, this.worldLayer);
+    }
 
     function test(player: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) {
       let playerBody: Phaser.Physics.Arcade.Body = player.body;
