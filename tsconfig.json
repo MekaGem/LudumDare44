@@ -1,12 +1,6 @@
 {
-    "compilerOptions": {
-        "target": "es5",
-        "module": "amd",
-        "sourceMap": true,
-        "out": "out/script.js",
-        "watch": true
-    },
-    "include": [
-        "src/*"
-    ]
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "CommonJs"
+  }
 }
