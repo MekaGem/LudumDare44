@@ -1,4 +1,8 @@
+import { PlayerState } from "../logic/playerState";
+import { PLAYER_INFO } from "../const/const";
+
 export class MainScene extends Phaser.Scene {
+  private playerState: PlayerState;
   private playerUnit: Phaser.Physics.Arcade.Sprite;
   private ground: Phaser.Physics.Arcade.Sprite;
 	private cursors: CursorKeys;
@@ -20,6 +24,8 @@ export class MainScene extends Phaser.Scene {
   }
 
   create(): void {
+    this.playerState = new PlayerState(PLAYER_INFO.STARTING_BLOOD);
+
     this.ground = this.physics.add.sprite(0, 400, "ground");
     this.ground.setCollideWorldBounds(true);
 
