@@ -13,7 +13,7 @@ export class MainScene extends Phaser.Scene {
   // Graphics and physics.
   private playerHealthBar: HealthBar;
   private player: Player;
-  private gunners: Gunner[];
+  private gunners: Set<Gunner>;
   private updateList: Set<Phaser.GameObjects.GameObject>;
 
   private cursors: Phaser.Input.Keyboard.CursorKeys;
@@ -28,6 +28,8 @@ export class MainScene extends Phaser.Scene {
 
   private enemiesGroup: Phaser.Physics.Arcade.Group;
 
+  // Particles
+  private bloodParticles: Phaser.GameObjects.Particles.ParticleEmitterManager;
 
   constructor() {
     super({
@@ -85,7 +87,7 @@ export class MainScene extends Phaser.Scene {
     this.playerHealthBar = new HealthBar(
       this, PLAYER_HUD.healthBarOffsetX, PLAYER_HUD.healthBarOffsetY, this.playerState);
 
-    this.gunners = [];
+    this.gunners = new Set();
 
     // Enemies creation.
     this.enemiesGroup = this.physics.add.group();
@@ -94,9 +96,11 @@ export class MainScene extends Phaser.Scene {
       let gunner = new Gunner(this, spawn.x, spawn.y);
       this.enemiesGroup.add(gunner);
       this.physics.add.collider(gunner, this.worldLayer);
-      this.gunners.push(gunner);
+      this.gunners.add(gunner);
       this._addToUpdateList(gunner);
     }
+
+    this.bloodParticles = this.add.particles("1x1white");
 
     this.worldLayer.forEachTile(tile => {
       // Make tiles controlling NPC actions invisible.
@@ -132,7 +136,6 @@ export class MainScene extends Phaser.Scene {
 
       let distanceToPlayer = gunnerCenter.distance(playerCenter);
       if (distanceToPlayer < 300 && Math.abs(playerCenter.y - gunnerCenter.y) < 30) {
-        console.log("distanceToPlayer = " + distanceToPlayer);
         if (gunner.tryShoot()) {
           var direction: Direction;
           if (gunnerCenter.x > playerCenter.x) {
@@ -168,11 +171,32 @@ export class MainScene extends Phaser.Scene {
 
       this.physics.add.overlap(bullet, this.enemiesGroup, (b: Phaser.GameObjects.GameObject, enemy: Phaser.GameObjects.GameObject) => {
         bullet.destroy();
-        enemy.destroy();
 
-        const index = this.gunners.indexOf(enemy as Gunner, 0);
-        if (index > -1) {
-          this.gunners.splice(index, 1);
+        if (enemy instanceof Gunner) {
+          let gunner = enemy as Gunner;
+          this.gunners.delete(gunner);
+          this.enemiesGroup.remove(gunner);
+          this.updateList.delete(gunner);
+          gunner.body.stop();
+
+          let emitter = this.bloodParticles.createEmitter({
+            x: gunner.body.center.x,
+            y: gunner.body.center.y,
+            lifespan: 200,
+            speed: { min: 200, max: 400 },
+            angle: { min: 180 + 45, max: 360 - 45 },
+            gravityY: 1000,
+            scale: { start: 2, end: 1.0 },
+            quantity: 10,
+            blendMode: 'NORMAL',
+            tint: 0xff0000,
+          });
+
+          this.time.delayedCall(5000, ()=>{
+            console.log("gunner die !!!");
+            emitter.stop();
+            enemy.destroy();
+          }, [], this);
         }
       });
     }
