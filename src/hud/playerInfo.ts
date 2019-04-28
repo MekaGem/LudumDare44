@@ -8,8 +8,8 @@ export class HealthBar extends Phaser.GameObjects.Container {
   // Something like in Diablo would look awesome.
   private health_text: Phaser.GameObjects.Text;
   
-  constructor(scene, scene_params, player_state: PlayerState) {
-    super(scene, scene_params.x, scene_params.y);
+  constructor(scene, x: number, y: number, player_state: PlayerState) {
+    super(scene, x, y);
 
     this.player_state = player_state;
 

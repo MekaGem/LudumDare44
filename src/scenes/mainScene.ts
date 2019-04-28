@@ -61,15 +61,13 @@ export class MainScene extends Phaser.Scene {
     // Player creation.
     this.playerState = new PlayerState(PLAYER.startingBlood);
     const playerSpawn: any = this.tilemap.findObject("Objects", obj => obj.name === "PlayerSpawn");
-    this.player = new Player(this, {x: playerSpawn.x, y: playerSpawn.y}, this.playerState);
+    this.player = new Player(this, playerSpawn.x, playerSpawn.y, this.playerState);
     this.cameras.main.startFollow(this.player);
     this.physics.add.collider(this.player, this.worldLayer);
 
     // HUD creation (depends on the player state).
-    this.playerHealthBar = new HealthBar(this, {
-      x: PLAYER_HUD.healthBarOffsetX,
-      y: PLAYER_HUD.healthBarOffsetY,
-    }, this.playerState);
+    this.playerHealthBar = new HealthBar(
+      this, PLAYER_HUD.healthBarOffsetX, PLAYER_HUD.healthBarOffsetY, this.playerState);
 
     // Enemies creation.
     this.enemiesGroup = this.physics.add.group();

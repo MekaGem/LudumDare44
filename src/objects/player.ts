@@ -15,8 +15,8 @@ export class Player extends Phaser.GameObjects.Container {
   // Knows how to draw itself.
   // Needs to have a physical body to collide with enemies.
 
-  constructor(scene: Phaser.Scene, params: any, playerState: PlayerState) {
-    super(scene, params.x, params.y);
+  constructor(scene: Phaser.Scene, x: number, y: number, playerState: PlayerState) {
+    super(scene, x, y);
 
     this.playerState = playerState;
 
