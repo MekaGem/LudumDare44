@@ -36,6 +36,7 @@ export let BULLET = {
 export let PLAYER = {
   // Characteristics.
   startingBlood: 10,
+  regenerationSpeed: 120,
   // Physics.
   maxWSpeed: 300,
   drag: 1000,

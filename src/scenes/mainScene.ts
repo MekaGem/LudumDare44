@@ -27,6 +27,7 @@ export class MainScene extends Phaser.Scene {
   private backgroundLayer: Phaser.Tilemaps.StaticTilemapLayer;
 
   private enemiesGroup: Phaser.Physics.Arcade.Group;
+  private bloodSpots: Set<Phaser.GameObjects.GameObject>;
 
   // Particles
   private bloodParticles: Phaser.GameObjects.Particles.ParticleEmitterManager;
@@ -101,6 +102,7 @@ export class MainScene extends Phaser.Scene {
     }
 
     this.bloodParticles = this.add.particles("1x1white");
+    this.bloodSpots = new Set();
 
     this.worldLayer.forEachTile(tile => {
       // Make tiles controlling NPC actions invisible.
@@ -157,6 +159,13 @@ export class MainScene extends Phaser.Scene {
         }
       }
     }
+
+    for (var spot of this.bloodSpots) {
+      let spotCenter = (spot.body as Phaser.Physics.Arcade.Body).center;
+      if (spotCenter.distance(this.player.body.center) < 30) {
+        this.playerState.regenerate();
+      }
+    }
   }
 
   onButtonDown(event): void {
@@ -175,6 +184,9 @@ export class MainScene extends Phaser.Scene {
 
         if (enemy instanceof Gunner) {
           let gunner = enemy as Gunner;
+
+          this.bloodSpots.add(gunner);
+
           this.gunners.delete(gunner);
           this.enemiesGroup.remove(gunner);
           this.updateList.delete(gunner);
@@ -197,6 +209,7 @@ export class MainScene extends Phaser.Scene {
             console.log("gunner die !!!");
             emitter.stop();
             enemy.destroy();
+            this.bloodSpots.delete(gunner);
           }, [], this);
         }
       });
