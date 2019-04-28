@@ -64,9 +64,11 @@ export class MainScene extends Phaser.Scene {
 
   create(): void {
     // Add more colors to the dull black world.
+    var gameWidth = this.game.config.width as number;
+    var gameHeight = this.game.config.height as number;
     this.cameras.main.setBackgroundColor(CONST.backgroundColor);
-    var background = this.add.image(0, 0, "background");
-    background.setScale(0.8);
+    var background = this.add.image(gameWidth / 2, gameHeight / 2, "background");
+    background.setDisplaySize(gameWidth, gameHeight);
     background.setScrollFactor(0);
 
     this.updateList = new Set();
