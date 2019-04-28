@@ -68,6 +68,7 @@ export class MainScene extends Phaser.Scene {
 
     const playerSpawn: any = this.tilemap.findObject("Objects", obj => obj.name === "PlayerSpawn");
     this.player = new Player(this, {x: playerSpawn.x, y: playerSpawn.y}, this.playerState);
+    this.cameras.main.startFollow(this.player);
 
     this.physics.add.collider(this.player, this.worldLayer);
 
@@ -102,7 +103,6 @@ export class MainScene extends Phaser.Scene {
     if (false) {
       this.player.highlight(this.player.body.onFloor());
     }
-    this.cameras.main.startFollow(this.player);
 
     for (var gunner of this.gunners) {
       gunner.update();
