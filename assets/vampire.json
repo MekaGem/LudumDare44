@@ -12,14 +12,14 @@
 				{
 					"filename": "move3.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
-						"w": 115,
-						"h": 154
+						"w": 71,
+						"h": 115
 					},
 					"spriteSourceSize": {
-						"x": 27,
-						"y": 38,
+						"x": 0,
+						"y": 0,
 						"w": 71,
 						"h": 115
 					},
@@ -28,19 +28,23 @@
 						"y": 1,
 						"w": 71,
 						"h": 115
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
 					}
 				},
 				{
 					"filename": "move1.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
-						"w": 115,
-						"h": 154
+						"w": 67,
+						"h": 115
 					},
 					"spriteSourceSize": {
-						"x": 27,
-						"y": 39,
+						"x": 0,
+						"y": 0,
 						"w": 67,
 						"h": 115
 					},
@@ -49,19 +53,23 @@
 						"y": 1,
 						"w": 67,
 						"h": 115
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
 					}
 				},
 				{
 					"filename": "move2.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
-						"w": 115,
-						"h": 154
+						"w": 69,
+						"h": 112
 					},
 					"spriteSourceSize": {
-						"x": 27,
-						"y": 41,
+						"x": 0,
+						"y": 0,
 						"w": 69,
 						"h": 112
 					},
@@ -70,6 +78,10 @@
 						"y": 1,
 						"w": 69,
 						"h": 112
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
 					}
 				}
 			]
@@ -78,6 +90,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:1c3f35882ff5f643874fd0c701977094:ce28327f9bad4a3569280370ec7ace6b:7c7f4480e486e87f2a9b272f35888b2e$"
+		"smartupdate": "$TexturePacker:SmartUpdate:f56ddec2be34ae44f8c19effdd3d051b:ce28327f9bad4a3569280370ec7ace6b:7c7f4480e486e87f2a9b272f35888b2e$"
 	}
 }
