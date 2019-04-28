@@ -45,6 +45,7 @@ export class MainScene extends Phaser.Scene {
 
   preload(): void {
     this.load.setPath('./assets/');
+    this.load.image("background", "background.png");
     this.load.image("ground", "ground.png");
     this.load.image("1x1white", "1x1white.png");
     this.load.image(BULLET.blood.spritePack, BULLET.blood.spriteName);
@@ -64,6 +65,9 @@ export class MainScene extends Phaser.Scene {
   create(): void {
     // Add more colors to the dull black world.
     this.cameras.main.setBackgroundColor(CONST.backgroundColor);
+    var background = this.add.image(0, 0, "background");
+    background.setScale(0.8);
+    background.setScrollFactor(0);
 
     this.updateList = new Set();
 
