@@ -1,5 +1,5 @@
 // Stores player characteristics.
-export class PlayerState {
+export class PlayerState extends Phaser.Events.EventEmitter {
   // Contains logic about cost of different operations, e.g. shooting.
 
   // Stores:
@@ -11,11 +11,13 @@ export class PlayerState {
     return this._blood;
   }
 
-  damage(amount: number) {
-    this._blood -= amount;
+  constructor(starting_blood) {
+    super()
+    this._blood = starting_blood;
   }
 
-  constructor(starting_blood) {
-    this._blood = starting_blood;
+  damage(amount: number) {
+    this._blood -= amount;
+    this.emit('damage', amount);
   }
 }

@@ -159,6 +159,8 @@ export class MainScene extends Phaser.Scene {
     if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.Z) {
       let playerBody: Phaser.Physics.Arcade.Body = this.player.body;
       let bullet = new Bullet(this, playerBody.center.x, playerBody.center.y, BulletType.Blood, this.player.direction);
+      // Emitting a bullet hits you.
+      this.playerState.damage(1);
 
       this.physics.add.collider(bullet, this.worldLayer, (b: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) => {
         bullet.destroy();

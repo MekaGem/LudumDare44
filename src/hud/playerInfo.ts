@@ -20,10 +20,18 @@ export class HealthBar extends Phaser.GameObjects.Container {
       add: false,
     });
     this.add(this.health_text);
-    this.health_text.setText("Blood: " + this.player_state.blood.toString());
 
     // Don't move with the camera.
     this.setScrollFactor(0);
     this.scene.add.existing(this);
+
+    this.update();
+    this.player_state.on('damage', damage => {
+      this.update();
+    });
+  }
+
+  update() {
+    this.health_text.setText("Blood: " + this.player_state.blood.toString());
   }
 }
