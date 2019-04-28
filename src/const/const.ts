@@ -58,7 +58,7 @@ export let PLAYER_HUD = {
 // ======= Gunner =======
 //
 export let GUNNER_INFO = {
-  MOVING_SPEED: 100,
+  movingSpeed: 100,
   width: 50,
   height: 50,
 }
