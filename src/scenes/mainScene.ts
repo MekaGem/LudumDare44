@@ -50,14 +50,6 @@ export class MainScene extends Phaser.Scene {
     this.canvas = this.sys.game.canvas;
   }
 
-  private getWidth(): number {
-    return this.canvas.width;
-  }
-
-  private getHeight(): number {
-    return this.canvas.height;
-  }
-
   create(): void {
     // Add more colors to the dull black world.
     this.cameras.main.setBackgroundColor(CONST.backgroundColor);
