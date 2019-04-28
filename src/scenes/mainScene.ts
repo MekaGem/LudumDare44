@@ -95,23 +95,21 @@ export class MainScene extends Phaser.Scene {
   }
 
   update(time: number, delta: number): void {
-    this.player.body.setVelocityX(0);
+    var onGround = this.player.body.onFloor();
+    var acceleration = onGround ? PLAYER.groundAcceleration : PLAYER.airAcceleration;
+
     if (this.cursors.right.isDown) {
-      this.player.body.setVelocityX(PLAYER.wSpeed);
+      this.player.body.setAccelerationX(acceleration);
       this.player.direction = Direction.Right;
-    }
-    if (this.cursors.left.isDown) {
-      this.player.body.setVelocityX(-PLAYER.wSpeed);
+    } else if (this.cursors.left.isDown) {
+      this.player.body.setAccelerationX(-acceleration);
       this.player.direction = Direction.Left;
-    }
-    if (this.cursors.up.isDown) {
-      if (this.player.body.onFloor()) {
-        this.player.body.setVelocityY(-PLAYER.hSpeed);
-      }
+    } else {
+      this.player.body.setAccelerationX(0);
     }
 
-    if (false) {
-      this.player.highlight(this.player.body.onFloor());
+    if (onGround && this.cursors.up.isDown) {
+      this.player.body.setVelocityY(-PLAYER.hSpeed);
     }
 
     for (var obj of this.updateList) {

@@ -9,7 +9,7 @@
 export let CONST = {
   fontSize: "32px",
   backgroundColor: "#ccccff",
-  gravity: 1500,
+  gravity: 1000,
 }
 
 //
@@ -37,8 +37,11 @@ export let PLAYER = {
   // Characteristics.
   startingBlood: 10,
   // Physics.
-  wSpeed: 200,
-  hSpeed: 700,  // Influences jumpiness.
+  maxWSpeed: 300,
+  groundAcceleration: 600,
+  airAcceleration: 200,
+  maxHSpeed: 550,
+  hSpeed: 550,  // Influences jumpiness.
   // Graphics.
   width: 50,
   height: 50,
