@@ -34,9 +34,9 @@ export class Bullet extends Phaser.GameObjects.Container {
 
   private static chooseConfig(type: BulletType): any {
     if (type == BulletType.Blood) {
-      return BULLET.BLOOD;
+      return BULLET.blood;
     } else if (type == BulletType.Gun) {
-      return BULLET.GUN;
+      return BULLET.gun;
     }
   }
 }

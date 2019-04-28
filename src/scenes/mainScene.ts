@@ -39,7 +39,7 @@ export class MainScene extends Phaser.Scene {
     this.load.image("player", "vampire.png");
     this.load.image("ground", "ground.png");
     this.load.image("1x1white", "1x1white.png");
-    this.load.image(BULLET.BLOOD.spritePack, BULLET.BLOOD.spriteName);
+    this.load.image(BULLET.blood.spritePack, BULLET.blood.spriteName);
 
     this.load.image("tiles", "mario.png");
     this.load.tilemapTiledJSON("level1", "maps/level1.json");
