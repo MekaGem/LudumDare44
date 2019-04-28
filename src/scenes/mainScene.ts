@@ -52,7 +52,7 @@ export class MainScene extends Phaser.Scene {
   }
 
   _addToUpdateList(object: Phaser.GameObjects.GameObject) {
-    object.on('destroy', obj => this.updateList.delete(obj));
+    object.on(Phaser.GameObjects.Events.DESTROY, obj => this.updateList.delete(obj));
     this.updateList.add(object);
   }
 
