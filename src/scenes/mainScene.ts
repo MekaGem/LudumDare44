@@ -13,10 +13,7 @@ export class MainScene extends Phaser.Scene {
   // Graphics and physics.
   private playerHealthBar: HealthBar;
   private player: Player;
-  private ground: Phaser.Physics.Arcade.Sprite;
   private cursors: Phaser.Input.Keyboard.CursorKeys;
-  private canvas: HTMLCanvasElement;
-  private wallsGroup: Phaser.Physics.Arcade.StaticGroup;
   private enemiesGroup: Phaser.Physics.Arcade.Group;
   private tilemap: Phaser.Tilemaps.Tilemap;
   private tileset: Phaser.Tilemaps.Tileset;
@@ -46,8 +43,6 @@ export class MainScene extends Phaser.Scene {
 
     //this.load.atlas("gunner", "./assets/gunner.png", "./assets/gunner.json");
     this.load.multiatlas("gunner", "gunner.json");
-
-    this.canvas = this.sys.game.canvas;
   }
 
   create(): void {
