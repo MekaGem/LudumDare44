@@ -38,6 +38,7 @@ export let PLAYER = {
   startingBlood: 10,
   // Physics.
   maxWSpeed: 300,
+  drag: 1000,
   groundAcceleration: 600,
   airAcceleration: 200,
   maxHSpeed: 550,

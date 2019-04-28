@@ -28,7 +28,7 @@ export class Player extends Phaser.GameObjects.Container {
 
     scene.physics.world.enable(this);
     this.body
-      .setDrag(1000, 0)
+      .setDrag(PLAYER.drag, 0)
       .setMaxVelocity(PLAYER.maxWSpeed, PLAYER.maxHSpeed);
 
     scene.add.existing(this);
