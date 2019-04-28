@@ -4,30 +4,30 @@
 			"image": "vampire.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 213,
-				"h": 117
+				"w": 231,
+				"h": 409
 			},
 			"scale": 0.075,
 			"frames": [
 				{
-					"filename": "move3.png",
+					"filename": "Vampire2.PNG",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 71,
-						"h": 115
+						"w": 86,
+						"h": 139
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 71,
-						"h": 115
+						"w": 86,
+						"h": 139
 					},
 					"frame": {
 						"x": 1,
 						"y": 1,
-						"w": 71,
-						"h": 115
+						"w": 86,
+						"h": 139
 					},
 					"anchor": {
 						"x": 0.5,
@@ -35,24 +35,24 @@
 					}
 				},
 				{
-					"filename": "move1.png",
+					"filename": "Shooter3.PNG",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 67,
-						"h": 115
+						"w": 140,
+						"h": 131
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 67,
-						"h": 115
+						"w": 140,
+						"h": 131
 					},
 					"frame": {
-						"x": 74,
-						"y": 1,
-						"w": 67,
-						"h": 115
+						"x": 1,
+						"y": 142,
+						"w": 140,
+						"h": 131
 					},
 					"anchor": {
 						"x": 0.5,
@@ -60,24 +60,99 @@
 					}
 				},
 				{
-					"filename": "move2.png",
+					"filename": "Shooter1.PNG",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 69,
-						"h": 112
+						"w": 138,
+						"h": 128
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 69,
-						"h": 112
+						"w": 138,
+						"h": 128
+					},
+					"frame": {
+						"x": 89,
+						"y": 1,
+						"w": 138,
+						"h": 128
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Shooter2.PNG",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 156,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 156,
+						"h": 128
+					},
+					"frame": {
+						"x": 1,
+						"y": 275,
+						"w": 156,
+						"h": 128
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Vampire3.PNG",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 79,
+						"h": 139
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 79,
+						"h": 139
 					},
 					"frame": {
 						"x": 143,
-						"y": 1,
-						"w": 69,
-						"h": 112
+						"y": 131,
+						"w": 79,
+						"h": 139
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "Vampire1.PNG",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 71,
+						"h": 136
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 71,
+						"h": 136
+					},
+					"frame": {
+						"x": 159,
+						"y": 272,
+						"w": 71,
+						"h": 136
 					},
 					"anchor": {
 						"x": 0.5,
@@ -90,6 +165,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:f56ddec2be34ae44f8c19effdd3d051b:ce28327f9bad4a3569280370ec7ace6b:7c7f4480e486e87f2a9b272f35888b2e$"
+		"smartupdate": "$TexturePacker:SmartUpdate:b4dd8d2deeb503e1848a5a8aa47ea3d8:743da9e6fd3d050b38599e547f9ca0cd:7c7f4480e486e87f2a9b272f35888b2e$"
 	}
 }

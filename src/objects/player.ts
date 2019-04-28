@@ -21,7 +21,7 @@ export class Player extends Phaser.GameObjects.Container {
 
     this.playerState = playerState;
 
-    this._sprite = scene.add.sprite(0, 0, "player", "move1.png");
+    this._sprite = scene.add.sprite(0, 0, "player", "Vampire1.PNG");
     var box = boxedSize(this._sprite.width, this._sprite.height, PLAYER.width, PLAYER.height);
     this._sprite.setDisplaySize(box.width, box.height);
     this.setSize(box.width, box.height);
@@ -49,7 +49,7 @@ export class Player extends Phaser.GameObjects.Container {
     const anims = scene.anims;
     var frameNames = anims.generateFrameNames("player", {
                          start: 1, end: 3, zeroPad: 0,
-                         prefix: "move", suffix: ".png"
+                         prefix: "Vampire", suffix: ".PNG"
                      });
     scene.anims.create({ key: "player-run", frames: frameNames, frameRate: 6, repeat: -1 });
   }

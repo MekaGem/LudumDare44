@@ -15,7 +15,7 @@ export class Gunner extends Phaser.GameObjects.Container {
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y);
 
-    this._sprite = scene.add.sprite(0, 0, "gunner", "gunner-0.png");
+    this._sprite = scene.add.sprite(0, 0, "player", "Shooter1.PNG");
     var box = boxedSize(this._sprite.width, this._sprite.height, GUNNER.width, GUNNER.height);
     this._sprite.setDisplaySize(box.width, box.height);
     this.setSize(box.width, box.height);
@@ -28,7 +28,7 @@ export class Gunner extends Phaser.GameObjects.Container {
   }
 
   set direction(direction: Direction) {
-    this._sprite.setFlipX(direction == Direction.Left);
+    this._sprite.setFlipX(direction == Direction.Right);
     this._direction = direction;
   }
 

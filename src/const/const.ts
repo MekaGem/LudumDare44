@@ -69,8 +69,8 @@ export let GUNNER = {
   // Physics.
   movingSpeed: 100,
   // Graphics.
-  width: 0.9 * CONST.tileSize,
-  height: 1.8 * CONST.tileSize,
+  width: 1.8 * CONST.tileSize,
+  height: 2.8 * CONST.tileSize,
 
   gunCooldown: 60,
 }
