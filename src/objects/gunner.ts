@@ -1,5 +1,6 @@
 import { Direction, getDX } from "../logic/direction";
 import { GUNNER } from "../const/const";
+import { boxedSize } from "../utils/scaling";
 
 export class Gunner extends Phaser.GameObjects.Container {
   // Fix imprecise phaser.d.ts interface.
@@ -13,10 +14,9 @@ export class Gunner extends Phaser.GameObjects.Container {
     super(scene, x, y);
 
     this._alive = true;
+
     this._sprite = scene.add.sprite(0, 0, "gunner", "gunner-0.png");
-    var box = new Phaser.Structs.Size(this._sprite.width, this._sprite.height,
-                                      Phaser.Structs.Size.FIT);
-    box.fitTo(GUNNER.width, GUNNER.height);
+    var box = boxedSize(this._sprite.width, this._sprite.height, GUNNER.width, GUNNER.height);
     this._sprite.setDisplaySize(box.width, box.height);
     this.setSize(box.width, box.height);
     this.add(this._sprite);

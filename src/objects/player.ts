@@ -1,6 +1,7 @@
 import { PlayerState } from "../logic/playerState";
 import { PLAYER } from "../const/const";
 import { Direction } from "../logic/direction";
+import { boxedSize } from "../utils/scaling";
 
 // Stores graphical and physical representation of Player.
 export class Player extends Phaser.GameObjects.Container {
@@ -20,10 +21,7 @@ export class Player extends Phaser.GameObjects.Container {
     this.playerState = playerState;
 
     this._sprite = scene.add.sprite(0, 0, "player");
-
-    var box = new Phaser.Structs.Size(this._sprite.width, this._sprite.height,
-                                      Phaser.Structs.Size.FIT);
-    box.fitTo(PLAYER.width, PLAYER.height);
+    var box = boxedSize(this._sprite.width, this._sprite.height, PLAYER.width, PLAYER.height);
     this._sprite.setDisplaySize(box.width, box.height);
     this.setSize(box.width, box.height);
     this.add(this._sprite);

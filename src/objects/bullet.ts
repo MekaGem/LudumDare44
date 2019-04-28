@@ -1,5 +1,6 @@
 import { BULLET } from "../const/const";
 import { Direction, getDX } from "../logic/direction";
+import { boxedSize } from "../utils/scaling";
 
 export enum BulletType {
   Blood,
@@ -22,8 +23,9 @@ export class Bullet extends Phaser.GameObjects.Container {
     } else {
       this._sprite = this.scene.add.sprite(0, 0, config.spritePack, config.spriteName);
     }
-    this._sprite.setDisplaySize(config.size, config.size);
-    this.setSize(config.size, config.size);
+    var box = boxedSize(this._sprite.width, this._sprite.height, config.size, config.size);
+    this._sprite.setDisplaySize(box.width, box.height);
+    this.setSize(box.width, box.height);
     this.add(this._sprite);
 
     scene.physics.world.enable(this);
