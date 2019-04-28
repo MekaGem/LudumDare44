@@ -35,11 +35,12 @@ export class Player extends Phaser.GameObjects.Container {
     scene.add.existing(this);
 
     // Track the arrow keys & WASD
-    const { LEFT, RIGHT, UP, W, A, D } = Phaser.Input.Keyboard.KeyCodes;
+    const { LEFT, RIGHT, UP, DOWN, W, A, D } = Phaser.Input.Keyboard.KeyCodes;
     this._keys = scene.input.keyboard.addKeys({
       left: LEFT,
       right: RIGHT,
       up: UP,
+      down: DOWN,
       w: W,
       a: A,
       d: D
@@ -55,7 +56,7 @@ export class Player extends Phaser.GameObjects.Container {
 
   update() {
     var onGround = this.body.onFloor();
-    var acceleration = onGround ? PLAYER.groundAcceleration : PLAYER.airAcceleration;
+    var acceleration = PLAYER.groundAcceleration;
 
     if (this._keys.right.isDown || this._keys.d.isDown) {
       this.body.setAccelerationX(acceleration);

@@ -10,6 +10,7 @@ export class Gunner extends Phaser.GameObjects.Container {
   private _direction: Direction;
   private _sprite: Phaser.GameObjects.Sprite;
   private gunCooldown: number = 0;
+  private walking: boolean = true;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y);
@@ -37,14 +38,27 @@ export class Gunner extends Phaser.GameObjects.Container {
 
   update() {
     this.gunCooldown = Math.max(this.gunCooldown - 1, 0);
-    this.body.setVelocityX(getDX(this._direction) * GUNNER.movingSpeed);
+    if (this.walking) {
+      this.body.setVelocityX(getDX(this._direction) * GUNNER.movingSpeed);
+    }
   }
 
   tryShoot(): boolean {
+    if (!this.walking) return false;
     if (this.gunCooldown == 0) {
       this.gunCooldown = GUNNER.gunCooldown;
       return true;
     }
     return false;
+  }
+
+  setWalking(walking: boolean) {
+    this.walking = walking;
+    console.log(this);
+    console.log("setWalking: " + this + " " + walking + " " + this.walking);
+  }
+
+  isWalking(): boolean {
+    return this.walking;
   }
 }

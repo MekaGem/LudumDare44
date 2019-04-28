@@ -40,11 +40,10 @@ export let PLAYER = {
   startingBlood: 10,
   regenerationSpeed: 120,
   // Physics.
-  maxWSpeed: 300,
-  drag: 1000,
-  groundAcceleration: 600,
-  airAcceleration: 200,
+  maxWSpeed: 400,
   maxHSpeed: 550,
+  drag: 2000,
+  groundAcceleration: 1000,
   hSpeed: 550,  // Influences jumpiness.
   // Graphics.
   width: 0.9 * CONST.tileSize,

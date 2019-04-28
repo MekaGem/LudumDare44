@@ -147,17 +147,25 @@ export class MainScene extends Phaser.Scene {
           direction = Direction.Right;
         }
 
-        if (direction == gunner.direction && gunner.tryShoot()) {
-          let bullet = new Bullet(this, gunnerCenter.x, gunnerCenter.y, BulletType.Gun, direction);
+        if (gunner.isWalking() && direction == gunner.direction && gunner.tryShoot()) {
+          console.log("STOP AND SHOOT");
+          gunner.setWalking(false);
+          gunner.body.stop();
 
-          this.physics.add.collider(bullet, this.worldLayer, (b: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) => {
-            bullet.destroy();
-          });
+          this.time.delayedCall(1000, ()=>{
+            gunner.setWalking(true);
 
-          this.physics.add.overlap(bullet, this.player, (b: Phaser.GameObjects.GameObject, player: Phaser.GameObjects.GameObject) => {
-            bullet.destroy();
-            this.playerState.damage(1);
-          });
+            let bullet = new Bullet(this, gunnerCenter.x, gunnerCenter.y, BulletType.Gun, direction);
+
+            this.physics.add.collider(bullet, this.worldLayer, (b: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) => {
+              bullet.destroy();
+            });
+
+            this.physics.add.overlap(bullet, this.player, (b: Phaser.GameObjects.GameObject, player: Phaser.GameObjects.GameObject) => {
+              bullet.destroy();
+              this.playerState.damage(1);
+            });
+          }, [], this);
         }
       }
     }
