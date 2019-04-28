@@ -20,13 +20,13 @@ export let CONST = {
 export let BULLET = {
   blood: {
     speed: 600,
-    size: 16,
+    size: CONST.tileSize / 2,
     spritePack: "blood_drop",
     spriteName: "blood_drop.png",
   },
   gun: {
     speed: 1000,
-    size: 16,
+    size: CONST.tileSize / 2,
     spritePack: "gunner",
     spriteName: "gunner-5.png",
   },
