@@ -44,7 +44,6 @@ export class MainScene extends Phaser.Scene {
 
   preload(): void {
     this.load.setPath('./assets/');
-    this.load.image("player", "vampire.png");
     this.load.image("ground", "ground.png");
     this.load.image("1x1white", "1x1white.png");
     this.load.image(BULLET.blood.spritePack, BULLET.blood.spriteName);
@@ -53,6 +52,7 @@ export class MainScene extends Phaser.Scene {
     this.load.tilemapTiledJSON("level1", "maps/level1.json");
 
     this.load.multiatlas("gunner", "gunner.json");
+    this.load.multiatlas("player", "vampire.json");
   }
 
   _addToUpdateList(object: Phaser.GameObjects.GameObject) {

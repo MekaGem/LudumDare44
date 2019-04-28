@@ -21,7 +21,7 @@ export class Player extends Phaser.GameObjects.Container {
 
     this.playerState = playerState;
 
-    this._sprite = scene.add.sprite(0, 0, "player");
+    this._sprite = scene.add.sprite(0, 0, "player", "move1.png");
     var box = boxedSize(this._sprite.width, this._sprite.height, PLAYER.width, PLAYER.height);
     this._sprite.setDisplaySize(box.width, box.height);
     this.setSize(box.width, box.height);
@@ -44,6 +44,13 @@ export class Player extends Phaser.GameObjects.Container {
       a: A,
       d: D
     });
+
+    const anims = scene.anims;
+    var frameNames = anims.generateFrameNames("player", {
+                         start: 1, end: 3, zeroPad: 0,
+                         prefix: "move", suffix: ".png"
+                     });
+    scene.anims.create({ key: "player-run", frames: frameNames, frameRate: 3, repeat: -1 });
   }
 
   update() {
@@ -62,6 +69,15 @@ export class Player extends Phaser.GameObjects.Container {
 
     if (onGround && (this._keys.up.isDown || this._keys.w.isDown)) {
       this.body.setVelocityY(-PLAYER.hSpeed);
+    }
+
+    // Update animation based on the player state.
+    if (onGround) {
+      if (this.body.velocity.x !== 0) {
+        this._sprite.anims.play("player-run", true);
+      } else {
+        this._sprite.anims.stop();
+      }
     }
 
     super.update();

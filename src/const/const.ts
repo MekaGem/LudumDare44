@@ -44,8 +44,8 @@ export let PLAYER = {
   maxHSpeed: 550,
   hSpeed: 550,  // Influences jumpiness.
   // Graphics.
-  width: 50,
-  height: 50,
+  width: 100,
+  height: 100,
 }
 
 export let PLAYER_HUD = {
