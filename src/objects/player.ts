@@ -8,7 +8,7 @@ export class Player extends Phaser.GameObjects.Container {
   body!: Phaser.Physics.Arcade.Body
 
   private playerState: PlayerState;
-  private playerUnit: Phaser.GameObjects.Sprite;
+  private _sprite: Phaser.GameObjects.Sprite;
   private _direction: Direction;
 
   // Knows how to draw itself.
@@ -19,14 +19,14 @@ export class Player extends Phaser.GameObjects.Container {
 
     this.playerState = playerState;
 
-    this.playerUnit = scene.add.sprite(0, 0, "player");
+    this._sprite = scene.add.sprite(0, 0, "player");
 
-    var box = new Phaser.Structs.Size(this.playerUnit.width, this.playerUnit.height,
+    var box = new Phaser.Structs.Size(this._sprite.width, this._sprite.height,
                                       Phaser.Structs.Size.FIT);
     box.fitTo(PLAYER.width, PLAYER.height);
-    this.playerUnit.setDisplaySize(box.width, box.height);
+    this._sprite.setDisplaySize(box.width, box.height);
     this.setSize(box.width, box.height);
-    this.add(this.playerUnit);
+    this.add(this._sprite);
 
     scene.physics.world.enable(this);
     scene.add.existing(this);
@@ -34,9 +34,9 @@ export class Player extends Phaser.GameObjects.Container {
 
   highlight(active) {
     if (active) {
-      this.playerUnit.setTint(0xff0000);
+      this._sprite.setTint(0xff0000);
     } else {
-      this.playerUnit.setTint(0x00ff00);
+      this._sprite.setTint(0x00ff00);
     }
   }
 

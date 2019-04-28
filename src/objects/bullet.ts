@@ -10,20 +10,21 @@ export class Bullet extends Phaser.GameObjects.Container {
   // Fix imprecise phaser.d.ts interface.
   body!: Phaser.Physics.Arcade.Body
 
+  private _sprite: Phaser.GameObjects.Sprite;
+
   constructor(scene: Phaser.Scene, x: number, y: number, type: BulletType, direction: Direction) {
     super(scene, x, y);
 
     let config = Bullet.chooseConfig(type);
 
-    var sprite: Phaser.GameObjects.Sprite;
     if (type == BulletType.Blood) {
-      sprite = this.scene.add.sprite(0, 0, config.spritePack);
+      this._sprite = this.scene.add.sprite(0, 0, config.spritePack);
     } else {
-      sprite = this.scene.add.sprite(0, 0, config.spritePack, config.spriteName);
+      this._sprite = this.scene.add.sprite(0, 0, config.spritePack, config.spriteName);
     }
-    sprite.setDisplaySize(config.size, config.size);
+    this._sprite.setDisplaySize(config.size, config.size);
     this.setSize(config.size, config.size);
-    this.add(sprite);
+    this.add(this._sprite);
 
     scene.physics.world.enable(this);
     scene.add.existing(this);
