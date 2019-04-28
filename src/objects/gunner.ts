@@ -1,6 +1,7 @@
 import { Direction, getDX } from "../logic/direction";
 import { GUNNER } from "../const/const";
 import { boxedSize } from "../utils/scaling";
+import { Bullet } from "./bullet";
 
 export class Gunner extends Phaser.GameObjects.Container {
   // Fix imprecise phaser.d.ts interface.
@@ -8,6 +9,7 @@ export class Gunner extends Phaser.GameObjects.Container {
 
   private movingDirection: Direction;
   private _sprite: Phaser.GameObjects.Sprite;
+  private gunCooldown: number = 0;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y);
@@ -30,5 +32,9 @@ export class Gunner extends Phaser.GameObjects.Container {
 
   update() {
     this.body.setVelocityX(getDX(this.movingDirection) * GUNNER.movingSpeed);
+  }
+
+  tryShoot(): boolean {
+    return true;
   }
 }

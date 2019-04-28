@@ -11,6 +11,10 @@ export class PlayerState {
     return this._blood;
   }
 
+  damage(amount: number) {
+    this._blood -= amount;
+  }
+
   constructor(starting_blood) {
     this._blood = starting_blood;
   }

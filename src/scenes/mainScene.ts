@@ -13,6 +13,7 @@ export class MainScene extends Phaser.Scene {
   // Graphics and physics.
   private playerHealthBar: HealthBar;
   private player: Player;
+  private gunners: Gunner[];
   private updateList: Set<Phaser.GameObjects.GameObject>;
 
   private cursors: Phaser.Input.Keyboard.CursorKeys;
@@ -79,6 +80,8 @@ export class MainScene extends Phaser.Scene {
     this.playerHealthBar = new HealthBar(
       this, PLAYER_HUD.healthBarOffsetX, PLAYER_HUD.healthBarOffsetY, this.playerState);
 
+    this.gunners = [];
+
     // Enemies creation.
     this.enemiesGroup = this.physics.add.group();
     const gunnerSpawns: any = this.tilemap.filterObjects("Objects", obj => obj.name === "GunnerSpawn");
@@ -86,6 +89,7 @@ export class MainScene extends Phaser.Scene {
       let gunner = new Gunner(this, spawn.x, spawn.y);
       this.enemiesGroup.add(gunner);
       this.physics.add.collider(gunner, this.worldLayer);
+      this.gunners.push(gunner);
       this._addToUpdateList(gunner);
     }
   }
@@ -112,6 +116,34 @@ export class MainScene extends Phaser.Scene {
 
     for (var obj of this.updateList) {
       obj.update();
+    }
+
+    for (var gunner of this.gunners) {
+      let gunnerCenter = gunner.body.center;
+      let playerCenter = this.player.body.center;
+
+      let distanceToPlayer = gunnerCenter.distance(playerCenter);
+      if (distanceToPlayer < 300 && Math.abs(playerCenter.y - gunnerCenter.y) < 30) {
+        console.log("distanceToPlayer = " + distanceToPlayer);
+        if (gunner.tryShoot()) {
+          var direction: Direction;
+          if (gunnerCenter.x > playerCenter.x) {
+            direction = Direction.Left;
+          } else {
+            direction = Direction.Right;
+          }
+          let bullet = new Bullet(this, gunnerCenter.x, gunnerCenter.y, BulletType.Gun, direction);
+
+          this.physics.add.collider(bullet, this.worldLayer, (b: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) => {
+            bullet.destroy();
+          });
+
+          this.physics.add.collider(bullet, this.player, (b: Phaser.GameObjects.GameObject, player: Phaser.GameObjects.GameObject) => {
+            bullet.destroy();
+            this.playerState.damage(1);
+          });
+        }
+      }
     }
   }
 
