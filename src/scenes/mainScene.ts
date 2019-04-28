@@ -148,12 +148,13 @@ export class MainScene extends Phaser.Scene {
         }
 
         if (gunner.isWalking() && direction == gunner.direction && gunner.tryShoot()) {
-          console.log("STOP AND SHOOT");
           gunner.setWalking(false);
           gunner.body.stop();
 
-          this.time.delayedCall(1000, ()=>{
-            gunner.setWalking(true);
+          let thisGunner = gunner;
+
+          this.time.delayedCall(200, ()=>{
+            thisGunner.setWalking(true);
 
             let bullet = new Bullet(this, gunnerCenter.x, gunnerCenter.y, BulletType.Gun, direction);
 

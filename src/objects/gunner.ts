@@ -54,8 +54,6 @@ export class Gunner extends Phaser.GameObjects.Container {
 
   setWalking(walking: boolean) {
     this.walking = walking;
-    console.log(this);
-    console.log("setWalking: " + this + " " + walking + " " + this.walking);
   }
 
   isWalking(): boolean {
