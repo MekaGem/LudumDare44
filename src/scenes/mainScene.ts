@@ -73,6 +73,7 @@ export class MainScene extends Phaser.Scene {
     this.backgroundLayer = this.tilemap.createStaticLayer("Background", this.tileset, 0, 0);
 
     this.worldLayer = this.tilemap.createStaticLayer("World", this.tileset, 0, 0);
+    this.worldLayer.setScale(1);
     this.worldLayer.setCollisionByProperty({ collides: true });
 
     // Player creation.
@@ -82,6 +83,7 @@ export class MainScene extends Phaser.Scene {
     this.physics.add.collider(this.player, this.worldLayer);
 
     this.cameras.main.startFollow(this.player);
+    this.cameras.main.setZoom(1);
     this.cameras.main.setBounds(0, 0, this.tilemap.widthInPixels, this.tilemap.heightInPixels);
 
     // HUD creation (depends on the player state).

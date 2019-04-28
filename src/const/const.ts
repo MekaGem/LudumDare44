@@ -10,6 +10,8 @@ export let CONST = {
   fontSize: "32px",
   backgroundColor: "#ccccff",
   gravity: 1000,
+  tileSize: 32,
+  inf: 1e9,
 }
 
 //
@@ -45,13 +47,13 @@ export let PLAYER = {
   maxHSpeed: 550,
   hSpeed: 550,  // Influences jumpiness.
   // Graphics.
-  width: 100,
-  height: 100,
+  width: 0.9 * CONST.tileSize,
+  height: 1.8 * CONST.tileSize,
 }
 
 export let PLAYER_HUD = {
-  healthBarOffsetX: 30,
-  healthBarOffsetY: 30,
+  healthBarOffsetX: 10,
+  healthBarOffsetY: 10,
 
   bloodTextStyle: {
     fontSize: CONST.fontSize,
@@ -68,8 +70,8 @@ export let GUNNER = {
   // Physics.
   movingSpeed: 100,
   // Graphics.
-  width: 50,
-  height: 50,
+  width: 0.9 * CONST.tileSize,
+  height: 1.8 * CONST.tileSize,
 
   gunCooldown: 60,
 }
