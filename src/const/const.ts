@@ -45,9 +45,12 @@ export let PLAYER = {
 }
 
 export let PLAYER_HUD = {
+  healthBarOffsetX: 30,
+  healthBarOffsetY: 30,
+
   bloodTextStyle: {
     fontSize: CONST.fontSize,
-    color: "#000000",  // Black.
+    color: "red",
   }
 }
 

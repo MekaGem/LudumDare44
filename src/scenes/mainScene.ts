@@ -1,5 +1,5 @@
 import { PlayerState } from "../logic/playerState";
-import { PLAYER, CONST, BULLET } from "../const/const";
+import { PLAYER, CONST, BULLET, PLAYER_HUD } from "../const/const";
 import { HealthBar } from "../hud/playerInfo";
 import { Player } from "../objects/player";
 import { Bullet, BulletType } from "../objects/bullet";
@@ -67,8 +67,8 @@ export class MainScene extends Phaser.Scene {
 
     // HUD creation (depends on the player state).
     this.playerHealthBar = new HealthBar(this, {
-      x: 30,
-      y: 30,
+      x: PLAYER_HUD.healthBarOffsetX,
+      y: PLAYER_HUD.healthBarOffsetY,
     }, this.playerState);
 
     // Enemies creation.
