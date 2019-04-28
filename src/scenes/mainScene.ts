@@ -97,6 +97,15 @@ export class MainScene extends Phaser.Scene {
       this.gunners.push(gunner);
       this._addToUpdateList(gunner);
     }
+
+    this.worldLayer.forEachTile(tile => {
+      // Make tiles controlling NPC actions invisible.
+      if (!this.game.config.physics.arcade.debug) {
+        if ("npc_action" in tile.properties) {
+          tile.setVisible(false);
+        }
+      }
+    });
   }
 
   update(time: number, delta: number): void {
