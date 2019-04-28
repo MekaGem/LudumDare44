@@ -1,5 +1,5 @@
 import { Direction, getDX } from "../logic/direction";
-import { GUNNER_INFO } from "../const/const";
+import { GUNNER } from "../const/const";
 
 export class Gunner extends Phaser.GameObjects.Container {
   // Fix imprecise phaser.d.ts interface.
@@ -14,7 +14,7 @@ export class Gunner extends Phaser.GameObjects.Container {
     this._sprite = scene.add.sprite(0, 0, "gunner", "gunner-0.png");
     var box = new Phaser.Structs.Size(this._sprite.width, this._sprite.height,
                                       Phaser.Structs.Size.FIT);
-    box.fitTo(GUNNER_INFO.width, GUNNER_INFO.height);
+    box.fitTo(GUNNER.width, GUNNER.height);
     this._sprite.setDisplaySize(box.width, box.height);
     this.setSize(box.width, box.height);
     this.add(this._sprite);
@@ -32,6 +32,6 @@ export class Gunner extends Phaser.GameObjects.Container {
   // TODO: Consider instead manually call update method for all gunners in mainScene.update.
   // https://github.com/photonstorm/phaser/pull/3379#issuecomment-373718957
   preUpdate() {
-    this.body.setVelocityX(getDX(this.movingDirection) * GUNNER_INFO.movingSpeed);
+    this.body.setVelocityX(getDX(this.movingDirection) * GUNNER.movingSpeed);
   }
 }

@@ -1,5 +1,5 @@
 import { PlayerState } from "../logic/playerState";
-import { PLAYER_INFO, CONST, PLAYER_PHYSICS, BULLET } from "../const/const";
+import { PLAYER, CONST, BULLET } from "../const/const";
 import { HealthBar } from "../hud/playerInfo";
 import { Player } from "../objects/player";
 import { Bullet, BulletType } from "../objects/bullet";
@@ -60,7 +60,7 @@ export class MainScene extends Phaser.Scene {
     this.worldLayer = this.tilemap.createStaticLayer("World", this.tileset, 0, 0);
     this.worldLayer.setCollisionByProperty({ collides: true });
 
-    this.playerState = new PlayerState(PLAYER_INFO.startingBlood);
+    this.playerState = new PlayerState(PLAYER.startingBlood);
     this.playerHealthBar = new HealthBar(this, {
       x: 30,
       y: 30,
@@ -87,16 +87,16 @@ export class MainScene extends Phaser.Scene {
   update(time: number, delta: number): void {
     this.player.body.setVelocityX(0);
     if (this.cursors.right.isDown) {
-      this.player.body.setVelocityX(PLAYER_PHYSICS.wSpeed);
+      this.player.body.setVelocityX(PLAYER.wSpeed);
       this.player.direction = Direction.Right;
     }
     if (this.cursors.left.isDown) {
-      this.player.body.setVelocityX(-PLAYER_PHYSICS.wSpeed);
+      this.player.body.setVelocityX(-PLAYER.wSpeed);
       this.player.direction = Direction.Left;
     }
     if (this.cursors.up.isDown) {
       if (this.player.body.onFloor()) {
-        this.player.body.setVelocityY(-PLAYER_PHYSICS.hSpeed);
+        this.player.body.setVelocityY(-PLAYER.hSpeed);
       }
     }
 

@@ -33,16 +33,13 @@ export let BULLET = {
 //
 // ======= Player =======
 //
-export let PLAYER_INFO = {
+export let PLAYER = {
+  // Characteristics.
   startingBlood: 10,
-}
-
-export let PLAYER_PHYSICS = {
+  // Physics.
   wSpeed: 200,
   hSpeed: 700,
-}
-
-export let PLAYER_GRAPHICS = {
+  // Graphics.
   width: 50,
   height: 50,
 }
@@ -57,8 +54,12 @@ export let PLAYER_HUD = {
 //
 // ======= Gunner =======
 //
-export let GUNNER_INFO = {
+export let GUNNER = {
+  // Characteristics.
+  //
+  // Physics.
   movingSpeed: 100,
+  // Graphics.
   width: 50,
   height: 50,
 }
