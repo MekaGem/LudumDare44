@@ -28,6 +28,10 @@ export class Bullet extends Phaser.GameObjects.Container {
     this.setSize(box.width, box.height);
     this.add(this._sprite);
 
+    if (direction == Direction.Left) {
+      this._sprite.setFlipX(true);
+    }
+
     scene.physics.world.enable(this);
     scene.add.existing(this);
 
