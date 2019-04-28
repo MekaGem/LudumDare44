@@ -23,10 +23,10 @@ export class Gunner extends Phaser.GameObjects.Container {
     scene.physics.world.enable(this);
     scene.add.existing(this);
 
-    this.setDirection(Direction.Right);
+    this.direction = Direction.Right;
   }
 
-  setDirection(direction: Direction) {
+  set direction(direction: Direction) {
     this._sprite.setFlipX(direction == Direction.Left);
     this._direction = direction;
   }

@@ -111,6 +111,16 @@ export class MainScene extends Phaser.Scene {
       let gunnerCenter = gunner.body.center;
       let playerCenter = this.player.body.center;
 
+      var tile = this.worldLayer.getTileAtWorldXY(gunnerCenter.x, gunnerCenter.y);
+      if (tile && ("npc_action" in tile.properties)) {
+        var action = tile.properties["npc_action"];
+        if (action == "left") {
+          gunner.direction = Direction.Left;
+        } else if (action == "right") {
+          gunner.direction = Direction.Right;
+        }
+      }
+
       let distanceToPlayer = gunnerCenter.distance(playerCenter);
       if (distanceToPlayer < 300 && Math.abs(playerCenter.y - gunnerCenter.y) < 30) {
         console.log("distanceToPlayer = " + distanceToPlayer);
