@@ -38,7 +38,7 @@ export let PLAYER = {
   startingBlood: 10,
   // Physics.
   wSpeed: 200,
-  hSpeed: 700,
+  hSpeed: 700,  // Influences jumpiness.
   // Graphics.
   width: 50,
   height: 50,
