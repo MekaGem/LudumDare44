@@ -13,12 +13,16 @@ export class MainScene extends Phaser.Scene {
   // Graphics and physics.
   private playerHealthBar: HealthBar;
   private player: Player;
+  private gunners: Gunner[];
+
   private cursors: Phaser.Input.Keyboard.CursorKeys;
-  private enemiesGroup: Phaser.Physics.Arcade.Group;
+
   private tilemap: Phaser.Tilemaps.Tilemap;
   private tileset: Phaser.Tilemaps.Tileset;
+
+  private enemiesGroup: Phaser.Physics.Arcade.Group;
   private worldLayer: Phaser.Tilemaps.StaticTilemapLayer;
-  private updateList: Phaser.GameObjects.UpdateList;
+
 
   constructor() {
     super({
@@ -67,15 +71,15 @@ export class MainScene extends Phaser.Scene {
 
     this.physics.add.collider(this.player, this.worldLayer);
 
-    this.updateList = new Phaser.GameObjects.UpdateList(this);
     this.enemiesGroup = this.physics.add.group();
 
+    this.gunners = [];
     const gunnerSpawns: any = this.tilemap.filterObjects("Objects", obj => obj.name === "GunnerSpawn");
     for (var spawn of gunnerSpawns) {
       let gunner = new Gunner(this, spawn.x, spawn.y);
-      this.updateList.add(gunner);
       this.enemiesGroup.add(gunner);
       this.physics.add.collider(gunner, this.worldLayer);
+      this.gunners.push(gunner);
     }
   }
 
@@ -100,7 +104,9 @@ export class MainScene extends Phaser.Scene {
     }
     this.cameras.main.startFollow(this.player);
 
-    this.updateList.preUpdate();
+    for (var gunner of this.gunners) {
+      gunner.update();
+    }
   }
 
   onButtonDown(event): void {

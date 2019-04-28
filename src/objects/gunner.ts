@@ -7,10 +7,12 @@ export class Gunner extends Phaser.GameObjects.Container {
 
   private movingDirection: Direction;
   private _sprite: Phaser.GameObjects.Sprite;
+  private _alive: boolean;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y);
 
+    this._alive = true;
     this._sprite = scene.add.sprite(0, 0, "gunner", "gunner-0.png");
     var box = new Phaser.Structs.Size(this._sprite.width, this._sprite.height,
                                       Phaser.Structs.Size.FIT);
@@ -29,9 +31,16 @@ export class Gunner extends Phaser.GameObjects.Container {
     this.movingDirection = direction;
   }
 
-  // TODO: Consider instead manually call update method for all gunners in mainScene.update.
-  // https://github.com/photonstorm/phaser/pull/3379#issuecomment-373718957
-  preUpdate() {
+  update() {
+    if (!this._alive) {
+      return;
+    }
+
     this.body.setVelocityX(getDX(this.movingDirection) * GUNNER.movingSpeed);
+  }
+
+  destroy() {
+    this._alive = false;
+    super.destroy();
   }
 }
