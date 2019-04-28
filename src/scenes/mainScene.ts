@@ -17,11 +17,14 @@ export class MainScene extends Phaser.Scene {
 
   private cursors: Phaser.Input.Keyboard.CursorKeys;
 
+  // Holds data about the actual map.
   private tilemap: Phaser.Tilemaps.Tilemap;
+  // ???
   private tileset: Phaser.Tilemaps.Tileset;
+  // Display object derived from the tilemap.
+  private worldLayer: Phaser.Tilemaps.StaticTilemapLayer;
 
   private enemiesGroup: Phaser.Physics.Arcade.Group;
-  private worldLayer: Phaser.Tilemaps.StaticTilemapLayer;
 
 
   constructor() {
