@@ -45,7 +45,6 @@ export class MainScene extends Phaser.Scene {
     this.load.image("tiles", "mario.png");
     this.load.tilemapTiledJSON("level1", "maps/level1.json");
 
-    //this.load.atlas("gunner", "./assets/gunner.png", "./assets/gunner.json");
     this.load.multiatlas("gunner", "gunner.json");
   }
 
@@ -59,21 +58,21 @@ export class MainScene extends Phaser.Scene {
     this.worldLayer = this.tilemap.createStaticLayer("World", this.tileset, 0, 0);
     this.worldLayer.setCollisionByProperty({ collides: true });
 
+    // Player creation.
     this.playerState = new PlayerState(PLAYER.startingBlood);
+    const playerSpawn: any = this.tilemap.findObject("Objects", obj => obj.name === "PlayerSpawn");
+    this.player = new Player(this, {x: playerSpawn.x, y: playerSpawn.y}, this.playerState);
+    this.cameras.main.startFollow(this.player);
+    this.physics.add.collider(this.player, this.worldLayer);
+
+    // HUD creation (depends on the player state).
     this.playerHealthBar = new HealthBar(this, {
       x: 30,
       y: 30,
     }, this.playerState);
-    this.playerHealthBar.setScrollFactor(0);
 
-    const playerSpawn: any = this.tilemap.findObject("Objects", obj => obj.name === "PlayerSpawn");
-    this.player = new Player(this, {x: playerSpawn.x, y: playerSpawn.y}, this.playerState);
-    this.cameras.main.startFollow(this.player);
-
-    this.physics.add.collider(this.player, this.worldLayer);
-
+    // Enemies creation.
     this.enemiesGroup = this.physics.add.group();
-
     this.gunners = [];
     const gunnerSpawns: any = this.tilemap.filterObjects("Objects", obj => obj.name === "GunnerSpawn");
     for (var spawn of gunnerSpawns) {
