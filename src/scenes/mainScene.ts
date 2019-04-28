@@ -13,7 +13,7 @@ export class MainScene extends Phaser.Scene {
   // Graphics and physics.
   private playerHealthBar: HealthBar;
   private player: Player;
-  private gunners: Gunner[];
+  private updateList: Set<Phaser.GameObjects.GameObject>;
 
   private cursors: Phaser.Input.Keyboard.CursorKeys;
 
@@ -51,9 +51,16 @@ export class MainScene extends Phaser.Scene {
     this.load.multiatlas("gunner", "gunner.json");
   }
 
+  _addToUpdateList(object: Phaser.GameObjects.GameObject) {
+    object.on('destroy', obj => this.updateList.delete(obj));
+    this.updateList.add(object);
+  }
+
   create(): void {
     // Add more colors to the dull black world.
     this.cameras.main.setBackgroundColor(CONST.backgroundColor);
+
+    this.updateList = new Set();
 
     this.tilemap = this.make.tilemap({ key: "level1" });
     this.tileset = this.tilemap.addTilesetImage("mario", "tiles");
@@ -74,13 +81,12 @@ export class MainScene extends Phaser.Scene {
 
     // Enemies creation.
     this.enemiesGroup = this.physics.add.group();
-    this.gunners = [];
     const gunnerSpawns: any = this.tilemap.filterObjects("Objects", obj => obj.name === "GunnerSpawn");
     for (var spawn of gunnerSpawns) {
       let gunner = new Gunner(this, spawn.x, spawn.y);
       this.enemiesGroup.add(gunner);
       this.physics.add.collider(gunner, this.worldLayer);
-      this.gunners.push(gunner);
+      this._addToUpdateList(gunner);
     }
   }
 
@@ -104,8 +110,8 @@ export class MainScene extends Phaser.Scene {
       this.player.highlight(this.player.body.onFloor());
     }
 
-    for (var gunner of this.gunners) {
-      gunner.update();
+    for (var obj of this.updateList) {
+      obj.update();
     }
   }
 

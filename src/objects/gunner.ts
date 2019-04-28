@@ -8,12 +8,9 @@ export class Gunner extends Phaser.GameObjects.Container {
 
   private movingDirection: Direction;
   private _sprite: Phaser.GameObjects.Sprite;
-  private _alive: boolean;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y);
-
-    this._alive = true;
 
     this._sprite = scene.add.sprite(0, 0, "gunner", "gunner-0.png");
     var box = boxedSize(this._sprite.width, this._sprite.height, GUNNER.width, GUNNER.height);
@@ -32,15 +29,6 @@ export class Gunner extends Phaser.GameObjects.Container {
   }
 
   update() {
-    if (!this._alive) {
-      return;
-    }
-
     this.body.setVelocityX(getDX(this.movingDirection) * GUNNER.movingSpeed);
-  }
-
-  destroy() {
-    this._alive = false;
-    super.destroy();
   }
 }
