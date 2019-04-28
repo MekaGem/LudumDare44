@@ -20,7 +20,7 @@ export class MainScene extends Phaser.Scene {
 
   // Holds data about the actual map.
   private tilemap: Phaser.Tilemaps.Tilemap;
-  // ???
+  // Stores tiles images.
   private tileset: Phaser.Tilemaps.Tileset;
   // Display object derived from the tilemap.
   private worldLayer: Phaser.Tilemaps.StaticTilemapLayer;
