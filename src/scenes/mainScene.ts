@@ -136,13 +136,14 @@ export class MainScene extends Phaser.Scene {
 
       let distanceToPlayer = gunnerCenter.distance(playerCenter);
       if (distanceToPlayer < 300 && Math.abs(playerCenter.y - gunnerCenter.y) < 30) {
-        if (gunner.tryShoot()) {
-          var direction: Direction;
-          if (gunnerCenter.x > playerCenter.x) {
-            direction = Direction.Left;
-          } else {
-            direction = Direction.Right;
-          }
+        var direction: Direction;
+        if (gunnerCenter.x > playerCenter.x) {
+          direction = Direction.Left;
+        } else {
+          direction = Direction.Right;
+        }
+
+        if (direction == gunner.direction && gunner.tryShoot()) {
           let bullet = new Bullet(this, gunnerCenter.x, gunnerCenter.y, BulletType.Gun, direction);
 
           this.physics.add.collider(bullet, this.worldLayer, (b: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) => {

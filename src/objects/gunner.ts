@@ -31,11 +31,20 @@ export class Gunner extends Phaser.GameObjects.Container {
     this._direction = direction;
   }
 
+  get direction(): Direction {
+    return this._direction;
+  }
+
   update() {
+    this.gunCooldown = Math.max(this.gunCooldown - 1, 0);
     this.body.setVelocityX(getDX(this._direction) * GUNNER.movingSpeed);
   }
 
   tryShoot(): boolean {
-    return true;
+    if (this.gunCooldown == 0) {
+      this.gunCooldown = GUNNER.gunCooldown;
+      return true;
+    }
+    return false;
   }
 }

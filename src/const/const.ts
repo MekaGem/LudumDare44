@@ -70,5 +70,5 @@ export let GUNNER = {
   width: 50,
   height: 50,
 
-  gunCooldown: 1000,
+  gunCooldown: 60,
 }
