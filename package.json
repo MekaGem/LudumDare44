@@ -1,7 +1,7 @@
 {
-  "name": "template",
+  "name": "bloodnight",
   "version": "1.0.0",
-  "description": "Template",
+  "description": "Blood Night",
   "keywords": [
     "GameDev"
   ],
@@ -9,12 +9,12 @@
     "expose-loader": "0.7.5",
     "ts-loader": "4.4.2",
     "typescript": "^2.9.2",
-    "webpack": "4.15.0",
-    "webpack-cli": "3.0.8",
-    "webpack-dev-server": "3.1.4"
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
-    "phaser": "3.10.1"
+    "phaser": "^3.16.2"
   },
   "scripts": {
     "dev": "webpack --mode development && webpack-dev-server --mode development",
@@ -22,6 +22,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/akashin/LudumDare42.git"
+    "url": "git+https://github.com/akashin/LudumDare44.git"
   }
 }
