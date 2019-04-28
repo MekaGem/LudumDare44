@@ -6,13 +6,18 @@ export class Gunner extends Phaser.GameObjects.Container {
   body!: Phaser.Physics.Arcade.Body
 
   private movingDirection: Direction;
+  private _sprite: Phaser.GameObjects.Sprite;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y);
 
-    let sprite = scene.add.sprite(0, 0, "gunner", "gunner-0.png");
-    this.setSize(20, 38);
-    this.add(sprite);
+    this._sprite = scene.add.sprite(0, 0, "gunner", "gunner-0.png");
+    var box = new Phaser.Structs.Size(this._sprite.width, this._sprite.height,
+                                      Phaser.Structs.Size.FIT);
+    box.fitTo(GUNNER_INFO.width, GUNNER_INFO.height);
+    this._sprite.setDisplaySize(box.width, box.height);
+    this.setSize(box.width, box.height);
+    this.add(this._sprite);
 
     scene.physics.world.enable(this);
     scene.add.existing(this);

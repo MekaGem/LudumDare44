@@ -43,7 +43,7 @@ export let PLAYER_PHYSICS = {
 }
 
 export let PLAYER_GRAPHICS = {
-  width: 90,
+  width: 50,
   height: 50,
 }
 
@@ -54,6 +54,11 @@ export let PLAYER_HUD = {
   }
 }
 
+//
+// ======= Gunner =======
+//
 export let GUNNER_INFO = {
   MOVING_SPEED: 100,
+  width: 50,
+  height: 50,
 }
