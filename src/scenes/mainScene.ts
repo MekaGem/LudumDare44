@@ -138,7 +138,7 @@ export class MainScene extends Phaser.Scene {
             bullet.destroy();
           });
 
-          this.physics.add.collider(bullet, this.player, (b: Phaser.GameObjects.GameObject, player: Phaser.GameObjects.GameObject) => {
+          this.physics.add.overlap(bullet, this.player, (b: Phaser.GameObjects.GameObject, player: Phaser.GameObjects.GameObject) => {
             bullet.destroy();
             this.playerState.damage(1);
           });
@@ -156,9 +156,14 @@ export class MainScene extends Phaser.Scene {
         bullet.destroy();
       });
 
-      this.physics.add.collider(bullet, this.enemiesGroup, (b: Phaser.GameObjects.GameObject, enemy: Phaser.GameObjects.GameObject) => {
+      this.physics.add.overlap(bullet, this.enemiesGroup, (b: Phaser.GameObjects.GameObject, enemy: Phaser.GameObjects.GameObject) => {
         bullet.destroy();
         enemy.destroy();
+
+        const index = this.gunners.indexOf(enemy as Gunner, 0);
+        if (index > -1) {
+          this.gunners.splice(index, 1);
+        }
       });
     }
   }
