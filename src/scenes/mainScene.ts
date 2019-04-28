@@ -53,6 +53,7 @@ export class MainScene extends Phaser.Scene {
     this.load.image("tiles", "mario.png");
     this.load.tilemapTiledJSON("level1", "maps/level1.json");
 
+    // TODO: Clean up and rename as those are stored in the same texture now.
     this.load.multiatlas("gunner", "gunner.json");
     this.load.multiatlas("player", "vampire.json");
   }
@@ -144,6 +145,7 @@ export class MainScene extends Phaser.Scene {
         }
       }
 
+      // TODO: Move distances to constants.
       let distanceToPlayer = gunnerCenter.distance(playerCenter);
       if (distanceToPlayer < 300 && Math.abs(playerCenter.y - gunnerCenter.y) < 30) {
         var direction: Direction;
