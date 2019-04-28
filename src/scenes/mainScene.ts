@@ -12,7 +12,7 @@ export class MainScene extends Phaser.Scene {
 
   // Graphics and physics.
   private playerHealthBar: HealthBar;
-  private playerUnit: Player;
+  private player: Player;
   private ground: Phaser.Physics.Arcade.Sprite;
   private cursors: Phaser.Input.Keyboard.CursorKeys;
   private canvas: HTMLCanvasElement;
@@ -68,9 +68,9 @@ export class MainScene extends Phaser.Scene {
     this.playerHealthBar.setScrollFactor(0);
 
     const playerSpawn: any = this.tilemap.findObject("Objects", obj => obj.name === "PlayerSpawn");
-    this.playerUnit = new Player(this, {x: playerSpawn.x, y: playerSpawn.y}, this.playerState);
+    this.player = new Player(this, {x: playerSpawn.x, y: playerSpawn.y}, this.playerState);
 
-    this.physics.add.collider(this.playerUnit, this.worldLayer);
+    this.physics.add.collider(this.player, this.worldLayer);
 
     this.updateList = new Phaser.GameObjects.UpdateList(this);
     this.enemiesGroup = this.physics.add.group();
@@ -85,33 +85,33 @@ export class MainScene extends Phaser.Scene {
   }
 
   update(time: number, delta: number): void {
-    this.playerUnit.body.setVelocityX(0);
+    this.player.body.setVelocityX(0);
     if (this.cursors.right.isDown) {
-      this.playerUnit.body.setVelocityX(PLAYER_PHYSICS.wSpeed);
-      this.playerUnit.direction = Direction.Right;
+      this.player.body.setVelocityX(PLAYER_PHYSICS.wSpeed);
+      this.player.direction = Direction.Right;
     }
     if (this.cursors.left.isDown) {
-      this.playerUnit.body.setVelocityX(-PLAYER_PHYSICS.wSpeed);
-      this.playerUnit.direction = Direction.Left;
+      this.player.body.setVelocityX(-PLAYER_PHYSICS.wSpeed);
+      this.player.direction = Direction.Left;
     }
     if (this.cursors.up.isDown) {
-      if (this.playerUnit.body.onFloor()) {
-        this.playerUnit.body.setVelocityY(-PLAYER_PHYSICS.hSpeed);
+      if (this.player.body.onFloor()) {
+        this.player.body.setVelocityY(-PLAYER_PHYSICS.hSpeed);
       }
     }
 
     if (false) {
-      this.playerUnit.highlight(this.playerUnit.body.onFloor());
+      this.player.highlight(this.player.body.onFloor());
     }
-    this.cameras.main.startFollow(this.playerUnit);
+    this.cameras.main.startFollow(this.player);
 
     this.updateList.preUpdate();
   }
 
   onButtonDown(event): void {
     if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.Z) {
-      let playerBody: Phaser.Physics.Arcade.Body = this.playerUnit.body;
-      let bullet = new Bullet(this, playerBody.center.x, playerBody.center.y, BulletType.Blood, this.playerUnit.direction);
+      let playerBody: Phaser.Physics.Arcade.Body = this.player.body;
+      let bullet = new Bullet(this, playerBody.center.x, playerBody.center.y, BulletType.Blood, this.player.direction);
 
       this.physics.add.collider(bullet, this.worldLayer, (b: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) => {
         bullet.destroy();
