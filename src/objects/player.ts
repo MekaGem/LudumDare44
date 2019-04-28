@@ -4,6 +4,8 @@ import { Direction } from "../logic/direction";
 import { boxedSize } from "../utils/scaling";
 
 // Stores graphical and physical representation of Player.
+// Knows how to draw itself.
+// Has a physical body to collide with enemies.
 export class Player extends Phaser.GameObjects.Container {
   // Fix imprecise phaser.d.ts interface.
   body!: Phaser.Physics.Arcade.Body
@@ -12,8 +14,7 @@ export class Player extends Phaser.GameObjects.Container {
   private _sprite: Phaser.GameObjects.Sprite;
   private _direction: Direction;
 
-  // Knows how to draw itself.
-  // Needs to have a physical body to collide with enemies.
+  private _keys: any;
 
   constructor(scene: Phaser.Scene, x: number, y: number, playerState: PlayerState) {
     super(scene, x, y);
@@ -32,6 +33,38 @@ export class Player extends Phaser.GameObjects.Container {
       .setMaxVelocity(PLAYER.maxWSpeed, PLAYER.maxHSpeed);
 
     scene.add.existing(this);
+
+    // Track the arrow keys & WASD
+    const { LEFT, RIGHT, UP, W, A, D } = Phaser.Input.Keyboard.KeyCodes;
+    this._keys = scene.input.keyboard.addKeys({
+      left: LEFT,
+      right: RIGHT,
+      up: UP,
+      w: W,
+      a: A,
+      d: D
+    });
+  }
+
+  update() {
+    var onGround = this.body.onFloor();
+    var acceleration = onGround ? PLAYER.groundAcceleration : PLAYER.airAcceleration;
+
+    if (this._keys.right.isDown || this._keys.d.isDown) {
+      this.body.setAccelerationX(acceleration);
+      this.direction = Direction.Right;
+    } else if (this._keys.left.isDown || this._keys.a.isDown) {
+      this.body.setAccelerationX(-acceleration);
+      this.direction = Direction.Left;
+    } else {
+      this.body.setAccelerationX(0);
+    }
+
+    if (onGround && (this._keys.up.isDown || this._keys.w.isDown)) {
+      this.body.setVelocityY(-PLAYER.hSpeed);
+    }
+
+    super.update();
   }
 
   highlight(active) {
