@@ -14,7 +14,7 @@ export class MainScene extends Phaser.Scene {
   private playerHealthBar: HealthBar;
   private playerUnit: Player;
   private ground: Phaser.Physics.Arcade.Sprite;
-  private cursors: CursorKeys;
+  private cursors: Phaser.Input.Keyboard.CursorKeys;
   private canvas: HTMLCanvasElement;
   private wallsGroup: Phaser.Physics.Arcade.StaticGroup;
   private enemiesGroup: Phaser.Physics.Arcade.Group;
@@ -81,10 +81,6 @@ export class MainScene extends Phaser.Scene {
       this.updateList.add(gunner);
       this.enemiesGroup.add(gunner);
       this.physics.add.collider(gunner, this.worldLayer);
-    }
-
-    function test(player: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) {
-      let playerBody: Phaser.Physics.Arcade.Body = player.body;
     }
   }
 

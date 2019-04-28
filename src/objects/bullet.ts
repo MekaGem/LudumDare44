@@ -7,6 +7,9 @@ export enum BulletType {
 }
 
 export class Bullet extends Phaser.GameObjects.Container {
+  // Fix imprecise phaser.d.ts interface.
+  body!: Phaser.Physics.Arcade.Body
+
   constructor(scene: Phaser.Scene, x: number, y: number, type: BulletType, direction: Direction) {
     super(scene, x, y);
 

@@ -2,6 +2,9 @@ import { Direction, getDX } from "../logic/direction";
 import { GUNNER_INFO } from "../const/const";
 
 export class Gunner extends Phaser.GameObjects.Container {
+  // Fix imprecise phaser.d.ts interface.
+  body!: Phaser.Physics.Arcade.Body
+
   private movingDirection: Direction;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {

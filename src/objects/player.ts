@@ -4,6 +4,9 @@ import { Direction } from "../logic/direction";
 
 // Stores graphical and physical representation of Player.
 export class Player extends Phaser.GameObjects.Container {
+  // Fix imprecise phaser.d.ts interface.
+  body!: Phaser.Physics.Arcade.Body
+
   private playerState: PlayerState;
   private playerUnit: Phaser.GameObjects.Sprite;
   private _direction: Direction;
