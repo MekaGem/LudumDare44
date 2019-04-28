@@ -25,6 +25,13 @@ export class Gunner extends Phaser.GameObjects.Container {
     scene.add.existing(this);
 
     this.direction = Direction.Right;
+
+    const anims = scene.anims;
+    var frameNames = anims.generateFrameNames("player", {
+                         start: 1, end: 3, zeroPad: 0,
+                         prefix: "Shooter", suffix: ".PNG"
+                     });
+    scene.anims.create({ key: "gunner-run", frames: frameNames, frameRate: 9, repeat: -1 });
   }
 
   set direction(direction: Direction) {
@@ -39,6 +46,7 @@ export class Gunner extends Phaser.GameObjects.Container {
   update() {
     this.gunCooldown = Math.max(this.gunCooldown - 1, 0);
     if (this.walking) {
+      this._sprite.anims.play("gunner-run", true);
       this.body.setVelocityX(getDX(this._direction) * GUNNER.movingSpeed);
     }
   }
