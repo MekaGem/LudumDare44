@@ -43,6 +43,7 @@ export class Player extends Phaser.GameObjects.Container {
   }
 
   set direction(direction: Direction) {
+    this._sprite.setFlipX(direction == Direction.Left);
     this._direction = direction;
   }
 }

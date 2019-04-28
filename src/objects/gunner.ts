@@ -7,7 +7,7 @@ export class Gunner extends Phaser.GameObjects.Container {
   // Fix imprecise phaser.d.ts interface.
   body!: Phaser.Physics.Arcade.Body
 
-  private movingDirection: Direction;
+  private _direction: Direction;
   private _sprite: Phaser.GameObjects.Sprite;
   private gunCooldown: number = 0;
 
@@ -27,11 +27,12 @@ export class Gunner extends Phaser.GameObjects.Container {
   }
 
   setDirection(direction: Direction) {
-    this.movingDirection = direction;
+    this._sprite.setFlipX(direction == Direction.Left);
+    this._direction = direction;
   }
 
   update() {
-    this.body.setVelocityX(getDX(this.movingDirection) * GUNNER.movingSpeed);
+    this.body.setVelocityX(getDX(this._direction) * GUNNER.movingSpeed);
   }
 
   tryShoot(): boolean {
