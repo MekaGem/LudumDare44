@@ -50,7 +50,7 @@ export class Player extends Phaser.GameObjects.Container {
                          start: 1, end: 3, zeroPad: 0,
                          prefix: "move", suffix: ".png"
                      });
-    scene.anims.create({ key: "player-run", frames: frameNames, frameRate: 3, repeat: -1 });
+    scene.anims.create({ key: "player-run", frames: frameNames, frameRate: 6, repeat: -1 });
   }
 
   update() {
