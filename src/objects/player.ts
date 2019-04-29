@@ -13,6 +13,8 @@ export class Player extends Phaser.GameObjects.Container {
   private playerState: PlayerState;
   private _sprite: Phaser.GameObjects.Sprite;
   private _direction: Direction;
+  private _attacking: boolean = false;
+  private _attackSprite: Phaser.GameObjects.Sprite;
 
   private _keys: any;
 
@@ -81,6 +83,10 @@ export class Player extends Phaser.GameObjects.Container {
       }
     }
 
+    if (this._attacking) {
+      this.body.stop();
+    }
+
     super.update();
   }
 
@@ -103,7 +109,36 @@ export class Player extends Phaser.GameObjects.Container {
   }
 
   set direction(direction: Direction) {
+    if (this._attacking) return;
     this._sprite.setFlipX(direction == Direction.Left);
     this._direction = direction;
+  }
+
+  get attacking(): boolean {
+    return this._attacking;
+  }
+
+  set attacking(attacking: boolean) {
+    if (attacking && !this._attacking) {
+      this.body.setAllowGravity(false);
+
+      let width = PLAYER.meleeAttackDistance;
+      let height = PLAYER.height * 0.25;
+
+      var x = this.body.center.x;
+      if (this._direction == Direction.Left) {
+        x -= width;
+      }
+      this._attackSprite = this.scene.add.sprite(x, this.body.center.y - height / 2, "1x1white");
+
+      this._attackSprite.setOrigin(0.0, 0.0);
+      this._attackSprite.setTint(0xff0000);
+      this._attackSprite.setDisplaySize(width, height);
+      this._attackSprite.setSize(width, height);
+    } else if (!attacking && this._attacking) {
+      this.body.setAllowGravity(true);
+      this._attackSprite.destroy();
+    }
+    this._attacking = attacking;
   }
 }

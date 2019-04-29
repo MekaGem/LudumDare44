@@ -195,6 +195,37 @@ export class MainScene extends Phaser.Scene {
     }
   }
 
+  private killGunner(gunner: Gunner) {
+    this.bloodSpots.add(gunner);
+
+    this.gunners.delete(gunner);
+    this.enemiesGroup.remove(gunner);
+    this.updateList.delete(gunner);
+    gunner.walking = false;
+
+    let emitter = this.bloodParticles.createEmitter({
+      x: gunner.body.center.x,
+      y: gunner.body.center.y,
+      lifespan: 200,
+      speed: { min: 200, max: 400 },
+      angle: { min: 180 + 45, max: 360 - 45 },
+      gravityY: 1000,
+      scale: { start: 2, end: 1.0 },
+      quantity: 10,
+      blendMode: 'NORMAL',
+      tint: 0xff0000,
+    });
+
+    this.time.delayedCall(GUNNER.deathDuration, ()=>{
+      if (this.game.config.physics.arcade.debug) {
+        console.log("gunner die!!!");
+      }
+      emitter.stop();
+      gunner.destroy();
+      this.bloodSpots.delete(gunner);
+    }, [], this);
+  }
+
   onButtonDown(event): void {
     if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.Z) {
       let playerBody: Phaser.Physics.Arcade.Body = this.player.body;
@@ -210,38 +241,32 @@ export class MainScene extends Phaser.Scene {
         bullet.destroy();
 
         if (enemy instanceof Gunner) {
-          let gunner = enemy as Gunner;
-
-          this.bloodSpots.add(gunner);
-
-          this.gunners.delete(gunner);
-          this.enemiesGroup.remove(gunner);
-          this.updateList.delete(gunner);
-          gunner.walking = false;
-
-          let emitter = this.bloodParticles.createEmitter({
-            x: gunner.body.center.x,
-            y: gunner.body.center.y,
-            lifespan: 200,
-            speed: { min: 200, max: 400 },
-            angle: { min: 180 + 45, max: 360 - 45 },
-            gravityY: 1000,
-            scale: { start: 2, end: 1.0 },
-            quantity: 10,
-            blendMode: 'NORMAL',
-            tint: 0xff0000,
-          });
-
-          this.time.delayedCall(GUNNER.deathDuration, ()=>{
-            if (this.game.config.physics.arcade.debug) {
-              console.log("gunner die!!!");
-            }
-            emitter.stop();
-            enemy.destroy();
-            this.bloodSpots.delete(gunner);
-          }, [], this);
+          this.killGunner(enemy as Gunner);
         }
       });
+    }
+
+    if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.X) {
+      this.player.attacking = true;
+
+      let playerCenter = this.player.body.center;
+
+      for (var gunner of this.gunners) {
+        let thisGunner = gunner;
+        let gunnerCenter = thisGunner.body.center;
+
+        var direction = getDirection(playerCenter.x, gunnerCenter.x);
+        if (this.player.direction == direction
+            && Math.abs(playerCenter.y - gunnerCenter.y) < GUNNER.height / 2
+            && Math.abs(playerCenter.x - gunnerCenter.x) < PLAYER.meleeAttackDistance
+        ) {
+          this.killGunner(thisGunner);
+        }
+      }
+
+      this.time.delayedCall(PLAYER.meleeAttackDuration, ()=>{
+        this.player.attacking = false;
+      }, [], this);
     }
   }
 }

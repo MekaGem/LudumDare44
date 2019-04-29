@@ -49,6 +49,9 @@ export let PLAYER = {
   // Graphics.
   width: 0.85 * CONST.tileSize,
   height: 1.7 * CONST.tileSize,
+  // Attack
+  meleeAttackDuration: 200,
+  meleeAttackDistance: 2.0 * CONST.tileSize,
 }
 
 export let PLAYER_HUD = {
