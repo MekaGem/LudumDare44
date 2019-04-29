@@ -1,5 +1,5 @@
 import { PlayerState } from "../logic/playerState";
-import { PLAYER, CONST, BULLET, PLAYER_HUD } from "../const/const";
+import { PLAYER, CONST, BULLET, PLAYER_HUD, GUNNER } from "../const/const";
 import { HealthBar } from "../hud/playerInfo";
 import { Player } from "../objects/player";
 import { Bullet, BulletType } from "../objects/bullet";
@@ -104,7 +104,8 @@ export class MainScene extends Phaser.Scene {
     this.enemiesGroup = this.physics.add.group();
     const gunnerSpawns: any = this.tilemap.filterObjects("Objects", obj => obj.name === "GunnerSpawn");
     for (var spawn of gunnerSpawns) {
-      let gunner = new Gunner(this, spawn.x, spawn.y);
+      // TODO: Take direction from the spawn object.
+      let gunner = new Gunner(this, spawn.x, spawn.y, Direction.Right);
       this.enemiesGroup.add(gunner);
       this.physics.add.collider(gunner, this.worldLayer);
       this.gunners.add(gunner);
@@ -148,29 +149,29 @@ export class MainScene extends Phaser.Scene {
 
       // Initiate shooting if this gunner can see the player.
       if (gunner.canSee(playerCenter)) {
-        var direction = getDirection(gunnerCenter.x, playerCenter.x);
+        gunner.walking = false;
 
-        if (gunner.walking && direction == gunner.direction && gunner.tryShoot()) {
-          gunner.walking = false;
-          gunner.body.stop();
+        if (gunner.tryShoot()) {
+          var direction = getDirection(gunnerCenter.x, playerCenter.x);
 
-          let thisGunner = gunner;
-
-          this.time.delayedCall(200, ()=>{
-            thisGunner.walking = true;
-
+          // Shoot with a slight delay.
+          this.time.delayedCall(GUNNER.shootDelay, ()=>{
             let bullet = new Bullet(this, gunnerCenter.x, gunnerCenter.y, BulletType.Gun, direction);
 
-            this.physics.add.collider(bullet, this.worldLayer, (b: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) => {
+            this.physics.add.collider(bullet, this.worldLayer, (b: Phaser.GameObjects.GameObject,
+                                                                wall: Phaser.GameObjects.GameObject) => {
               bullet.destroy();
             });
 
-            this.physics.add.overlap(bullet, this.player, (b: Phaser.GameObjects.GameObject, player: Phaser.GameObjects.GameObject) => {
+            this.physics.add.overlap(bullet, this.player, (b: Phaser.GameObjects.GameObject,
+                                                           player: Phaser.GameObjects.GameObject) => {
               bullet.destroy();
               this.playerState.damage(1);
             });
           }, [], this);
         }
+      } else {
+        gunner.walking = true;
       }
     }
 

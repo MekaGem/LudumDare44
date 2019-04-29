@@ -75,4 +75,6 @@ export let GUNNER = {
   gunCooldown: 60,
 
   visionDistance: 300,
+
+  shootDelay: 200,  // milliseconds.
 }
