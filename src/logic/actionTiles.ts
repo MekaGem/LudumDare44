@@ -9,14 +9,14 @@ export function getActionFromTile(tile): string {
 }
 
 export function getTileProperty(tile: Phaser.Tilemaps.Tile, name: string) {
-  if (tile && (name in tile.properties)) {
+  if (tile && tile.properties && (name in tile.properties)) {
     return tile.properties[name];
   }
   return null;
 }
 
 export function setTileProperty(tile: Phaser.Tilemaps.Tile, name: string, value: any) {
-  if (tile && (name in tile.properties)) {
+  if (tile && tile.properties && (name in tile.properties)) {
     return tile.properties[name] = value;
   }
 }

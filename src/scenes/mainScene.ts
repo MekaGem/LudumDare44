@@ -91,7 +91,21 @@ export class MainScene extends Phaser.Scene {
     this.playerState = new PlayerState(PLAYER.startingBlood);
     const playerSpawn: any = this.tilemap.findObject("Objects", obj => obj.name === "PlayerSpawn");
     this.player = new Player(this, playerSpawn.x, playerSpawn.y, this.playerState, directionFromSpawn(playerSpawn));
-    this.physics.add.collider(this.player, this.worldLayer);
+    this.physics.add.collider(this.player, this.worldLayer, playerWorldCollider);
+
+    let This = this;
+    function playerWorldCollider(player: Phaser.GameObjects.GameObject, obj: Phaser.GameObjects.GameObject) {
+      if (obj instanceof Phaser.Tilemaps.Tile) {
+        let tile = obj as Phaser.Tilemaps.Tile;
+
+        let chest = getTileProperty(tile, "chest");
+        if (chest != null && This.playerState.hasKey(chest)) {
+          setTileProperty(tile, "chest", null);
+          tile.setCollision(false);
+          tile.setVisible(false);
+        }
+      }
+    }
 
     this.cameras.main.startFollow(this.player);
     this.cameras.main.setZoom(1);
@@ -212,6 +226,13 @@ export class MainScene extends Phaser.Scene {
       if (blood) {
         setTileProperty(tile, "blood", false);
         this.playerState.blood += BONUS.bloodBonusAmount;
+        tile.setVisible(false);
+      }
+
+      let key = getTileProperty(tile, "key");
+      if (key != null) {
+        setTileProperty(tile, "key", null);
+        this.playerState.addKey(key);
         tile.setVisible(false);
       }
     }

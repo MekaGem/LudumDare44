@@ -6,6 +6,9 @@ export class PlayerState extends Phaser.Events.EventEmitter {
 
   // Stores:
   // - Upgrades
+
+  private _keys: Set<number> = new Set();
+
   private regeneration: number = PLAYER.regenerationSpeed;
   private _alive: boolean;
   get alive(): boolean {
@@ -52,5 +55,13 @@ export class PlayerState extends Phaser.Events.EventEmitter {
       this.blood += 1;
       console.log("BLOOD++");
     }
+  }
+
+  addKey(index: number) {
+    this._keys.add(index);
+  }
+
+  hasKey(index: number): boolean {
+    return this._keys.has(index);
   }
 }
