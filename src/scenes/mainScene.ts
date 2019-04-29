@@ -146,8 +146,11 @@ export class MainScene extends Phaser.Scene {
           tile.setVisible(false);
         }
       }
-      if ("spike" in tile.properties) {
-        const spike = this.spikeGroup.create(tile.getCenterX(), tile.getCenterY(), "spike");
+      if ("spikes" in tile.properties) {
+        console.log(tile);
+        var spike = this.physics.add.sprite(tile.getCenterX(), tile.getCenterY(), "spike");
+        this.spikeGroup.add(spike);
+        //this.spikeGroup.add(tile);
         // The map has spikes rotated in Tiled (z key), so parse out that angle to the correct body
         // placement
         spike.rotation = tile.rotation;
@@ -172,20 +175,22 @@ export class MainScene extends Phaser.Scene {
           offsetX = 0;
           offsetY = 0;
         }
+        width = CONST.tileSize;
 
         spike.setDisplaySize(height, width);
-        spike.body.setSize(height, width);
-        spike.body.setOffset(offsetX, offsetY);
+        spike.setSize(height, width);
+        //spike.setOffset(offsetX, offsetY);
+        this.physics.add.collider(spike, this.worldLayer);
 
         this.worldLayer.removeTileAt(tile.x, tile.y);
       }
-
     });
 
 
     this.physics.add.overlap(this.spikeGroup, this.player,
                              (b: Phaser.GameObjects.GameObject, player: Phaser.GameObjects.GameObject) => {
       this.playerState.blood = 0;
+      console.log("overlap");
     });
 
     this.playerState.on(EVENT.playerDied, () => {
@@ -204,6 +209,9 @@ export class MainScene extends Phaser.Scene {
     // Handles player controls.
     if (this.playerState.alive) {
       this.player.update();
+    }
+    if (this.player.y > this.worldLayer.height) {
+      this.playerState.blood = 0;
     }
 
     for (var obj of this.updateList) {

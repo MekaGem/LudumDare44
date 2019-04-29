@@ -18,6 +18,10 @@ export class Player extends Phaser.GameObjects.Container {
 
   private _keys: any;
 
+  get sprite() {
+    return this._sprite;
+  }
+
   constructor(scene: Phaser.Scene, x: number, y: number, playerState: PlayerState, direction: Direction) {
     super(scene, x, y);
 
