@@ -147,7 +147,6 @@ export class MainScene extends Phaser.Scene {
         }
       }
       if ("spikes" in tile.properties) {
-        console.log(tile);
         var spike = this.physics.add.sprite(tile.getCenterX(), tile.getCenterY(), "spike");
         this.spikeGroup.add(spike);
         //this.spikeGroup.add(tile);
@@ -160,24 +159,24 @@ export class MainScene extends Phaser.Scene {
         var offsetY = 0;
 
         if (spike.angle === 0) {
-          height = CONST.tileSize;
-          width = 12;
+          width = CONST.tileSize;
+          height = 12;
           offsetX = 0;
-          offsetY = 2 * (CONST.tileSize - 6);
+          offsetY = CONST.tileSize - 12;
         } else if (spike.angle === -90) {
-          height = 12;
-          width = CONST.tileSize;
-          offsetY = 2 * (CONST.tileSize - 6);
-          offsetX = 0;
+          width = 12;
+          height = CONST.tileSize;
+          offsetX = CONST.tileSize - 12;
+          offsetY = 0;
         } else if (spike.angle === 90) {
-          height = 12;
-          width = CONST.tileSize;
+          width = 12;
+          height = CONST.tileSize;
           offsetX = 0;
           offsetY = 0;
         }
 
-        spike.setDisplaySize(height, width);
-        spike.setSize(height, width);
+        spike.setDisplaySize(CONST.tileSize, CONST.tileSize);
+        spike.setSize(width, height);
         spike.setOffset(offsetX, offsetY);
         this.physics.add.collider(spike, this.worldLayer);
 
