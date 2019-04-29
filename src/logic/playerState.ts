@@ -53,7 +53,6 @@ export class PlayerState extends Phaser.Events.EventEmitter {
     if (this.regeneration == 0) {
       this.regeneration = PLAYER.regenerationSpeed;
       this.blood += 1;
-      console.log("BLOOD++");
     }
   }
 
