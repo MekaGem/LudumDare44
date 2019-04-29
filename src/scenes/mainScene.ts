@@ -204,7 +204,7 @@ export class MainScene extends Phaser.Scene {
           this.gunners.delete(gunner);
           this.enemiesGroup.remove(gunner);
           this.updateList.delete(gunner);
-          gunner.body.stop();
+          gunner.walking = false;
 
           let emitter = this.bloodParticles.createEmitter({
             x: gunner.body.center.x,
@@ -219,8 +219,10 @@ export class MainScene extends Phaser.Scene {
             tint: 0xff0000,
           });
 
-          this.time.delayedCall(5000, ()=>{
-            console.log("gunner die !!!");
+          this.time.delayedCall(GUNNER.deathDuration, ()=>{
+            if (this.game.config.physics.arcade.debug) {
+              console.log("gunner die!!!");
+            }
             emitter.stop();
             enemy.destroy();
             this.bloodSpots.delete(gunner);

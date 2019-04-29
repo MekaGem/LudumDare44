@@ -77,4 +77,6 @@ export let GUNNER = {
   visionDistance: 300,
 
   shootDelay: 200,  // milliseconds.
+
+  deathDuration: 5000,  // milliseconds.
 }
