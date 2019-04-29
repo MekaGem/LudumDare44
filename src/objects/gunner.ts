@@ -112,12 +112,7 @@ export class Gunner extends Phaser.GameObjects.Container {
     if (!distanceCheck) {
       return false;
     }
-
-    // Walking gunners see only in the direction of walking.
-    if (this.state == GunnerState.Walking) {
-      return (getDirection(center.x, target.x) == this.direction);
-    }
-    return true;
+    return (getDirection(center.x, target.x) == this.direction);
   }
 
   tryShoot(): boolean {
