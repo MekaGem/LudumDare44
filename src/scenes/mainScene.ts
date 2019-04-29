@@ -167,25 +167,28 @@ export class MainScene extends Phaser.Scene {
         } else if (spike.angle === -90) {
           height = 12;
           width = CONST.tileSize;
-          offsetX = 2 * (CONST.tileSize - 6);
-          offsetY = 0;
+          offsetY = 2 * (CONST.tileSize - 6);
+          offsetX = 0;
         } else if (spike.angle === 90) {
           height = 12;
           width = CONST.tileSize;
           offsetX = 0;
           offsetY = 0;
         }
-        width = CONST.tileSize;
 
         spike.setDisplaySize(height, width);
         spike.setSize(height, width);
-        //spike.setOffset(offsetX, offsetY);
+        spike.setOffset(offsetX, offsetY);
         this.physics.add.collider(spike, this.worldLayer);
+
+        this.physics.add.overlap(spike, this.player,
+                                 (b: Phaser.GameObjects.GameObject, player: Phaser.GameObjects.GameObject) => {
+          this.playerState.blood = 0;
+        });
 
         this.worldLayer.removeTileAt(tile.x, tile.y);
       }
     });
-
 
     this.physics.add.overlap(this.spikeGroup, this.player,
                              (b: Phaser.GameObjects.GameObject, player: Phaser.GameObjects.GameObject) => {
