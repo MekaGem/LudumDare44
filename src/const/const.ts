@@ -73,4 +73,6 @@ export let GUNNER = {
   height: 2.8 * CONST.tileSize,
 
   gunCooldown: 60,
+
+  visionDistance: 300,
 }

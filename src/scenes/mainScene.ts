@@ -146,9 +146,7 @@ export class MainScene extends Phaser.Scene {
         }
       }
 
-      // TODO: Move distances to constants.
-      let distanceToPlayer = gunnerCenter.distance(playerCenter);
-      if (distanceToPlayer < 300 && Math.abs(playerCenter.y - gunnerCenter.y) < 30) {
+      if (gunner.canSee(playerCenter)) {
         var direction: Direction;
         if (gunnerCenter.x > playerCenter.x) {
           direction = Direction.Left;

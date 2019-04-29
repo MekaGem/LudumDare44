@@ -51,6 +51,13 @@ export class Gunner extends Phaser.GameObjects.Container {
     }
   }
 
+  canSee(target: Phaser.Math.Vector2): boolean {
+    let center = this.body.center;
+    let distance = center.distance(target);
+    return (distance < GUNNER.visionDistance
+            && Math.abs(target.y - center.y) < this.height / 2);
+  }
+
   tryShoot(): boolean {
     if (!this.walking) return false;
     if (this.gunCooldown == 0) {
