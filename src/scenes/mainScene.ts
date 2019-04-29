@@ -146,17 +146,18 @@ export class MainScene extends Phaser.Scene {
         }
       }
 
+      // Initiate shooting if this gunner can see the player.
       if (gunner.canSee(playerCenter)) {
         var direction = getDirection(gunnerCenter.x, playerCenter.x);
 
-        if (gunner.isWalking() && direction == gunner.direction && gunner.tryShoot()) {
-          gunner.setWalking(false);
+        if (gunner.walking && direction == gunner.direction && gunner.tryShoot()) {
+          gunner.walking = false;
           gunner.body.stop();
 
           let thisGunner = gunner;
 
           this.time.delayedCall(200, ()=>{
-            thisGunner.setWalking(true);
+            thisGunner.walking = true;
 
             let bullet = new Bullet(this, gunnerCenter.x, gunnerCenter.y, BulletType.Gun, direction);
 
