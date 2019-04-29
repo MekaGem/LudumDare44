@@ -10,3 +10,12 @@ export function getDX(direction: Direction): number {
         return 1;
     }
 }
+
+// Returns a direction in which source must move to reach destination.
+export function getDirection(sourceX: number, destinationX: number): Direction {
+  if (sourceX > destinationX) {
+    return Direction.Left;
+  } else {
+    return Direction.Right;
+  }
+}

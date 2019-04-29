@@ -4,7 +4,7 @@ import { HealthBar } from "../hud/playerInfo";
 import { Player } from "../objects/player";
 import { Bullet, BulletType } from "../objects/bullet";
 import { Gunner } from "../objects/gunner";
-import { Direction } from "../logic/direction";
+import { Direction, getDirection } from "../logic/direction";
 
 export class MainScene extends Phaser.Scene {
   // Logic.
@@ -147,12 +147,7 @@ export class MainScene extends Phaser.Scene {
       }
 
       if (gunner.canSee(playerCenter)) {
-        var direction: Direction;
-        if (gunnerCenter.x > playerCenter.x) {
-          direction = Direction.Left;
-        } else {
-          direction = Direction.Right;
-        }
+        var direction = getDirection(gunnerCenter.x, playerCenter.x);
 
         if (gunner.isWalking() && direction == gunner.direction && gunner.tryShoot()) {
           gunner.setWalking(false);
