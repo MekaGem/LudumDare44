@@ -37,6 +37,12 @@
                  "id":14,
                  "name":"PlayerSpawn",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"right"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -46,105 +52,15 @@
                 }, 
                 {
                  "height":0,
-                 "id":15,
-                 "name":"GunnerSpawn",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":426,
-                 "y":2950
-                }, 
-                {
-                 "height":0,
-                 "id":16,
-                 "name":"GunnerSpawn",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":666,
-                 "y":2850
-                }, 
-                {
-                 "height":0,
-                 "id":17,
-                 "name":"GunnerSpawn",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1046,
-                 "y":2952
-                }, 
-                {
-                 "height":0,
-                 "id":18,
-                 "name":"GunnerSpawn",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1366,
-                 "y":2858
-                }, 
-                {
-                 "height":0,
-                 "id":19,
-                 "name":"GunnerSpawn",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1368,
-                 "y":3070
-                }, 
-                {
-                 "height":0,
-                 "id":22,
-                 "name":"GunnerSpawn",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1876.58227848101,
-                 "y":2990.37974683544
-                }, 
-                {
-                 "height":0,
-                 "id":23,
-                 "name":"GunnerSpawn",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":2098.10126582279,
-                 "y":2994.59915611814
-                }, 
-                {
-                 "height":0,
-                 "id":24,
-                 "name":"GunnerSpawn",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1438.45335225257,
-                 "y":2608.48527846754
-                }, 
-                {
-                 "height":0,
                  "id":25,
                  "name":"GunnerSpawn",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"right"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -154,123 +70,183 @@
                 }, 
                 {
                  "height":0,
-                 "id":26,
+                 "id":36,
                  "name":"GunnerSpawn",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"right"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1250.44341965236,
-                 "y":2003.66087264988
+                 "x":1212,
+                 "y":1998
                 }, 
                 {
                  "height":0,
-                 "id":27,
+                 "id":37,
                  "name":"GunnerSpawn",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"right"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1747.07343029443,
-                 "y":1934.48740688187
+                 "x":1762,
+                 "y":1930
                 }, 
                 {
                  "height":0,
-                 "id":28,
+                 "id":38,
                  "name":"GunnerSpawn",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"left"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1839.3047179851,
-                 "y":2030.26605179142
+                 "x":1816,
+                 "y":2038
                 }, 
                 {
                  "height":0,
-                 "id":29,
+                 "id":39,
                  "name":"GunnerSpawn",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"left"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1747.07343029443,
-                 "y":2120.72366087265
+                 "x":2664,
+                 "y":1870
                 }, 
                 {
                  "height":0,
-                 "id":30,
+                 "id":40,
                  "name":"GunnerSpawn",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"left"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2481.15005321036,
-                 "y":1930.61901383469
+                 "x":2478,
+                 "y":1936
                 }, 
                 {
                  "height":0,
-                 "id":31,
+                 "id":41,
                  "name":"GunnerSpawn",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"right"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2667.06527137283,
-                 "y":1864.67186945725
+                 "x":2832,
+                 "y":1620
                 }, 
                 {
                  "height":0,
-                 "id":32,
+                 "id":42,
                  "name":"GunnerSpawn",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"right"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2993.79167624741,
-                 "y":1738.3306507243
+                 "x":1758,
+                 "y":2128
                 }, 
                 {
                  "height":0,
-                 "id":33,
+                 "id":43,
                  "name":"GunnerSpawn",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"right"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2832.83513451368,
-                 "y":1611.86479650494
+                 "x":2964,
+                 "y":1492
                 }, 
                 {
                  "height":0,
-                 "id":34,
+                 "id":44,
                  "name":"GunnerSpawn",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"right"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2991.49229707979,
-                 "y":1478.50080478271
+                 "x":2966,
+                 "y":1732
                 }, 
                 {
                  "height":0,
-                 "id":35,
+                 "id":45,
                  "name":"GunnerSpawn",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"right"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2830.53575534606,
-                 "y":1347.4361922281
+                 "x":2832,
+                 "y":1364
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -279,7 +255,7 @@
          "y":0
         }],
  "nextlayerid":14,
- "nextobjectid":36,
+ "nextobjectid":46,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",

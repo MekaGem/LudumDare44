@@ -4,7 +4,7 @@ import { HealthBar } from "../hud/playerInfo";
 import { Player } from "../objects/player";
 import { Bullet, BulletType } from "../objects/bullet";
 import { Gunner, GunnerState } from "../objects/gunner";
-import { Direction, getDirection } from "../logic/direction";
+import { Direction, getDirection, directionFromSpawn } from "../logic/direction";
 import { getActionFromTile } from "../logic/actionTiles";
 
 export class MainScene extends Phaser.Scene {
@@ -88,8 +88,7 @@ export class MainScene extends Phaser.Scene {
     // Player creation.
     this.playerState = new PlayerState(PLAYER.startingBlood);
     const playerSpawn: any = this.tilemap.findObject("Objects", obj => obj.name === "PlayerSpawn");
-    // TODO: Take direction from the spawn object.
-    this.player = new Player(this, playerSpawn.x, playerSpawn.y, this.playerState, Direction.Right);
+    this.player = new Player(this, playerSpawn.x, playerSpawn.y, this.playerState, directionFromSpawn(playerSpawn));
     this.physics.add.collider(this.player, this.worldLayer);
 
     this.cameras.main.startFollow(this.player);
@@ -106,8 +105,7 @@ export class MainScene extends Phaser.Scene {
     this.enemiesGroup = this.physics.add.group();
     const gunnerSpawns: any = this.tilemap.filterObjects("Objects", obj => obj.name === "GunnerSpawn");
     for (var spawn of gunnerSpawns) {
-      // TODO: Take direction from the spawn object.
-      let gunner = new Gunner(this, spawn.x, spawn.y, Direction.Right);
+      let gunner = new Gunner(this, spawn.x, spawn.y, directionFromSpawn(spawn));
       this.enemiesGroup.add(gunner);
       this.physics.add.collider(gunner, this.worldLayer);
       this.gunners.add(gunner);

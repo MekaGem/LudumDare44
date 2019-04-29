@@ -19,3 +19,21 @@ export function getDirection(sourceX: number, destinationX: number): Direction {
     return Direction.Right;
   }
 }
+
+export function directionFromSpawn(spawn: any): Direction {
+  if (spawn.properties) {
+    for (var property of spawn.properties) {
+      if (property.name == "direction") {
+        var d = property.value;
+        if (d == "left") {
+          return Direction.Left;
+        } else if (d == "right") {
+          return Direction.Right;
+        }
+      }
+    }
+  }
+
+  console.log("Failed to find direction in", spawn);
+  return Direction.Right;
+}
