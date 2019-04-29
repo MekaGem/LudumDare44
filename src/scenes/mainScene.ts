@@ -24,7 +24,7 @@ export class MainScene extends Phaser.Scene {
   // Stores tiles images.
   private tileset: Phaser.Tilemaps.Tileset;
   // Display object derived from the tilemap.
-  private worldLayer: Phaser.Tilemaps.StaticTilemapLayer;
+  private worldLayer: Phaser.Tilemaps.DynamicTilemapLayer;
   private backgroundLayer: Phaser.Tilemaps.StaticTilemapLayer;
 
   private enemiesGroup: Phaser.Physics.Arcade.Group;
@@ -81,7 +81,7 @@ export class MainScene extends Phaser.Scene {
 
     this.backgroundLayer = this.tilemap.createStaticLayer("Background", this.tileset, 0, 0);
 
-    this.worldLayer = this.tilemap.createStaticLayer("World", this.tileset, 0, 0);
+    this.worldLayer = this.tilemap.createDynamicLayer("World", this.tileset, 0, 0);
     this.worldLayer.setScale(1);
     this.worldLayer.setCollisionByProperty({ collides: true });
 
