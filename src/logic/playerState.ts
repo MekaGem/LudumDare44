@@ -28,6 +28,7 @@ export class PlayerState extends Phaser.Events.EventEmitter {
   }
 
   set blood(blood: number) {
+    blood = Math.max(blood, 0);
     blood = Math.min(blood, PLAYER.maxBlood);
     var delta = blood - this._blood;
     this._blood = blood;
