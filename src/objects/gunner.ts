@@ -52,6 +52,7 @@ export class Gunner extends Phaser.GameObjects.Container {
   }
 
   set direction(direction: Direction) {
+    console.log("Change direction");
     this._direction = direction;
     if (this.state == GunnerState.Walking) {
       this._sprite.setFlipX(this._direction == Direction.Right);
@@ -72,24 +73,34 @@ export class Gunner extends Phaser.GameObjects.Container {
     this._state = state;
 
     switch (state) {
-      case GunnerState.None: {
-        return;
-      }
-      case GunnerState.Walking: {
+      case GunnerState.None:
+        break;
+
+      case GunnerState.Walking:
+        console.log("Walking");
         this.body.setVelocityX(getDX(this._direction) * GUNNER.movingSpeed);
         this._sprite.setFlipX(this._direction == Direction.Right);
         this._sprite.anims.play("gunner-run", true);
-      }
-      case GunnerState.Dying: {
+        console.log(this.body.velocity);
+        break;
+
+      case GunnerState.Dying:
+        console.log("Dying");
         this.body.setVelocityX(0);
         // TODO: Play idle-gunner animation.
         this._sprite.anims.stop();
-      }
-      case GunnerState.Shooting: {
+        break;
+
+      case GunnerState.Shooting:
+        console.log("Shooting");
         this.body.setVelocityX(0);
         // TODO: Play idle-gunner animation.
         this._sprite.anims.play("gunner-shoot", true);
-      }
+        break;
+
+      default:
+        console.log("Unrecognized state", state);
+        break;
     }
   }
 
@@ -97,9 +108,10 @@ export class Gunner extends Phaser.GameObjects.Container {
     this.gunCooldown = Math.max(this.gunCooldown - 1, 0);
     // Checks triggeting state transitions should happen here.
     if (this.state == GunnerState.Walking) {
-      this.body.setVelocityX(getDX(this._direction) * GUNNER.movingSpeed);
-      this._sprite.setFlipX(this._direction == Direction.Right);
-      this._sprite.anims.play("gunner-run", true);
+      console.log(this.body.velocity);
+      //this.body.setVelocityX(getDX(this._direction) * GUNNER.movingSpeed);
+      //this._sprite.setFlipX(this._direction == Direction.Right);
+      //this._sprite.anims.play("gunner-run", true);
     }
   }
 

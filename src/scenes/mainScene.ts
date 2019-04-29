@@ -110,6 +110,7 @@ export class MainScene extends Phaser.Scene {
       this.physics.add.collider(gunner, this.worldLayer);
       this.gunners.add(gunner);
       this._addToUpdateList(gunner);
+      break;
     }
 
     this.bloodParticles = this.add.particles("1x1white");
@@ -150,6 +151,12 @@ export class MainScene extends Phaser.Scene {
       if (gunner.state == GunnerState.Dying) {
         continue;
       }
+
+      var thisGunner = gunner;
+      this.time.delayedCall(GUNNER.shootDelay, ()=>{
+        thisGunner.state = GunnerState.Dying;
+      }, [], this);
+      continue;
 
       let gunnerCenter = gunner.body.center;
       let playerCenter = this.player.body.center;
