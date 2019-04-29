@@ -156,11 +156,11 @@ export class MainScene extends Phaser.Scene {
       let playerCenter = this.player.body.center;
 
       // Initiate shooting if this gunner can see the player.
-      if (gunner.canSee(playerCenter)) {
+      if (gunner.canSee(playerCenter) || (gunner.state == GunnerState.Shooting && gunner.canAim(playerCenter))) {
+        var direction = getDirection(gunnerCenter.x, playerCenter.x);
+        gunner.direction = direction;
         gunner.state = GunnerState.Shooting;
         if (gunner.tryShoot()) {
-          var direction = getDirection(gunnerCenter.x, playerCenter.x);
-
           // Shoot with a slight delay.
           this.time.delayedCall(GUNNER.shootDelay, ()=>{
             let bullet = new Bullet(this, gunnerCenter.x, gunnerCenter.y, BulletType.Gun, direction);

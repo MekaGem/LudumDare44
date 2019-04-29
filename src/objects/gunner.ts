@@ -52,8 +52,9 @@ export class Gunner extends Phaser.GameObjects.Container {
 
   set direction(direction: Direction) {
     this._direction = direction;
+    this._sprite.setFlipX(this._direction == Direction.Right);
+
     if (this.state == GunnerState.Walking) {
-      this._sprite.setFlipX(this._direction == Direction.Right);
       this.body.setVelocityX(getDX(this._direction) * GUNNER.movingSpeed);
     }
   }
@@ -103,8 +104,14 @@ export class Gunner extends Phaser.GameObjects.Container {
     // Checks triggeting state transitions should happen here.
   }
 
-  // Checks whether this gunner can see the given target.
-  canSee(target: Phaser.Math.Vector2): boolean {
+  // Checks whether this gunner looks in the direction of the target.
+  facesDirection(target: Phaser.Math.Vector2): boolean {
+    let center = this.body.center;
+    return (getDirection(center.x, target.x) == this.direction);
+  }
+
+  // Checks whether this gunner can aim a given target, possibly by changing direction.
+  canAim(target: Phaser.Math.Vector2): boolean {
     let center = this.body.center;
     let distance = center.distance(target);
     var distanceCheck = (distance < GUNNER.visionDistance
@@ -112,7 +119,12 @@ export class Gunner extends Phaser.GameObjects.Container {
     if (!distanceCheck) {
       return false;
     }
-    return (getDirection(center.x, target.x) == this.direction);
+    return true;
+  }
+
+  // Checks whether this gunner can see the given target.
+  canSee(target: Phaser.Math.Vector2): boolean {
+    return this.canAim(target) && this.facesDirection(target);
   }
 
   tryShoot(): boolean {
