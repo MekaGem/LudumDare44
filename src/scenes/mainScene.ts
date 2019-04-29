@@ -111,7 +111,6 @@ export class MainScene extends Phaser.Scene {
       this.gunners.add(gunner);
       this._addToUpdateList(gunner);
       gunner.state = GunnerState.Walking;
-      break;
     }
 
     this.bloodParticles = this.add.particles("1x1white");
