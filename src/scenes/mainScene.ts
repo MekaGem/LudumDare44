@@ -3,7 +3,7 @@ import { PLAYER, CONST, BULLET, PLAYER_HUD, GUNNER, EVENT } from "../const/const
 import { HealthBar } from "../hud/playerInfo";
 import { Player } from "../objects/player";
 import { Bullet, BulletType } from "../objects/bullet";
-import { Gunner } from "../objects/gunner";
+import { Gunner, GunnerState } from "../objects/gunner";
 import { Direction, getDirection } from "../logic/direction";
 import { getActionFromTile } from "../logic/actionTiles";
 
@@ -148,21 +148,16 @@ export class MainScene extends Phaser.Scene {
     }
 
     for (var gunner of this.gunners) {
+      if (gunner.state == GunnerState.Dying) {
+        continue;
+      }
+
       let gunnerCenter = gunner.body.center;
       let playerCenter = this.player.body.center;
 
-      var tile = this.worldLayer.getTileAtWorldXY(gunnerCenter.x, gunnerCenter.y);
-      var action = getActionFromTile(tile);
-      if (action == "left") {
-        gunner.direction = Direction.Left;
-      } else if (action == "right") {
-        gunner.direction = Direction.Right;
-      }
-
       // Initiate shooting if this gunner can see the player.
       if (gunner.canSee(playerCenter)) {
-        gunner.walking = false;
-
+        gunner.state = GunnerState.Shooting;
         if (gunner.tryShoot()) {
           var direction = getDirection(gunnerCenter.x, playerCenter.x);
 
@@ -183,7 +178,14 @@ export class MainScene extends Phaser.Scene {
           }, [], this);
         }
       } else {
-        gunner.walking = true;
+        var tile = this.worldLayer.getTileAtWorldXY(gunnerCenter.x, gunnerCenter.y);
+        var action = getActionFromTile(tile);
+        if (action == "left") {
+          gunner.direction = Direction.Left;
+        } else if (action == "right") {
+          gunner.direction = Direction.Right;
+        }
+        gunner.state = GunnerState.Walking;
       }
     }
 
@@ -201,7 +203,7 @@ export class MainScene extends Phaser.Scene {
     this.gunners.delete(gunner);
     this.enemiesGroup.remove(gunner);
     this.updateList.delete(gunner);
-    gunner.walking = false;
+    gunner.state = GunnerState.Dying;
 
     let emitter = this.bloodParticles.createEmitter({
       x: gunner.body.center.x,

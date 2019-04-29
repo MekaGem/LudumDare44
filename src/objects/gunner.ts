@@ -3,6 +3,13 @@ import { GUNNER } from "../const/const";
 import { boxedSize } from "../utils/scaling";
 import { Bullet } from "./bullet";
 
+export enum GunnerState {
+  None,
+  Walking,
+  Dying,
+  Shooting,
+}
+
 export class Gunner extends Phaser.GameObjects.Container {
   // Fix imprecise phaser.d.ts interface.
   body!: Phaser.Physics.Arcade.Body
@@ -10,7 +17,7 @@ export class Gunner extends Phaser.GameObjects.Container {
   private _direction: Direction;
   private _sprite: Phaser.GameObjects.Sprite;
   private gunCooldown: number = 0;
-  private _walking: boolean = true;
+  private _state: GunnerState = GunnerState.None;
 
   constructor(scene: Phaser.Scene, x: number, y: number, direction: Direction) {
     super(scene, x, y);
@@ -23,8 +30,6 @@ export class Gunner extends Phaser.GameObjects.Container {
 
     scene.physics.world.enable(this);
     scene.add.existing(this);
-
-    this.direction = Direction.Right;
 
     const anims = scene.anims;
     {
@@ -43,28 +48,58 @@ export class Gunner extends Phaser.GameObjects.Container {
     }
 
     this.direction = direction;
-    this.walking = true;
+    this.state = GunnerState.Walking;
   }
 
   set direction(direction: Direction) {
-    this._sprite.setFlipX(direction == Direction.Right);
     this._direction = direction;
+    if (this.state == GunnerState.Walking) {
+      this._sprite.setFlipX(this._direction == Direction.Right);
+      this.body.setVelocityX(getDX(this._direction) * GUNNER.movingSpeed);
+    }
   }
-
   get direction(): Direction {
     return this._direction;
   }
 
+  get state() {
+    return this._state;
+  }
+  set state(state: GunnerState) {
+    if (this._state == state) {
+      return;
+    }
+    this._state = state;
+
+    switch (state) {
+      case GunnerState.None: {
+        return;
+      }
+      case GunnerState.Walking: {
+        this.body.setVelocityX(getDX(this._direction) * GUNNER.movingSpeed);
+        this._sprite.setFlipX(this._direction == Direction.Right);
+        this._sprite.anims.play("gunner-run", true);
+      }
+      case GunnerState.Dying: {
+        this.body.setVelocityX(0);
+        // TODO: Play idle-gunner animation.
+        this._sprite.anims.stop();
+      }
+      case GunnerState.Shooting: {
+        this.body.setVelocityX(0);
+        // TODO: Play idle-gunner animation.
+        this._sprite.anims.play("gunner-shoot", true);
+      }
+    }
+  }
+
   update() {
     this.gunCooldown = Math.max(this.gunCooldown - 1, 0);
-
-    if (this.walking) {
+    // Checks triggeting state transitions should happen here.
+    if (this.state == GunnerState.Walking) {
       this.body.setVelocityX(getDX(this._direction) * GUNNER.movingSpeed);
+      this._sprite.setFlipX(this._direction == Direction.Right);
       this._sprite.anims.play("gunner-run", true);
-    } else {
-      this.body.setVelocityX(0);
-      // TODO: Play idle-gunner animation.
-      this._sprite.anims.stop();
     }
   }
 
@@ -79,7 +114,7 @@ export class Gunner extends Phaser.GameObjects.Container {
     }
 
     // Walking gunners see only in the direction of walking.
-    if (this.walking) {
+    if (this.state == GunnerState.Walking) {
       return (getDirection(center.x, target.x) == this.direction);
     }
     return true;
@@ -88,17 +123,8 @@ export class Gunner extends Phaser.GameObjects.Container {
   tryShoot(): boolean {
     if (this.gunCooldown == 0) {
       this.gunCooldown = GUNNER.gunCooldown;
-      this._sprite.anims.play("gunner-shoot", true);
       return true;
     }
     return false;
-  }
-
-  set walking(walking: boolean) {
-    this._walking = walking;
-  }
-
-  get walking(): boolean {
-    return this._walking;
   }
 }
