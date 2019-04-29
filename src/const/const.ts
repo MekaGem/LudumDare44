@@ -46,8 +46,8 @@ export let PLAYER = {
   groundAcceleration: 1000,
   hSpeed: 550,  // Influences jumpiness.
   // Graphics.
-  width: 0.9 * CONST.tileSize,
-  height: 1.8 * CONST.tileSize,
+  width: 0.85 * CONST.tileSize,
+  height: 1.7 * CONST.tileSize,
 }
 
 export let PLAYER_HUD = {
@@ -69,8 +69,8 @@ export let GUNNER = {
   // Physics.
   movingSpeed: 100,
   // Graphics.
-  width: 1.8 * CONST.tileSize,
-  height: 2.8 * CONST.tileSize,
+  width: CONST.inf,
+  height: 1.8 * CONST.tileSize,
 
   gunCooldown: 60,
 
