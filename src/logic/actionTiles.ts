@@ -7,3 +7,10 @@ export function getActionFromTile(tile): string {
   }
   return "none";
 }
+
+export function getTileProperty(tile: Phaser.Tilemaps.Tile, name: string) {
+  if (tile && (name in tile.properties)) {
+    return tile.properties[name];
+  }
+  return null;
+}

@@ -5,7 +5,7 @@ import { Player } from "../objects/player";
 import { Bullet, BulletType } from "../objects/bullet";
 import { Gunner, GunnerState } from "../objects/gunner";
 import { Direction, getDirection, directionFromSpawn } from "../logic/direction";
-import { getActionFromTile } from "../logic/actionTiles";
+import { getActionFromTile, getTileProperty } from "../logic/actionTiles";
 
 export class MainScene extends Phaser.Scene {
   // Logic.
@@ -194,6 +194,16 @@ export class MainScene extends Phaser.Scene {
       let spotCenter = (spot.body as Phaser.Physics.Arcade.Body).center;
       if (spotCenter.distance(this.player.body.center) < 30) {
         this.playerState.regenerate();
+      }
+    }
+
+    {
+      let playerCenter = this.player.body.center;
+      let tile = this.worldLayer.getTileAtWorldXY(playerCenter.x, playerCenter.y);
+      let exit = getTileProperty(tile, "exit");
+      if (exit) {
+        console.log("EndGameScene");
+        this.scene.start("EndGameScene");
       }
     }
   }
