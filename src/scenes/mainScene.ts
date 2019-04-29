@@ -5,7 +5,7 @@ import { Player } from "../objects/player";
 import { Bullet, BulletType } from "../objects/bullet";
 import { Gunner, GunnerState } from "../objects/gunner";
 import { Direction, getDirection, directionFromSpawn } from "../logic/direction";
-import { getActionFromTile, getTileProperty } from "../logic/actionTiles";
+import { getActionFromTile, getTileProperty, setTileProperty } from "../logic/actionTiles";
 
 export class MainScene extends Phaser.Scene {
   // Logic.
@@ -200,10 +200,17 @@ export class MainScene extends Phaser.Scene {
     {
       let playerCenter = this.player.body.center;
       let tile = this.worldLayer.getTileAtWorldXY(playerCenter.x, playerCenter.y);
+
       let exit = getTileProperty(tile, "exit");
       if (exit) {
-        console.log("EndGameScene");
         this.scene.start("EndGameScene");
+      }
+
+      let blood = getTileProperty(tile, "blood");
+      if (blood) {
+        setTileProperty(tile, "blood", false);
+        this.playerState.blood += 1;
+        tile.setVisible(false);
       }
     }
   }

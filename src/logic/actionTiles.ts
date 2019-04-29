@@ -14,3 +14,9 @@ export function getTileProperty(tile: Phaser.Tilemaps.Tile, name: string) {
   }
   return null;
 }
+
+export function setTileProperty(tile: Phaser.Tilemaps.Tile, name: string, value: any) {
+  if (tile && (name in tile.properties)) {
+    return tile.properties[name] = value;
+  }
+}
