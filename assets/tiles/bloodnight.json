@@ -8,7 +8,7 @@
  "margin":0,
  "name":"bloodnight",
  "spacing":0,
- "tilecount":7,
+ "tilecount":8,
  "tiledversion":"1.2.3",
  "tileheight":64,
  "tiles":[
@@ -75,6 +75,12 @@
         {
          "id":9,
          "image":"door_purple.png",
+         "imageheight":64,
+         "imagewidth":64
+        }, 
+        {
+         "id":10,
+         "image":"key_purple.png",
          "imageheight":64,
          "imagewidth":64
         }],
