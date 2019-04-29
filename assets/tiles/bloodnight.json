@@ -112,7 +112,13 @@
          "id":15,
          "image":"spike.png",
          "imageheight":64,
-         "imagewidth":64
+         "imagewidth":64,
+         "properties":[
+                {
+                 "name":"spikes",
+                 "type":"bool",
+                 "value":false
+                }]
         }],
  "tilewidth":64,
  "type":"tileset",

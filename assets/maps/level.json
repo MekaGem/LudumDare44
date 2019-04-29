@@ -551,6 +551,11 @@
                          "name":"collides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"spikes",
+                         "type":"bool",
+                         "value":true
                         }]
                 }, 
                 {
