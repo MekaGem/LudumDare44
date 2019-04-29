@@ -7,7 +7,8 @@ export class HealthBar extends Phaser.GameObjects.Container {
 
   // Something like in Diablo would look awesome.
   private health_text: Phaser.GameObjects.Text;
-  
+  private health_orb: Phaser.GameObjects.Sprite;
+
   constructor(scene, x: number, y: number, player_state: PlayerState) {
     super(scene, x, y);
 
@@ -20,6 +21,14 @@ export class HealthBar extends Phaser.GameObjects.Container {
       add: false,
     });
     this.add(this.health_text);
+
+    //this.health_orb = scene.make.sprite({
+      //x: 80,
+      //y: 50,
+      //key: "circle",
+    //});
+    //this.health_orb.setDisplaySize(100, 100);
+    //this.add(this.health_orb);
 
     // Don't move with the camera.
     this.setScrollFactor(0);

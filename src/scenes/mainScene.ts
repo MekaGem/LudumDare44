@@ -48,6 +48,7 @@ export class MainScene extends Phaser.Scene {
     this.load.setPath('./assets/');
     this.load.image("background", "background.png");
     this.load.image("ground", "ground.png");
+    this.load.image("circle", "circle.png");
     this.load.image("1x1white", "1x1white.png");
     this.load.image(BULLET.blood.spritePack, BULLET.blood.spriteName);
 
