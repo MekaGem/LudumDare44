@@ -48,7 +48,7 @@
                  "visible":true,
                  "width":0,
                  "x":2395.58601892111,
-                 "y":687.630267703731
+                 "y":695.630267703731
                 }, 
                 {
                  "height":0,
@@ -264,6 +264,12 @@
         {
          "columns":19,
          "firstgid":1,
+         "grid":
+            {
+             "height":64,
+             "orientation":"orthogonal",
+             "width":64
+            },
          "image":"..\/mario.png",
          "imageheight":384,
          "imagewidth":608,

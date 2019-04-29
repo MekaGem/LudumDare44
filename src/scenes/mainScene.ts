@@ -53,8 +53,10 @@ export class MainScene extends Phaser.Scene {
     this.load.image("1x1white", "1x1white.png");
     this.load.image(BULLET.blood.spritePack, BULLET.blood.spriteName);
 
-    this.load.image("tiles", "mario.png");
-    this.load.tilemapTiledJSON("level1", "maps/level1.json");
+    this.load.image("tiles", "bloodnight_all_tiles.png");
+    this.load.tilemapTiledJSON("level", "maps/level.json");
+    //this.load.tilemapTiledJSON("level1", "maps/level1.json");
+    //this.load.multiatlas("bloodnight_tiles", "tiles/bloodnight.json");
 
     // TODO: Clean up and rename as those are stored in the same texture now.
     this.load.multiatlas("gunner", "gunner.json");
@@ -78,9 +80,11 @@ export class MainScene extends Phaser.Scene {
 
     this.updateList = new Set();
 
-    this.tilemap = this.make.tilemap({ key: "level1" });
-    this.tileset = this.tilemap.addTilesetImage("mario", "tiles");
+    console.log("Loading tilemap");
+    this.tilemap = this.make.tilemap({ key: "level" });
+    this.tileset = this.tilemap.addTilesetImage("_bloodnight", "tiles");
 
+    console.log("Loading background");
     this.backgroundLayer = this.tilemap.createStaticLayer("Background", this.tileset, 0, 0);
 
     this.worldLayer = this.tilemap.createDynamicLayer("World", this.tileset, 0, 0);

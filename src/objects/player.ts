@@ -24,6 +24,7 @@ export class Player extends Phaser.GameObjects.Container {
     this.playerState = playerState;
 
     this._sprite = scene.add.sprite(0, 0, "player", "Vampire1.PNG");
+    //this._sprite = scene.add.sprite(0, 0, "bloodnight_tiles", "tiles/wall.png");
     var box = boxedSize(this._sprite.width, this._sprite.height, PLAYER.width, PLAYER.height);
     this._sprite.setDisplaySize(box.width, box.height);
     this.setSize(box.width, box.height);

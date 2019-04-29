@@ -10,7 +10,7 @@ export let CONST = {
   fontSize: "32px",
   backgroundColor: "black",
   gravity: 1000,
-  tileSize: 32,
+  tileSize: 64,
   inf: 1e9,
 }
 
