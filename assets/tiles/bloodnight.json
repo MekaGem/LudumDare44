@@ -8,7 +8,7 @@
  "margin":0,
  "name":"bloodnight",
  "spacing":0,
- "tilecount":3,
+ "tilecount":4,
  "tiledversion":"1.2.3",
  "tileheight":64,
  "tiles":[
@@ -46,6 +46,18 @@
                  "name":"npc_action",
                  "type":"string",
                  "value":"right"
+                }]
+        }, 
+        {
+         "id":5,
+         "image":"ground.png",
+         "imageheight":64,
+         "imagewidth":64,
+         "properties":[
+                {
+                 "name":"spike",
+                 "type":"bool",
+                 "value":true
                 }]
         }],
  "tilewidth":64,

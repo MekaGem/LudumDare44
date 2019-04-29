@@ -28,6 +28,7 @@ export class MainScene extends Phaser.Scene {
   private backgroundLayer: Phaser.Tilemaps.StaticTilemapLayer;
 
   private enemiesGroup: Phaser.Physics.Arcade.Group;
+  private spikeGroup: Phaser.Physics.Arcade.StaticGroup;
   private bloodSpots: Set<Phaser.GameObjects.GameObject>;
 
   // Particles
@@ -48,6 +49,7 @@ export class MainScene extends Phaser.Scene {
     this.load.setPath('./assets/');
     this.load.image("background", "background.png");
     this.load.image("ground", "ground.png");
+    this.load.image("spike", "spike.png");
     this.load.image("healthbar_empty", "healthbar_empty.png");
     this.load.image("healthbar_full", "healthbar_full.png");
     this.load.image("1x1white", "1x1white.png");
@@ -136,6 +138,7 @@ export class MainScene extends Phaser.Scene {
     this.bloodParticles = this.add.particles("1x1white");
     this.bloodSpots = new Set();
 
+    this.spikeGroup = this.physics.add.staticGroup();
     this.worldLayer.forEachTile(tile => {
       // Make tiles controlling NPC actions invisible.
       if (!this.game.config.physics.arcade.debug) {
@@ -143,6 +146,46 @@ export class MainScene extends Phaser.Scene {
           tile.setVisible(false);
         }
       }
+      if ("spike" in tile.properties) {
+        const spike = this.spikeGroup.create(tile.getCenterX(), tile.getCenterY(), "spike");
+        // The map has spikes rotated in Tiled (z key), so parse out that angle to the correct body
+        // placement
+        spike.rotation = tile.rotation;
+        var height = 0;
+        var width = 0;
+        var offsetX = 0;
+        var offsetY = 0;
+
+        if (spike.angle === 0) {
+          height = CONST.tileSize;
+          width = 12;
+          offsetX = 0;
+          offsetY = 2 * (CONST.tileSize - 6);
+        } else if (spike.angle === -90) {
+          height = 12;
+          width = CONST.tileSize;
+          offsetX = 2 * (CONST.tileSize - 6);
+          offsetY = 0;
+        } else if (spike.angle === 90) {
+          height = 12;
+          width = CONST.tileSize;
+          offsetX = 0;
+          offsetY = 0;
+        }
+
+        spike.setDisplaySize(height, width);
+        spike.body.setSize(height, width);
+        spike.body.setOffset(offsetX, offsetY);
+
+        this.worldLayer.removeTileAt(tile.x, tile.y);
+      }
+
+    });
+
+
+    this.physics.add.overlap(this.spikeGroup, this.player,
+                             (b: Phaser.GameObjects.GameObject, player: Phaser.GameObjects.GameObject) => {
+      this.playerState.blood = 0;
     });
 
     this.playerState.on(EVENT.playerDied, () => {
