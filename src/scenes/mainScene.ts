@@ -104,9 +104,9 @@ export class MainScene extends Phaser.Scene {
       if (obj instanceof Phaser.Tilemaps.Tile) {
         let tile = obj as Phaser.Tilemaps.Tile;
 
-        let chest = getTileProperty(tile, "chest");
-        if (chest != null && This.playerState.hasKey(chest)) {
-          setTileProperty(tile, "chest", null);
+        let door = getTileProperty(tile, "door");
+        if (door != null && This.playerState.hasKey(door)) {
+          setTileProperty(tile, "door", null);
           tile.setCollision(false);
           tile.setVisible(false);
         }
