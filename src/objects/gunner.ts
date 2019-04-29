@@ -48,11 +48,9 @@ export class Gunner extends Phaser.GameObjects.Container {
     }
 
     this.direction = direction;
-    this.state = GunnerState.Walking;
   }
 
   set direction(direction: Direction) {
-    console.log("Change direction");
     this._direction = direction;
     if (this.state == GunnerState.Walking) {
       this._sprite.setFlipX(this._direction == Direction.Right);
@@ -77,22 +75,18 @@ export class Gunner extends Phaser.GameObjects.Container {
         break;
 
       case GunnerState.Walking:
-        console.log("Walking");
         this.body.setVelocityX(getDX(this._direction) * GUNNER.movingSpeed);
         this._sprite.setFlipX(this._direction == Direction.Right);
         this._sprite.anims.play("gunner-run", true);
-        console.log(this.body.velocity);
         break;
 
       case GunnerState.Dying:
-        console.log("Dying");
         this.body.setVelocityX(0);
         // TODO: Play idle-gunner animation.
         this._sprite.anims.stop();
         break;
 
       case GunnerState.Shooting:
-        console.log("Shooting");
         this.body.setVelocityX(0);
         // TODO: Play idle-gunner animation.
         this._sprite.anims.play("gunner-shoot", true);
@@ -107,12 +101,6 @@ export class Gunner extends Phaser.GameObjects.Container {
   update() {
     this.gunCooldown = Math.max(this.gunCooldown - 1, 0);
     // Checks triggeting state transitions should happen here.
-    if (this.state == GunnerState.Walking) {
-      console.log(this.body.velocity);
-      //this.body.setVelocityX(getDX(this._direction) * GUNNER.movingSpeed);
-      //this._sprite.setFlipX(this._direction == Direction.Right);
-      //this._sprite.anims.play("gunner-run", true);
-    }
   }
 
   // Checks whether this gunner can see the given target.
