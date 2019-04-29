@@ -49,7 +49,7 @@ export class MainScene extends Phaser.Scene {
     this.load.setPath('./assets/');
     this.load.image("background", "background.png");
     this.load.image("ground", "ground.png");
-    this.load.image("spike", "spike.png");
+    this.load.image("spike", "tiles/spike.png");
     this.load.image("healthbar_empty", "healthbar_empty.png");
     this.load.image("healthbar_full", "healthbar_full.png");
     this.load.image("1x1white", "1x1white.png");
