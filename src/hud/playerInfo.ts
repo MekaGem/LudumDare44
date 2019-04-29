@@ -1,4 +1,4 @@
-import { PLAYER_HUD } from "../const/const";
+import { PLAYER_HUD, EVENT } from "../const/const";
 import { PlayerState } from "../logic/playerState";
 
 // Components for showing current player information.
@@ -26,7 +26,8 @@ export class HealthBar extends Phaser.GameObjects.Container {
     this.scene.add.existing(this);
 
     this.update();
-    this.player_state.on('damage', damage => {
+    this.player_state.on(EVENT.bloodChanged, delta => {
+      // TODO: If delta is negative, show damage, otherwise show regen animation.
       this.update();
     });
   }

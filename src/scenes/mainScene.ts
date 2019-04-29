@@ -165,7 +165,7 @@ export class MainScene extends Phaser.Scene {
             this.physics.add.overlap(bullet, this.player, (b: Phaser.GameObjects.GameObject,
                                                            player: Phaser.GameObjects.GameObject) => {
               bullet.destroy();
-              this.playerState.damage(1);
+              this.playerState.blood -= 1;
             });
           }, [], this);
         }
@@ -187,7 +187,7 @@ export class MainScene extends Phaser.Scene {
       let playerBody: Phaser.Physics.Arcade.Body = this.player.body;
       let bullet = new Bullet(this, playerBody.center.x, playerBody.center.y, BulletType.Blood, this.player.direction);
       // Emitting a bullet hits you.
-      this.playerState.damage(1);
+      this.playerState.blood -= 1;
 
       this.physics.add.collider(bullet, this.worldLayer, (b: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) => {
         bullet.destroy();

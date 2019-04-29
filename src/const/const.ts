@@ -38,6 +38,7 @@ export let BULLET = {
 export let PLAYER = {
   // Characteristics.
   startingBlood: 10,
+  maxBlood: 20,
   regenerationSpeed: 120,
   // Physics.
   maxWSpeed: 400,
@@ -79,4 +80,11 @@ export let GUNNER = {
   shootDelay: 200,  // milliseconds.
 
   deathDuration: 5000,  // milliseconds.
+}
+
+//
+// ======= Events =======
+//
+export let EVENT = {
+  bloodChanged: "bloodChanged",
 }

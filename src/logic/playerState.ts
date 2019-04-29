@@ -1,4 +1,4 @@
-import { PLAYER } from "../const/const";
+import { PLAYER, EVENT } from "../const/const";
 
 // Stores player characteristics.
 export class PlayerState extends Phaser.Events.EventEmitter {
@@ -16,12 +16,14 @@ export class PlayerState extends Phaser.Events.EventEmitter {
 
   constructor(starting_blood) {
     super()
-    this._blood = starting_blood;
+    this.blood = starting_blood;
   }
 
-  damage(amount: number) {
-    this._blood = Math.min(this._blood - amount, PLAYER.startingBlood);
-    this.emit('damage', amount);
+  set blood(blood: number) {
+    blood = Math.min(blood, PLAYER.maxBlood);
+    var delta = blood - this._blood;
+    this._blood = blood;
+    this.emit(EVENT.bloodChanged, delta);
   }
 
   regenerate() {
@@ -29,7 +31,7 @@ export class PlayerState extends Phaser.Events.EventEmitter {
     this.regeneration = Math.max(this.regeneration - 1, 0);
     if (this.regeneration == 0) {
       this.regeneration = PLAYER.regenerationSpeed;
-      this.damage(-1);
+      this.blood += 1;
       console.log("BLOOD++");
     }
   }
