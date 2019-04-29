@@ -18,7 +18,7 @@ export class Player extends Phaser.GameObjects.Container {
 
   private _keys: any;
 
-  constructor(scene: Phaser.Scene, x: number, y: number, playerState: PlayerState) {
+  constructor(scene: Phaser.Scene, x: number, y: number, playerState: PlayerState, direction: Direction) {
     super(scene, x, y);
 
     this.playerState = playerState;
@@ -28,6 +28,8 @@ export class Player extends Phaser.GameObjects.Container {
     this._sprite.setDisplaySize(box.width, box.height);
     this.setSize(box.width, box.height);
     this.add(this._sprite);
+    // Requires the sprite to be initialized.
+    this.direction = direction;
 
     scene.physics.world.enable(this);
     this.body

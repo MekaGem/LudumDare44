@@ -88,7 +88,8 @@ export class MainScene extends Phaser.Scene {
     // Player creation.
     this.playerState = new PlayerState(PLAYER.startingBlood);
     const playerSpawn: any = this.tilemap.findObject("Objects", obj => obj.name === "PlayerSpawn");
-    this.player = new Player(this, playerSpawn.x, playerSpawn.y, this.playerState);
+    // TODO: Take direction from the spawn object.
+    this.player = new Player(this, playerSpawn.x, playerSpawn.y, this.playerState, Direction.Right);
     this.physics.add.collider(this.player, this.worldLayer);
 
     this.cameras.main.startFollow(this.player);
