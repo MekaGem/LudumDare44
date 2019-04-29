@@ -46,7 +46,6 @@ export class PlayerState extends Phaser.Events.EventEmitter {
       return;
     }
 
-    if (this._blood == PLAYER.startingBlood) return;
     this.regeneration = Math.max(this.regeneration - 1, 0);
     if (this.regeneration == 0) {
       this.regeneration = PLAYER.regenerationSpeed;

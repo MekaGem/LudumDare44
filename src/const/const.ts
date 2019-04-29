@@ -37,9 +37,9 @@ export let BULLET = {
 //
 export let PLAYER = {
   // Characteristics.
-  startingBlood: 10,
-  maxBlood: 20,
-  regenerationSpeed: 120,
+  startingBlood: 50,
+  maxBlood: 100,
+  regenerationSpeed: 10,
   // Physics.
   maxWSpeed: 400,
   maxHSpeed: 550,
@@ -52,6 +52,10 @@ export let PLAYER = {
   // Attack
   meleeAttackDuration: 200,
   meleeAttackDistance: 2.0 * CONST.tileSize,
+
+  shotBloodCost: 10,
+
+  regenerateDistance: 30,
 }
 
 export let PLAYER_HUD = {
@@ -86,6 +90,15 @@ export let GUNNER = {
   shootDelay: 200,  // milliseconds.
 
   deathDuration: 5000,  // milliseconds.
+
+  attackDamage: 10,  // in blood.
+}
+
+//
+// ======= Bonuses =======
+//
+export let BONUS = {
+  bloodBonusAmount: 10,
 }
 
 //

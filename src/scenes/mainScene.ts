@@ -1,5 +1,5 @@
 import { PlayerState } from "../logic/playerState";
-import { PLAYER, CONST, BULLET, PLAYER_HUD, GUNNER, EVENT } from "../const/const";
+import { PLAYER, CONST, BULLET, PLAYER_HUD, GUNNER, EVENT, BONUS } from "../const/const";
 import { HealthBar } from "../hud/playerInfo";
 import { Player } from "../objects/player";
 import { Bullet, BulletType } from "../objects/bullet";
@@ -176,7 +176,7 @@ export class MainScene extends Phaser.Scene {
             this.physics.add.overlap(bullet, this.player, (b: Phaser.GameObjects.GameObject,
                                                            player: Phaser.GameObjects.GameObject) => {
               bullet.destroy();
-              this.playerState.blood -= 1;
+              this.playerState.blood -= GUNNER.attackDamage;
             });
           }, [], this);
         }
@@ -194,7 +194,7 @@ export class MainScene extends Phaser.Scene {
 
     for (var spot of this.bloodSpots) {
       let spotCenter = (spot.body as Phaser.Physics.Arcade.Body).center;
-      if (spotCenter.distance(this.player.body.center) < 30) {
+      if (spotCenter.distance(this.player.body.center) < PLAYER.regenerateDistance) {
         this.playerState.regenerate();
       }
     }
@@ -211,7 +211,7 @@ export class MainScene extends Phaser.Scene {
       let blood = getTileProperty(tile, "blood");
       if (blood) {
         setTileProperty(tile, "blood", false);
-        this.playerState.blood += 1;
+        this.playerState.blood += BONUS.bloodBonusAmount;
         tile.setVisible(false);
       }
     }
@@ -253,7 +253,7 @@ export class MainScene extends Phaser.Scene {
       let playerBody: Phaser.Physics.Arcade.Body = this.player.body;
       let bullet = new Bullet(this, playerBody.center.x, playerBody.center.y, BulletType.Blood, this.player.direction);
       // Emitting a bullet hits you.
-      this.playerState.blood -= 1;
+      this.playerState.blood -= PLAYER.shotBloodCost;
 
       this.physics.add.collider(bullet, this.worldLayer, (b: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) => {
         bullet.destroy();
