@@ -8,7 +8,7 @@
 //
 export let CONST = {
   fontSize: "32px",
-  backgroundColor: "#ccccff",
+  backgroundColor: "black",
   gravity: 1000,
   tileSize: 32,
   inf: 1e9,
@@ -87,4 +87,5 @@ export let GUNNER = {
 //
 export let EVENT = {
   bloodChanged: "bloodChanged",
+  playerDied: "playerDied",
 }

@@ -84,6 +84,12 @@ export class Player extends Phaser.GameObjects.Container {
     super.update();
   }
 
+  // Freezes the player and stops all animations.
+  freeze() {
+    this.body.moves = false;
+    this._sprite.anims.stop();
+  }
+
   highlight(active) {
     if (active) {
       this._sprite.setTint(0xff0000);

@@ -1,5 +1,5 @@
 import { PlayerState } from "../logic/playerState";
-import { PLAYER, CONST, BULLET, PLAYER_HUD, GUNNER } from "../const/const";
+import { PLAYER, CONST, BULLET, PLAYER_HUD, GUNNER, EVENT } from "../const/const";
 import { HealthBar } from "../hud/playerInfo";
 import { Player } from "../objects/player";
 import { Bullet, BulletType } from "../objects/bullet";
@@ -124,11 +124,24 @@ export class MainScene extends Phaser.Scene {
         }
       }
     });
+
+    this.playerState.on(EVENT.playerDied, () => {
+      const cam = this.cameras.main;
+      cam.shake(500, 0.05);
+      cam.fade(1000, 0, 0, 0);
+
+      this.player.freeze();
+      cam.once("camerafadeoutcomplete", () => {
+        this.scene.restart();
+      });
+    });
   }
 
   update(time: number, delta: number): void {
     // Handles player controls.
-    this.player.update();
+    if (this.playerState.alive) {
+      this.player.update();
+    }
 
     for (var obj of this.updateList) {
       obj.update();
