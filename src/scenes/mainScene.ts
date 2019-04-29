@@ -5,6 +5,7 @@ import { Player } from "../objects/player";
 import { Bullet, BulletType } from "../objects/bullet";
 import { Gunner } from "../objects/gunner";
 import { Direction, getDirection } from "../logic/direction";
+import { getActionFromTile } from "../logic/actionTiles";
 
 export class MainScene extends Phaser.Scene {
   // Logic.
@@ -138,13 +139,11 @@ export class MainScene extends Phaser.Scene {
       let playerCenter = this.player.body.center;
 
       var tile = this.worldLayer.getTileAtWorldXY(gunnerCenter.x, gunnerCenter.y);
-      if (tile && ("npc_action" in tile.properties)) {
-        var action = tile.properties["npc_action"];
-        if (action == "left") {
-          gunner.direction = Direction.Left;
-        } else if (action == "right") {
-          gunner.direction = Direction.Right;
-        }
+      var action = getActionFromTile(tile);
+      if (action == "left") {
+        gunner.direction = Direction.Left;
+      } else if (action == "right") {
+        gunner.direction = Direction.Right;
       }
 
       // Initiate shooting if this gunner can see the player.
