@@ -57,7 +57,7 @@ export class MainScene extends Phaser.Scene {
 
   preload(): void {
     this.load.setPath('./assets/');
-    this.load.image("background", "background.png");
+    this.load.image("background", "background.jpg");
     this.load.image("ground", "ground.png");
     this.load.image("spike", "tiles/spike.png");
     this.load.image("discoball", "tiles/discoball.png");
