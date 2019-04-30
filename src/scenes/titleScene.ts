@@ -1,5 +1,5 @@
 export class TitleScene extends Phaser.Scene {
-  private phaserSprite: Phaser.GameObjects.Sprite;
+  private titleSprite: Phaser.GameObjects.Sprite;
   private startKey: Phaser.Input.Keyboard.Key;
 
   constructor() {
@@ -15,11 +15,15 @@ export class TitleScene extends Phaser.Scene {
   }
 
   preload(): void {
-    this.load.image("logo", "./assets/phaser.png");
+    this.load.image("title", "./assets/title.jpg");
   }
 
   create(): void {
-    this.phaserSprite = this.add.sprite(400, 300, "logo");
+    var gameWidth = this.game.config.width as number;
+    var gameHeight = this.game.config.height as number;
+
+    this.titleSprite = this.add.sprite(gameWidth / 2, gameHeight / 2, "title");
+    this.titleSprite.setDisplaySize(gameWidth, gameHeight);
     this.add.text(300, 450, "Click space to start!");
   }
 
