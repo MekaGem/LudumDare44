@@ -27,8 +27,8 @@ export let BULLET = {
   gun: {
     speed: 1000,
     size: CONST.tileSize / 2,
-    spritePack: "gunner",
-    spriteName: "gunner-5.png",
+    spritePack: "bullet",
+    spriteName: "bullet.png",
   },
 }
 
