@@ -17,7 +17,7 @@ const config: GameConfig = {
     default: "arcade",
     arcade: {
       gravity: { y: CONST.gravity },
-      debug: true,
+      debug: false,
     }
   }
 };
