@@ -40,6 +40,7 @@ export class MainScene extends Phaser.Scene {
   private collectBonusSound: Phaser.Sound.HTML5AudioSound;
   private openDoorSound: Phaser.Sound.HTML5AudioSound;
   private playerDiesSound: Phaser.Sound.HTML5AudioSound;
+  private gunnerDiesSound: Phaser.Sound.HTML5AudioSound;
 
   constructor() {
     super({
@@ -77,6 +78,7 @@ export class MainScene extends Phaser.Scene {
     this.load.audio("collect_bonus", "sounds/collect_bonus.wav");
     this.load.audio("open_door", "sounds/open_door.wav");
     this.load.audio("player_dies", "sounds/player_dies.wav");
+    this.load.audio("gunner_dies", "sounds/gunner_dies.wav");
   }
 
   _addToUpdateList(object: Phaser.GameObjects.GameObject) {
@@ -269,6 +271,9 @@ export class MainScene extends Phaser.Scene {
     this.playerDiesSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("player_dies", {
       volume: 0.2,
     });
+    this.gunnerDiesSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("gunner_dies", {
+      volume: 0.2,
+    });
   }
 
   update(time: number, delta: number): void {
@@ -362,6 +367,7 @@ export class MainScene extends Phaser.Scene {
   }
 
   private killGunner(gunner: Gunner) {
+    this.gunnerDiesSound.play();
     this.bloodSpots.add(gunner);
 
     this.gunners.delete(gunner);
