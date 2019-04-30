@@ -11,12 +11,17 @@ export class EndGameScene extends Phaser.Scene {
     }
 
     preload(): void {
-      this.load.image("logo", "./assets/phaser.png");
+        this.load.setPath('./assets/');
+        this.load.multiatlas("units", "atlas.json");
     }
 
     create(): void {
-      this.phaserSprite = this.add.sprite(400, 300, "logo");
-      this.add.text(300, 450, "You Win!");
+      let gameWidth = this.game.config.width as number;
+      let gameHeight = this.game.config.height as number;
+
+      this.phaserSprite = this.add.sprite(gameWidth / 2, gameHeight / 2, "units", "vamp_jump_4.png");
+      this.add.text(300, 450, "You Win!", {fontSize: "32pt", color: "#f00"});
+      this.add.text(50, 500, "Collected " + 10 + "/" + 10 + " disco balls", {fontSize: "32pt", color: "#f00"});
     }
 
     update(): void {
