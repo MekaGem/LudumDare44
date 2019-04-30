@@ -21,6 +21,14 @@ export class PlayerState extends Phaser.Events.EventEmitter {
     return this._blood;
   }
 
+  private _score: number = 0;
+  get score(): number {
+    return this._score;
+  }
+  set score(score: number) {
+    this._score = score;
+  }
+
   constructor(starting_blood) {
     super()
     this._alive = true;

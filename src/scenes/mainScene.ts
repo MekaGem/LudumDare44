@@ -37,6 +37,7 @@ export class MainScene extends Phaser.Scene {
   // Sounds.
   private gunshotSound: Phaser.Sound.HTML5AudioSound;
   private bloodshotSound: Phaser.Sound.HTML5AudioSound;
+  private collectBonusSound: Phaser.Sound.HTML5AudioSound;
 
   constructor() {
     super({
@@ -54,6 +55,7 @@ export class MainScene extends Phaser.Scene {
     this.load.image("background", "background.png");
     this.load.image("ground", "ground.png");
     this.load.image("spike", "tiles/spike.png");
+    this.load.image("discoball", "tiles/discoball.png");
     this.load.image("healthbar_empty", "healthbar_empty.png");
     this.load.image("healthbar_full", "healthbar_full.png");
     this.load.image("1x1white", "1x1white.png");
@@ -70,6 +72,7 @@ export class MainScene extends Phaser.Scene {
     // Load sounds.
     this.load.audio("gunshot", "sounds/gunshot.wav");
     this.load.audio("bloodshot", "sounds/bloodshot.wav");
+    this.load.audio("collect_bonus", "sounds/collect_bonus.wav");
   }
 
   _addToUpdateList(object: Phaser.GameObjects.GameObject) {
@@ -194,6 +197,37 @@ export class MainScene extends Phaser.Scene {
 
         this.worldLayer.removeTileAt(tile.x, tile.y);
       }
+
+      if ("bonus" in tile.properties) {
+        var bonus = this.physics.add.sprite(tile.getCenterX(), tile.getCenterY(), "discoball");
+        this.spikeGroup.add(bonus);
+        //this.spikeGroup.add(tile);
+        // The map has spikes rotated in Tiled (z key), so parse out that angle to the correct body
+        // placement
+        var height = 0;
+        var width = 0;
+        //var offsetX = 0;
+        //var offsetY = 0;
+
+        width = CONST.tileSize;
+        height = CONST.tileSize;
+        //offsetX = 0;
+        //offsetY = CONST.tileSize - 12;
+
+        bonus.setDisplaySize(CONST.tileSize, CONST.tileSize);
+        bonus.setSize(width, height);
+        //spike.setOffset(offsetX, offsetY);
+        this.physics.add.collider(bonus, this.worldLayer);
+
+        this.physics.add.overlap(bonus, this.player,
+                                 (b: Phaser.GameObjects.GameObject, player: Phaser.GameObjects.GameObject) => {
+          this.playerState.score += 1;
+          this.collectBonusSound.play();
+          bonus.destroy();
+        });
+
+        this.worldLayer.removeTileAt(tile.x, tile.y);
+      }
     });
 
     this.physics.add.overlap(this.spikeGroup, this.player,
@@ -218,6 +252,9 @@ export class MainScene extends Phaser.Scene {
       volume: 0.2,
     });
     this.bloodshotSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("bloodshot", {
+      volume: 0.2,
+    });
+    this.collectBonusSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("collect_bonus", {
       volume: 0.2,
     });
   }
