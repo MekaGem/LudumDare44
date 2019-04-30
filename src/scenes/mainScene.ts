@@ -39,6 +39,7 @@ export class MainScene extends Phaser.Scene {
   private bloodshotSound: Phaser.Sound.HTML5AudioSound;
   private collectBonusSound: Phaser.Sound.HTML5AudioSound;
   private openDoorSound: Phaser.Sound.HTML5AudioSound;
+  private playerDiesSound: Phaser.Sound.HTML5AudioSound;
 
   constructor() {
     super({
@@ -75,6 +76,7 @@ export class MainScene extends Phaser.Scene {
     this.load.audio("bloodshot", "sounds/bloodshot.wav");
     this.load.audio("collect_bonus", "sounds/collect_bonus.wav");
     this.load.audio("open_door", "sounds/open_door.wav");
+    this.load.audio("player_dies", "sounds/player_dies.wav");
   }
 
   _addToUpdateList(object: Phaser.GameObjects.GameObject) {
@@ -241,8 +243,9 @@ export class MainScene extends Phaser.Scene {
 
     this.playerState.on(EVENT.playerDied, () => {
       const cam = this.cameras.main;
-      cam.shake(500, 0.05);
-      cam.fade(1000, 0, 0, 0);
+      this.playerDiesSound.play();
+      cam.shake(1000, 0.05);
+      cam.fade(2500, 0, 0, 0);
 
       this.player.freeze();
       cam.once("camerafadeoutcomplete", () => {
@@ -261,6 +264,9 @@ export class MainScene extends Phaser.Scene {
       volume: 0.2,
     });
     this.openDoorSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("open_door", {
+      volume: 0.2,
+    });
+    this.playerDiesSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("player_dies", {
       volume: 0.2,
     });
   }
