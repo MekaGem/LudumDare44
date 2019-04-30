@@ -499,6 +499,18 @@
                  "width":0,
                  "x":4062.18655967904,
                  "y":3064.1925777332
+                }, 
+                {
+                 "height":0,
+                 "id":42,
+                 "name":"ExitSpawn",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1918.18181818182,
+                 "y":442.424242424242
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -507,7 +519,7 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":42,
+ "nextobjectid":43,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",

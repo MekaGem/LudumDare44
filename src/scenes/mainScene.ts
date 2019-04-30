@@ -63,6 +63,7 @@ export class MainScene extends Phaser.Scene {
     this.load.image("healthbar_empty", "healthbar_empty.png");
     this.load.image("healthbar_full", "healthbar_full.png");
     this.load.image("1x1white", "1x1white.png");
+    this.load.image("exit", "exit.png");
     this.load.image(BULLET.blood.spritePack, BULLET.blood.spriteName);
     this.load.image(BULLET.gun.spritePack, BULLET.gun.spriteName);
 
@@ -137,6 +138,15 @@ export class MainScene extends Phaser.Scene {
     const playerSpawn: any = this.tilemap.findObject("Objects", obj => obj.name === "PlayerSpawn");
     this.player = new Player(this, playerSpawn.x, playerSpawn.y, this.playerState, directionFromSpawn(playerSpawn));
     this.physics.add.collider(this.player, this.worldLayer, playerWorldCollider);
+
+    const exitSpawn: any = this.tilemap.findObject("Objects", obj => obj.name === "ExitSpawn");
+    var exit = this.physics.add.sprite(exitSpawn.x, exitSpawn.y, "exit");
+    exit.setDisplaySize(120, 120);
+    this.physics.add.collider(exit, this.worldLayer);
+    this.physics.add.collider(exit, this.player,
+                             (b: Phaser.GameObjects.GameObject, player: Phaser.GameObjects.GameObject) => {
+                               console.log("Exit");
+    });
 
     let This = this;
     function playerWorldCollider(player: Phaser.GameObjects.GameObject, obj: Phaser.GameObjects.GameObject) {
