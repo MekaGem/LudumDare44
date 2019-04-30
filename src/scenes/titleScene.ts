@@ -24,6 +24,7 @@ export class TitleScene extends Phaser.Scene {
 
     this.titleSprite = this.add.sprite(gameWidth / 2, gameHeight / 2, "title");
     this.titleSprite.setDisplaySize(gameWidth, gameHeight);
+    this.add.text(280, 100, "Blood Night", {fontSize: "36pt", color: "#f00"});
     this.add.text(280, 500, "Click space to start!", {fontSize: "14pt", color: "#fff"});
     this.add.text(40, 550, "Controls: arrows to move and jump, z - shoot, x - melee attack", {fontSize: "14pt", color: "#fff"});
   }
