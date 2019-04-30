@@ -22,7 +22,7 @@ export class Gunner extends Phaser.GameObjects.Container {
   constructor(scene: Phaser.Scene, x: number, y: number, direction: Direction) {
     super(scene, x, y);
 
-    this._sprite = scene.add.sprite(0, 0, "player", "Shooter1.PNG");
+    this._sprite = scene.add.sprite(0, 0, "units", "Shooter1.PNG");
     var box = boxedSize(this._sprite.width, this._sprite.height, GUNNER.width, GUNNER.height);
     this._sprite.setDisplaySize(box.width, box.height);
     this.setSize(box.width, box.height);
@@ -33,14 +33,14 @@ export class Gunner extends Phaser.GameObjects.Container {
 
     const anims = scene.anims;
     {
-      var frameNames = anims.generateFrameNames("player", {
+      var frameNames = anims.generateFrameNames("units", {
                            start: 1, end: 3, zeroPad: 0,
                            prefix: "Shooter", suffix: ".PNG"
                        });
       scene.anims.create({ key: "gunner-run", frames: frameNames, frameRate: 9, repeat: -1 });
     }
     {
-      var frameNames = anims.generateFrameNames("player", {
+      var frameNames = anims.generateFrameNames("units", {
                            start: 1, end: 1, zeroPad: 0,
                            prefix: "Shooter", suffix: ".PNG"
                        });

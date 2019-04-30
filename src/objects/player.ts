@@ -27,8 +27,7 @@ export class Player extends Phaser.GameObjects.Container {
 
     this.playerState = playerState;
 
-    this._sprite = scene.add.sprite(0, 0, "player", "Vampire1.PNG");
-    //this._sprite = scene.add.sprite(0, 0, "bloodnight_tiles", "tiles/wall.png");
+    this._sprite = scene.add.sprite(0, 0, "units", "vamp_move_1.png");
     var box = boxedSize(this._sprite.width, this._sprite.height, PLAYER.width, PLAYER.height);
     this._sprite.setDisplaySize(box.width, box.height);
     this.setSize(box.width, box.height);
@@ -56,11 +55,20 @@ export class Player extends Phaser.GameObjects.Container {
     });
 
     const anims = scene.anims;
-    var frameNames = anims.generateFrameNames("player", {
-                         start: 1, end: 3, zeroPad: 0,
-                         prefix: "Vampire", suffix: ".PNG"
-                     });
-    scene.anims.create({ key: "player-run", frames: frameNames, frameRate: 6, repeat: -1 });
+    {
+      var frameNames = anims.generateFrameNames("units", {
+                           start: 1, end: 3, zeroPad: 0,
+                           prefix: "vamp_move_", suffix: ".png"
+                       });
+      scene.anims.create({ key: "player-run", frames: frameNames, frameRate: 6, repeat: -1 });
+    }
+    {
+      var frameNames = anims.generateFrameNames("units", {
+                           start: 1, end: 4, zeroPad: 0,
+                           prefix: "vamp_jump_", suffix: ".png"
+                       });
+      scene.anims.create({ key: "player-jump", frames: frameNames, frameRate: 6, repeat: 1 });
+    }
   }
 
   update() {
@@ -78,6 +86,7 @@ export class Player extends Phaser.GameObjects.Container {
     }
 
     if (onGround && (this._keys.up.isDown || this._keys.w.isDown)) {
+      console.log("Jump!");
       this.body.setVelocityY(-PLAYER.hSpeed);
     }
 
@@ -88,6 +97,8 @@ export class Player extends Phaser.GameObjects.Container {
       } else {
         this._sprite.anims.stop();
       }
+    } else {
+      this._sprite.anims.play("player-jump", true);
     }
 
     if (this._attacking) {

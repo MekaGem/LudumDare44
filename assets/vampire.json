@@ -4,159 +4,219 @@
 			"image": "vampire.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 231,
-				"h": 409
+				"w": 929,
+				"h": 1875
 			},
-			"scale": 0.075,
+			"scale": 0.25,
 			"frames": [
 				{
-					"filename": "Vampire2.PNG",
+					"filename": "Shooter2.PNG",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
-						"w": 86,
-						"h": 139
+						"w": 620,
+						"h": 877
 					},
 					"spriteSourceSize": {
 						"x": 0,
-						"y": 0,
-						"w": 86,
-						"h": 139
+						"y": 268,
+						"w": 515,
+						"h": 418
 					},
 					"frame": {
 						"x": 1,
 						"y": 1,
-						"w": 86,
-						"h": 139
+						"w": 515,
+						"h": 418
+					}
+				},
+				{
+					"filename": "vamp_jump_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 384,
+						"h": 512
 					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+					"spriteSourceSize": {
+						"x": 19,
+						"y": 20,
+						"w": 353,
+						"h": 474
+					},
+					"frame": {
+						"x": 518,
+						"y": 1,
+						"w": 353,
+						"h": 474
 					}
 				},
 				{
 					"filename": "Shooter3.PNG",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
-						"w": 140,
-						"h": 131
+						"w": 620,
+						"h": 877
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 140,
-						"h": 131
+						"x": 11,
+						"y": 268,
+						"w": 458,
+						"h": 428
 					},
 					"frame": {
 						"x": 1,
-						"y": 142,
-						"w": 140,
-						"h": 131
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"y": 421,
+						"w": 458,
+						"h": 428
 					}
 				},
 				{
 					"filename": "Shooter1.PNG",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
-						"w": 138,
-						"h": 128
+						"w": 620,
+						"h": 877
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 138,
-						"h": 128
+						"x": 1,
+						"y": 273,
+						"w": 456,
+						"h": 420
 					},
 					"frame": {
-						"x": 89,
-						"y": 1,
-						"w": 138,
-						"h": 128
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 461,
+						"y": 477,
+						"w": 456,
+						"h": 420
 					}
 				},
 				{
-					"filename": "Shooter2.PNG",
+					"filename": "vamp_jump_2.png",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
-						"w": 156,
-						"h": 128
+						"w": 384,
+						"h": 512
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 156,
-						"h": 128
+						"x": 12,
+						"y": 20,
+						"w": 345,
+						"h": 474
 					},
 					"frame": {
 						"x": 1,
-						"y": 275,
-						"w": 156,
-						"h": 128
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"y": 851,
+						"w": 345,
+						"h": 474
 					}
 				},
 				{
-					"filename": "Vampire3.PNG",
+					"filename": "vamp_move_1.png",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
-						"w": 79,
-						"h": 139
+						"w": 384,
+						"h": 512
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 79,
-						"h": 139
+						"x": 77,
+						"y": 8,
+						"w": 249,
+						"h": 504
 					},
 					"frame": {
-						"x": 143,
-						"y": 131,
-						"w": 79,
-						"h": 139
-					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 1,
+						"y": 1327,
+						"w": 249,
+						"h": 504
 					}
 				},
 				{
-					"filename": "Vampire1.PNG",
+					"filename": "vamp_move_3.png",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
-						"w": 71,
-						"h": 136
+						"w": 384,
+						"h": 512
 					},
 					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 71,
-						"h": 136
+						"x": 82,
+						"y": 11,
+						"w": 249,
+						"h": 501
 					},
 					"frame": {
-						"x": 159,
-						"y": 272,
-						"w": 71,
-						"h": 136
+						"x": 252,
+						"y": 1327,
+						"w": 249,
+						"h": 501
+					}
+				},
+				{
+					"filename": "vamp_jump_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 384,
+						"h": 512
 					},
-					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+					"spriteSourceSize": {
+						"x": 82,
+						"y": 86,
+						"w": 233,
+						"h": 426
+					},
+					"frame": {
+						"x": 348,
+						"y": 899,
+						"w": 233,
+						"h": 426
+					}
+				},
+				{
+					"filename": "vamp_jump_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 384,
+						"h": 512
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 20,
+						"w": 345,
+						"h": 474
+					},
+					"frame": {
+						"x": 583,
+						"y": 899,
+						"w": 345,
+						"h": 474
+					}
+				},
+				{
+					"filename": "vamp_move_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 384,
+						"h": 512
+					},
+					"spriteSourceSize": {
+						"x": 82,
+						"y": 13,
+						"w": 245,
+						"h": 499
+					},
+					"frame": {
+						"x": 503,
+						"y": 1375,
+						"w": 245,
+						"h": 499
 					}
 				}
 			]
@@ -165,6 +225,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:b4dd8d2deeb503e1848a5a8aa47ea3d8:743da9e6fd3d050b38599e547f9ca0cd:7c7f4480e486e87f2a9b272f35888b2e$"
+		"smartupdate": "$TexturePacker:SmartUpdate:9aff26b8faeefdd24612bf01d392c797:6c90c0224a4ddd541871748e2a5b6a62:7c7f4480e486e87f2a9b272f35888b2e$"
 	}
 }

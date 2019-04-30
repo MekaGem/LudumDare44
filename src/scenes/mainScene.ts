@@ -61,9 +61,7 @@ export class MainScene extends Phaser.Scene {
     //this.load.tilemapTiledJSON("level1", "maps/level1.json");
     //this.load.multiatlas("bloodnight_tiles", "tiles/bloodnight.json");
 
-    // TODO: Clean up and rename as those are stored in the same texture now.
-    this.load.multiatlas("gunner", "gunner.json");
-    this.load.multiatlas("player", "vampire.json");
+    this.load.multiatlas("units", "atlas.json");
   }
 
   _addToUpdateList(object: Phaser.GameObjects.GameObject) {
