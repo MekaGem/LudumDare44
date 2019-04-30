@@ -97,6 +97,27 @@ export class MainScene extends Phaser.Scene {
     var background = this.add.image(gameWidth / 2, gameHeight / 2, "background");
     background.setDisplaySize(gameWidth, gameHeight);
     background.setScrollFactor(0);
+    this.openDoorSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("open_door", {
+      volume: 0.2,
+    });
+    this.gunshotSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("gunshot", {
+      volume: 0.2,
+    });
+    this.bloodshotSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("bloodshot", {
+      volume: 0.2,
+    });
+    this.collectBonusSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("collect_bonus", {
+      volume: 0.2,
+    });
+    this.playerDiesSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("player_dies", {
+      volume: 0.2,
+    });
+    this.gunnerDiesSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("gunner_dies", {
+      volume: 0.2,
+    });
+    this.drinkingBloodSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("drinking_blood", {
+      volume: 0.2,
+    });
 
     this.updateList = new Set();
 
@@ -127,7 +148,7 @@ export class MainScene extends Phaser.Scene {
           setTileProperty(tile, "door", null);
           tile.setCollision(false);
           tile.setVisible(false);
-          this.openDoorSound.play();
+          This.openDoorSound.play();
         }
       }
     }
@@ -257,28 +278,6 @@ export class MainScene extends Phaser.Scene {
       });
     });
 
-
-    this.gunshotSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("gunshot", {
-      volume: 0.2,
-    });
-    this.bloodshotSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("bloodshot", {
-      volume: 0.2,
-    });
-    this.collectBonusSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("collect_bonus", {
-      volume: 0.2,
-    });
-    this.openDoorSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("open_door", {
-      volume: 0.2,
-    });
-    this.playerDiesSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("player_dies", {
-      volume: 0.2,
-    });
-    this.gunnerDiesSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("gunner_dies", {
-      volume: 0.2,
-    });
-    this.drinkingBloodSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("drinking_blood", {
-      volume: 0.2,
-    });
   }
 
   update(time: number, delta: number): void {
