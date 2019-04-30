@@ -93,7 +93,6 @@ export class Player extends Phaser.GameObjects.Container {
     }
 
     if (onGround && (this._keys.up.isDown || this._keys.w.isDown)) {
-      console.log("Jump!");
       this.body.setVelocityY(-PLAYER.hSpeed);
       this._sprite.anims.play("player-jump", true);
     }
