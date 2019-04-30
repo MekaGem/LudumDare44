@@ -36,6 +36,7 @@ export class MainScene extends Phaser.Scene {
 
   // Sounds.
   private gunshotSound: Phaser.Sound.HTML5AudioSound;
+  private bloodshotSound: Phaser.Sound.HTML5AudioSound;
 
   constructor() {
     super({
@@ -68,6 +69,7 @@ export class MainScene extends Phaser.Scene {
 
     // Load sounds.
     this.load.audio("gunshot", "sounds/gunshot.wav");
+    this.load.audio("bloodshot", "sounds/bloodshot.wav");
   }
 
   _addToUpdateList(object: Phaser.GameObjects.GameObject) {
@@ -215,6 +217,9 @@ export class MainScene extends Phaser.Scene {
     this.gunshotSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("gunshot", {
       volume: 0.2,
     });
+    this.bloodshotSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("bloodshot", {
+      volume: 0.2,
+    });
   }
 
   update(time: number, delta: number): void {
@@ -343,6 +348,7 @@ export class MainScene extends Phaser.Scene {
       let bullet = new Bullet(this, playerBody.center.x, playerBody.center.y, BulletType.Blood, this.player.direction);
       // Emitting a bullet hits you.
       this.playerState.blood -= PLAYER.shotBloodCost;
+      this.bloodshotSound.play();
 
       this.physics.add.collider(bullet, this.worldLayer, (b: Phaser.GameObjects.GameObject, wall: Phaser.GameObjects.GameObject) => {
         bullet.destroy();
