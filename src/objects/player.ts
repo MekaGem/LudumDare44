@@ -64,10 +64,17 @@ export class Player extends Phaser.GameObjects.Container {
     }
     {
       var frameNames = anims.generateFrameNames("units", {
+                           start: 1, end: 1, zeroPad: 0,
+                           prefix: "vamp_move_", suffix: ".png"
+                       });
+      scene.anims.create({ key: "player-idle", frames: frameNames, frameRate: 6, repeat: -1 });
+    }
+    {
+      var frameNames = anims.generateFrameNames("units", {
                            start: 1, end: 4, zeroPad: 0,
                            prefix: "vamp_jump_", suffix: ".png"
                        });
-      scene.anims.create({ key: "player-jump", frames: frameNames, frameRate: 6, repeat: 1 });
+      scene.anims.create({ key: "player-jump", frames: frameNames, frameRate: 12, repeat: -1 });
     }
   }
 
@@ -88,6 +95,7 @@ export class Player extends Phaser.GameObjects.Container {
     if (onGround && (this._keys.up.isDown || this._keys.w.isDown)) {
       console.log("Jump!");
       this.body.setVelocityY(-PLAYER.hSpeed);
+      this._sprite.anims.play("player-jump", true);
     }
 
     // Update animation based on the player state.
@@ -95,14 +103,14 @@ export class Player extends Phaser.GameObjects.Container {
       if (this.body.velocity.x !== 0) {
         this._sprite.anims.play("player-run", true);
       } else {
-        this._sprite.anims.stop();
+        this._sprite.anims.play("player-idle", true);
       }
     } else {
       this._sprite.anims.play("player-jump", true);
     }
 
     if (this._attacking) {
-      this.body.stop();
+      this._sprite.anims.stop();
     }
 
     super.update();
