@@ -143,9 +143,9 @@ export class MainScene extends Phaser.Scene {
     var exit = this.physics.add.sprite(exitSpawn.x, exitSpawn.y, "exit");
     exit.setDisplaySize(120, 120);
     this.physics.add.collider(exit, this.worldLayer);
-    this.physics.add.collider(exit, this.player,
+    this.physics.add.overlap(exit, this.player,
                              (b: Phaser.GameObjects.GameObject, player: Phaser.GameObjects.GameObject) => {
-                               console.log("Exit");
+        this.scene.start("EndGameScene");
     });
 
     let This = this;
