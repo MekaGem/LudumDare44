@@ -64,6 +64,7 @@ export class MainScene extends Phaser.Scene {
     this.load.image("healthbar_full", "healthbar_full.png");
     this.load.image("1x1white", "1x1white.png");
     this.load.image("exit", "exit.png");
+    this.load.image("claws", "claws.png");
     this.load.image(BULLET.blood.spritePack, BULLET.blood.spriteName);
     this.load.image(BULLET.gun.spritePack, BULLET.gun.spriteName);
 

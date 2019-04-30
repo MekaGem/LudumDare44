@@ -148,17 +148,20 @@ export class Player extends Phaser.GameObjects.Container {
     if (attacking && !this._attacking) {
       this.body.setAllowGravity(false);
 
-      let width = PLAYER.meleeAttackDistance;
+      let width = PLAYER.meleeAttackDistance + 30;
       let height = PLAYER.height * 0.25;
 
       var x = this.body.center.x;
       if (this._direction == Direction.Left) {
         x -= width;
       }
-      this._attackSprite = this.scene.add.sprite(x, this.body.center.y - height / 2, "1x1white");
+      this._attackSprite = this.scene.add.sprite(x, this.body.center.y - height / 2, "claws");
+      if (this._direction == Direction.Left) {
+        this._attackSprite.setFlipX(true);
+      }
 
       this._attackSprite.setOrigin(0.0, 0.0);
-      this._attackSprite.setTint(0xff0000);
+      //this._attackSprite.setTint(0xff0000);
       this._attackSprite.setDisplaySize(width, height);
       this._attackSprite.setSize(width, height);
     } else if (!attacking && this._attacking) {
