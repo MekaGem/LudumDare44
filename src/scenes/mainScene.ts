@@ -341,7 +341,7 @@ export class MainScene extends Phaser.Scene {
     for (var spot of this.bloodSpots) {
       let spotCenter = (spot.body as Phaser.Physics.Arcade.Body).center;
       if (spotCenter.distance(this.player.body.center) < PLAYER.regenerateDistance) {
-        this.drinkingBloodSound.play();
+        //this.drinkingBloodSound.play();
         this.playerState.regenerate();
       }
     }
