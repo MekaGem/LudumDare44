@@ -167,10 +167,6 @@ export class MainScene extends Phaser.Scene {
     this.cameras.main.setZoom(1);
     this.cameras.main.setBounds(0, 0, this.tilemap.widthInPixels, this.tilemap.heightInPixels);
 
-    // HUD creation (depends on the player state).
-    this.playerHealthBar = new HealthBar(
-      this, PLAYER_HUD.healthBarOffsetX, PLAYER_HUD.healthBarOffsetY, this.playerState);
-
     this.gunners = new Set();
 
     // Enemies creation.
@@ -288,6 +284,9 @@ export class MainScene extends Phaser.Scene {
       });
     });
 
+    // HUD creation (depends on the player state).
+    this.playerHealthBar = new HealthBar(
+      this, PLAYER_HUD.healthBarOffsetX, PLAYER_HUD.healthBarOffsetY, this.playerState);
   }
 
   update(time: number, delta: number): void {
