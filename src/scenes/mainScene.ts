@@ -227,7 +227,10 @@ export class MainScene extends Phaser.Scene {
 
         this.physics.add.overlap(spike, this.player,
                                  (b: Phaser.GameObjects.GameObject, player: Phaser.GameObjects.GameObject) => {
-          this.playerState.blood = 0;
+          this.playerState.blood -= 25;
+          if (this.playerState.blood > 0) {
+            this.player.returnToLastGround();
+          }
         });
 
         this.worldLayer.removeTileAt(tile.x, tile.y);
@@ -235,8 +238,6 @@ export class MainScene extends Phaser.Scene {
 
       if ("bonus" in tile.properties) {
         var bonus = this.physics.add.sprite(tile.getCenterX(), tile.getCenterY(), "discoball");
-        this.spikeGroup.add(bonus);
-        //this.spikeGroup.add(tile);
         // The map has spikes rotated in Tiled (z key), so parse out that angle to the correct body
         // placement
         var height = 0;
@@ -246,12 +247,9 @@ export class MainScene extends Phaser.Scene {
 
         width = CONST.tileSize;
         height = CONST.tileSize;
-        //offsetX = 0;
-        //offsetY = CONST.tileSize - 12;
 
         bonus.setDisplaySize(CONST.tileSize, CONST.tileSize);
         bonus.setSize(width, height);
-        //spike.setOffset(offsetX, offsetY);
         this.physics.add.collider(bonus, this.worldLayer);
 
         this.physics.add.overlap(bonus, this.player,

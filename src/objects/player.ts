@@ -15,6 +15,8 @@ export class Player extends Phaser.GameObjects.Container {
   private _direction: Direction;
   private _attacking: boolean = false;
   private _attackSprite: Phaser.GameObjects.Sprite;
+  private lastGroundX: number;
+  private lastGroundY: number;
 
   private _keys: any;
 
@@ -80,6 +82,10 @@ export class Player extends Phaser.GameObjects.Container {
 
   update() {
     var onGround = this.body.onFloor();
+    if (onGround) {
+      this.lastGroundX = this.body.x;
+      this.lastGroundY = this.body.y;
+    }
     var acceleration = PLAYER.groundAcceleration;
 
     if (this._keys.right.isDown || this._keys.d.isDown) {
@@ -113,6 +119,11 @@ export class Player extends Phaser.GameObjects.Container {
     }
 
     super.update();
+  }
+
+  returnToLastGround() {
+    this.body.x = this.lastGroundX;
+    this.body.y = this.lastGroundY;
   }
 
   // Freezes the player and stops all animations.
