@@ -41,6 +41,7 @@ export class MainScene extends Phaser.Scene {
   private openDoorSound: Phaser.Sound.HTML5AudioSound;
   private playerDiesSound: Phaser.Sound.HTML5AudioSound;
   private gunnerDiesSound: Phaser.Sound.HTML5AudioSound;
+  private drinkingBloodSound: Phaser.Sound.HTML5AudioSound;
 
   constructor() {
     super({
@@ -79,6 +80,7 @@ export class MainScene extends Phaser.Scene {
     this.load.audio("open_door", "sounds/open_door.wav");
     this.load.audio("player_dies", "sounds/player_dies.wav");
     this.load.audio("gunner_dies", "sounds/gunner_dies.wav");
+    this.load.audio("drinking_blood", "sounds/drinking_blood.wav");
   }
 
   _addToUpdateList(object: Phaser.GameObjects.GameObject) {
@@ -274,6 +276,9 @@ export class MainScene extends Phaser.Scene {
     this.gunnerDiesSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("gunner_dies", {
       volume: 0.2,
     });
+    this.drinkingBloodSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("drinking_blood", {
+      volume: 0.2,
+    });
   }
 
   update(time: number, delta: number): void {
@@ -336,6 +341,7 @@ export class MainScene extends Phaser.Scene {
     for (var spot of this.bloodSpots) {
       let spotCenter = (spot.body as Phaser.Physics.Arcade.Body).center;
       if (spotCenter.distance(this.player.body.center) < PLAYER.regenerateDistance) {
+        this.drinkingBloodSound.play();
         this.playerState.regenerate();
       }
     }
