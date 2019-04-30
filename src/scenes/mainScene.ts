@@ -42,6 +42,7 @@ export class MainScene extends Phaser.Scene {
   private playerDiesSound: Phaser.Sound.HTML5AudioSound;
   private gunnerDiesSound: Phaser.Sound.HTML5AudioSound;
   private drinkingBloodSound: Phaser.Sound.HTML5AudioSound;
+  private spikeTrapSound: Phaser.Sound.HTML5AudioSound;
 
   constructor() {
     super({
@@ -83,6 +84,7 @@ export class MainScene extends Phaser.Scene {
     this.load.audio("open_door", "sounds/open_door.wav");
     this.load.audio("player_dies", "sounds/player_dies.wav");
     this.load.audio("gunner_dies", "sounds/gunner_dies.wav");
+    this.load.audio("spiketrap", "sounds/spiketrap.wav");
   }
 
   _addToUpdateList(object: Phaser.GameObjects.GameObject) {
@@ -120,6 +122,9 @@ export class MainScene extends Phaser.Scene {
     //this.drinkingBloodSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("drink", {
       //volume: 0.2,
     //});
+    this.spikeTrapSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("spiketrap", {
+      volume: 0.2,
+    });
 
     this.updateList = new Set();
 
@@ -225,10 +230,14 @@ export class MainScene extends Phaser.Scene {
         spike.setOffset(offsetX, offsetY);
         this.physics.add.collider(spike, this.worldLayer);
 
+        var This = this;
         this.physics.add.overlap(spike, this.player,
                                  (b: Phaser.GameObjects.GameObject, player: Phaser.GameObjects.GameObject) => {
           this.playerState.blood -= 25;
           if (this.playerState.blood > 0) {
+            const cam = This.cameras.main;
+            cam.shake(100, 0.05);
+            this.spikeTrapSound.play();
             this.player.returnToLastGround();
           }
         });
