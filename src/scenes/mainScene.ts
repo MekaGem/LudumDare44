@@ -389,15 +389,20 @@ export class MainScene extends Phaser.Scene {
     this.updateList.delete(gunner);
     gunner.state = GunnerState.Dying;
 
+    var shiftX = 22;
+    var shiftY = -13;
+    if (gunner.direction == Direction.Right) {
+      shiftX *= -1;
+    }
     let emitter = this.bloodParticles.createEmitter({
-      x: gunner.body.center.x,
-      y: gunner.body.center.y,
+      x: gunner.body.center.x + shiftX,
+      y: gunner.body.center.y + shiftY,
       lifespan: 200,
       speed: { min: 200, max: 400 },
       angle: { min: 180 + 45, max: 360 - 45 },
       gravityY: 1000,
-      scale: { start: 2, end: 1.0 },
-      quantity: 10,
+      scale: { start: 3, end: 1.0 },
+      quantity: 30,
       blendMode: 'NORMAL',
       tint: 0xff0000,
     });
