@@ -34,6 +34,9 @@ export class MainScene extends Phaser.Scene {
   // Particles
   private bloodParticles: Phaser.GameObjects.Particles.ParticleEmitterManager;
 
+  // Sounds.
+  private gunshotSound: Phaser.Sound.HTML5AudioSound;
+
   constructor() {
     super({
       key: "MainScene"
@@ -62,6 +65,9 @@ export class MainScene extends Phaser.Scene {
     //this.load.multiatlas("bloodnight_tiles", "tiles/bloodnight.json");
 
     this.load.multiatlas("units", "atlas.json");
+
+    // Load sounds.
+    this.load.audio("gunshot", "sounds/gunshot.wav");
   }
 
   _addToUpdateList(object: Phaser.GameObjects.GameObject) {
@@ -204,6 +210,11 @@ export class MainScene extends Phaser.Scene {
         this.scene.restart();
       });
     });
+
+
+    this.gunshotSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("gunshot", {
+      volume: 0.2,
+    });
   }
 
   update(time: number, delta: number): void {
@@ -237,6 +248,7 @@ export class MainScene extends Phaser.Scene {
           // Shoot with a slight delay.
           this.time.delayedCall(GUNNER.shootDelay, ()=>{
             let bullet = new Bullet(this, gunnerCenter.x, gunnerCenter.y, BulletType.Gun, direction);
+            this.gunshotSound.play();
 
             this.physics.add.collider(bullet, this.worldLayer, (b: Phaser.GameObjects.GameObject,
                                                                 wall: Phaser.GameObjects.GameObject) => {
