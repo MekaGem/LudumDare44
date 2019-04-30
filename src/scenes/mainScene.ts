@@ -123,11 +123,9 @@ export class MainScene extends Phaser.Scene {
 
     this.updateList = new Set();
 
-    console.log("Loading tilemap");
     this.tilemap = this.make.tilemap({ key: "level" });
     this.tileset = this.tilemap.addTilesetImage("_bloodnight", "tiles");
 
-    console.log("Loading background");
     this.backgroundLayer = this.tilemap.createStaticLayer("Background", this.tileset, 0, 0);
 
     this.worldLayer = this.tilemap.createDynamicLayer("World", this.tileset, 0, 0);
@@ -270,7 +268,6 @@ export class MainScene extends Phaser.Scene {
     this.physics.add.overlap(this.spikeGroup, this.player,
                              (b: Phaser.GameObjects.GameObject, player: Phaser.GameObjects.GameObject) => {
       this.playerState.blood = 0;
-      console.log("overlap");
     });
 
     this.playerState.on(EVENT.playerDied, () => {
