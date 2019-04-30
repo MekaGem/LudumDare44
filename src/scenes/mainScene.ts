@@ -77,12 +77,12 @@ export class MainScene extends Phaser.Scene {
 
     // Load sounds.
     this.load.audio("gunshot", "sounds/gunshot.wav");
+    //this.load.audio("drink", "sounds/drinking.wav");
     this.load.audio("bloodshot", "sounds/bloodshot.wav");
     this.load.audio("collect_bonus", "sounds/collect_bonus.wav");
     this.load.audio("open_door", "sounds/open_door.wav");
     this.load.audio("player_dies", "sounds/player_dies.wav");
     this.load.audio("gunner_dies", "sounds/gunner_dies.wav");
-    this.load.audio("drinking_blood", "sounds/drinking_blood.wav");
   }
 
   _addToUpdateList(object: Phaser.GameObjects.GameObject) {
@@ -117,9 +117,9 @@ export class MainScene extends Phaser.Scene {
     this.gunnerDiesSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("gunner_dies", {
       volume: 0.2,
     });
-    this.drinkingBloodSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("drinking_blood", {
-      volume: 0.2,
-    });
+    //this.drinkingBloodSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("drink", {
+      //volume: 0.2,
+    //});
 
     this.updateList = new Set();
 
