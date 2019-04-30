@@ -38,6 +38,7 @@ export class MainScene extends Phaser.Scene {
   private gunshotSound: Phaser.Sound.HTML5AudioSound;
   private bloodshotSound: Phaser.Sound.HTML5AudioSound;
   private collectBonusSound: Phaser.Sound.HTML5AudioSound;
+  private openDoorSound: Phaser.Sound.HTML5AudioSound;
 
   constructor() {
     super({
@@ -73,6 +74,7 @@ export class MainScene extends Phaser.Scene {
     this.load.audio("gunshot", "sounds/gunshot.wav");
     this.load.audio("bloodshot", "sounds/bloodshot.wav");
     this.load.audio("collect_bonus", "sounds/collect_bonus.wav");
+    this.load.audio("open_door", "sounds/open_door.wav");
   }
 
   _addToUpdateList(object: Phaser.GameObjects.GameObject) {
@@ -119,6 +121,7 @@ export class MainScene extends Phaser.Scene {
           setTileProperty(tile, "door", null);
           tile.setCollision(false);
           tile.setVisible(false);
+          this.openDoorSound.play();
         }
       }
     }
@@ -257,6 +260,9 @@ export class MainScene extends Phaser.Scene {
     this.collectBonusSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("collect_bonus", {
       volume: 0.2,
     });
+    this.openDoorSound = <Phaser.Sound.HTML5AudioSound> this.sound.add("open_door", {
+      volume: 0.2,
+    });
   }
 
   update(time: number, delta: number): void {
@@ -343,6 +349,7 @@ export class MainScene extends Phaser.Scene {
       if (key != null) {
         setTileProperty(tile, "key", null);
         this.playerState.addKey(key);
+        this.collectBonusSound.play()
         tile.setVisible(false);
       }
     }
