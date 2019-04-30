@@ -24,7 +24,8 @@ export class TitleScene extends Phaser.Scene {
 
     this.titleSprite = this.add.sprite(gameWidth / 2, gameHeight / 2, "title");
     this.titleSprite.setDisplaySize(gameWidth, gameHeight);
-    this.add.text(300, 450, "Click space to start!");
+    this.add.text(280, 500, "Click space to start!", {fontSize: "14pt", color: "#fff"});
+    this.add.text(40, 550, "Controls: arrows to move and jump, z - shoot, x - melee attack", {fontSize: "14pt", color: "#fff"});
   }
 
   update(): void {
