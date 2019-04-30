@@ -7,7 +7,7 @@ export class HealthBar extends Phaser.GameObjects.Container {
   private playerState: PlayerState;
 
   // Something like in Diablo would look awesome.
-  private healthText: Phaser.GameObjects.Text;
+  private bonusText: Phaser.GameObjects.Text;
   private fullBar: Phaser.GameObjects.Sprite;
   private emptyBar: Phaser.GameObjects.Sprite;
 
@@ -16,22 +16,22 @@ export class HealthBar extends Phaser.GameObjects.Container {
 
     this.playerState = playerState;
 
-    this.healthText = scene.make.text({
-      x: 0,
-      y: 0,
+    this.bonusText = scene.make.text({
+      x: 600,
+      y: 10,
       style: PLAYER_HUD.bloodTextStyle,
       add: false,
     });
-    this.add(this.healthText);
+    this.add(this.bonusText);
 
     this.emptyBar = scene.make.sprite({
-      x: 150,
-      y: 50,
+      x: 100,
+      y: 25,
       key: "healthbar_empty",
     });
     this.fullBar = scene.make.sprite({
-      x: 150,
-      y: 50,
+      x: 100,
+      y: 25,
       key: "healthbar_full",
     });
     var box = boxedSize(this.emptyBar.width, this.emptyBar.height,
@@ -47,15 +47,17 @@ export class HealthBar extends Phaser.GameObjects.Container {
 
     this.update();
     this.playerState.on(EVENT.bloodChanged, delta => {
-      // TODO: If delta is negative, show damage, otherwise show regen animation.
+      this.update();
+    });
+    this.playerState.on(EVENT.scoreChanged, score => {
       this.update();
     });
   }
 
   update() {
-    this.healthText.setText("Blood: " + this.playerState.blood.toString());
-    var rate = this.playerState.blood * 1.0 / PLAYER.maxBlood;
+    this.bonusText.setText("Score: " + this.playerState.score.toString());
 
+    var rate = this.playerState.blood * 1.0 / PLAYER.maxBlood;
     this.fullBar.setCrop(0, 0, this.fullBar.width * rate, this.fullBar.height);
   }
 }

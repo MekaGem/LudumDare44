@@ -107,4 +107,5 @@ export let BONUS = {
 export let EVENT = {
   bloodChanged: "bloodChanged",
   playerDied: "playerDied",
+  scoreChanged: "scoreChanged",
 }

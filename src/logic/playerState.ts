@@ -27,6 +27,7 @@ export class PlayerState extends Phaser.Events.EventEmitter {
   }
   set score(score: number) {
     this._score = score;
+    this.emit(EVENT.scoreChanged, score);
   }
 
   constructor(starting_blood) {
