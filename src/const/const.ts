@@ -55,7 +55,7 @@ export let PLAYER = {
 
   shotBloodCost: 10,
 
-  regenerateDistance: 30,
+  regenerateDistance: 1.5 * CONST.tileSize,
 }
 
 export let PLAYER_HUD = {
