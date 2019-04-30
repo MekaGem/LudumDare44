@@ -145,7 +145,7 @@ export class MainScene extends Phaser.Scene {
     this.physics.add.collider(exit, this.worldLayer);
     this.physics.add.overlap(exit, this.player,
                              (b: Phaser.GameObjects.GameObject, player: Phaser.GameObjects.GameObject) => {
-        this.scene.start("EndGameScene");
+        this.scene.start("EndGameScene", {"score": this.playerState.score});
     });
 
     let This = this;
@@ -361,7 +361,7 @@ export class MainScene extends Phaser.Scene {
 
       let exit = getTileProperty(tile, "exit");
       if (exit) {
-        this.scene.start("EndGameScene");
+        this.scene.start("EndGameScene", {"score": this.playerState.score});
       }
 
       let blood = getTileProperty(tile, "blood");
